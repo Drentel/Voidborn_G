@@ -12,7 +12,8 @@ func _init():
 
 func set_level(lvl: int):
 	level = lvl
-	s_desc = "Deals " + str(1 + level*0.1) + "xATK damage to target"
+	s_desc = "Level %s\n" % [lvl]
+	s_desc += "Deals " + str(1 + level*0.1) + "xATK damage to target"
 
 func use(user):
 	user.emit_signal("skill_start", self)

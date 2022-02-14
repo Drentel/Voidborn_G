@@ -7,7 +7,8 @@ func _init():
 
 func set_level(lvl: int):
 	level = lvl
-	s_desc = "Overhealing is converted into barrier at " + str(lvl*2) + "% efficiency"
+	s_desc = "Level %s\n" % [lvl]
+	s_desc += "Overhealing is converted into barrier at " + str(lvl*2) + "% efficiency"
 
 func start_combat():
 	var nod = Node.new()

@@ -9,7 +9,8 @@ func _init():
 
 func set_level(lvl: int):
 	level = lvl
-	s_desc = "Deals " + str(0.4 + level*0.04) + "xATK+" + str(0.4 + level*0.04) + "xDEF damage to target. Ignores " + str(ceil(40+GUtil.teddy(lvl)*60)) + "% of target DEF"
+	s_desc = "Level %s\n" % [lvl]
+	s_desc += "Deals " + str(0.4 + level*0.04) + "xATK+" + str(0.4 + level*0.04) + "xDEF damage to target. Ignores " + str(ceil(40+GUtil.teddy(lvl)*60)) + "% of target DEF"
 
 func use(user):
 	user.emit_signal("skill_start", self)

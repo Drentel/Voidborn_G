@@ -7,7 +7,8 @@ func _init():
 
 func set_level(lvl: int):
 	level = lvl
-	s_desc = str(ceil(100*GUtil.teddy(lvl))) + "% chance to make any attack homing"
+	s_desc = "Level %s\n" % [lvl]
+	s_desc += str(ceil(100*GUtil.teddy(lvl))) + "% chance to make any attack homing"
 
 func start_combat():
 	var nod = Node.new()

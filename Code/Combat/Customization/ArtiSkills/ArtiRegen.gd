@@ -9,7 +9,8 @@ func _init():
 
 func set_level(lvl: int):
 	level = lvl
-	s_desc = "Heal for " + str(round(GUtil.teddy(level)*100)/100.0) + "xMHP at the start of turn"
+	s_desc = "Level %s\n" % [lvl]
+	s_desc += "Heal for " + str(round(GUtil.teddy(level)*100)/100.0) + "xMHP at the start of turn"
 
 func start_combat():
 	var nod = Node.new()

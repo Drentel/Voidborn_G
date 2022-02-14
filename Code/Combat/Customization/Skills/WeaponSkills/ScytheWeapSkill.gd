@@ -9,7 +9,8 @@ func _init():
 
 func set_level(lvl: int):
 	level = lvl
-	s_desc = "Deals %sxATK damage to one target, with a 10%% chance to attack all enemies afterwards"
+	s_desc = "Level %s\n" % [lvl]
+	s_desc += "Deals %sxATK damage to one target, with a 10%% chance to attack all enemies afterwards"
 	s_desc = s_desc % [(0.8+(level*0.08))]
 
 func use(user):

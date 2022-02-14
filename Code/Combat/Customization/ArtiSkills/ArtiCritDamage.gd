@@ -7,7 +7,8 @@ func _init():
 
 func set_level(lvl: int):
 	level = lvl
-	s_desc = "CTD increases by 1~" + str(max(lvl, 2)) + " when character attacks but doesn't crit, but reset when a crit happens"
+	s_desc = "Level %s\n" % [lvl]
+	s_desc += "CTD increases by 1~" + str(max(lvl, 2)) + " when character attacks but doesn't crit, but reset when a crit happens"
 
 func start_combat():
 	var nod = Node.new()
