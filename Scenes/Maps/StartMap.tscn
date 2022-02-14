@@ -1,0 +1,199 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Code/Map/MapRoot.gd" type="Script" id=1]
+[ext_resource path="res://Code/Map/MapNode.gd" type="Script" id=2]
+[ext_resource path="res://Code/Map/Events/ButtonActivateEvent.gd" type="Script" id=3]
+[ext_resource path="res://Code/Map/Events/DialogueEvent.gd" type="Script" id=4]
+[ext_resource path="res://Code/Map/Events/GiveItem.gd" type="Script" id=5]
+[ext_resource path="res://Code/Map/Events/ChangePartyEvent.gd" type="Script" id=6]
+[ext_resource path="res://Code/Map/Events/CombatEvent.gd" type="Script" id=7]
+[ext_resource path="res://Code/Map/Events/CharaEditEvent.gd" type="Script" id=8]
+[ext_resource path="res://Code/Map/Events/MapMoveEvent.gd" type="Script" id=9]
+[ext_resource path="res://Code/Map/Events/FlagCheck.gd" type="Script" id=10]
+[ext_resource path="res://Code/Map/Events/FlagSet.gd" type="Script" id=11]
+[ext_resource path="res://Themes/StarShader.tres" type="Material" id=13]
+
+[node name="MapRoot" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+map_name = "~ The Cave ~"
+
+[node name="Decor" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGStars" type="Polygon2D" parent="Decor"]
+material = ExtResource( 13 )
+polygon = PoolVector2Array( 48, -1304, -1136, -472, -1160, 952, 936, 1112, 1720, 664, 1664, -1016 )
+
+[node name="gate" type="Node2D" parent="Decor"]
+
+[node name="LineConnections" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="MapNodes" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartPoint" type="Panel" parent="MapNodes"]
+margin_left = 306.0
+margin_top = 206.0
+margin_right = 346.0
+margin_bottom = 246.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Pass")
+right = NodePath("../Debug")
+desc = "Rough dark stone surrounds me on all sides of this claustrophobic cave. The only soruce of light is a twisting passage to the north."
+
+[node name="EventChecker" type="Node" parent="MapNodes/StartPoint"]
+script = ExtResource( 10 )
+flag = "start_ev_1"
+
+[node name="EventSetter" type="Node" parent="MapNodes/StartPoint/EventChecker"]
+script = ExtResource( 11 )
+flag = "start_ev_1"
+bool_val = true
+
+[node name="IntroDialogue" type="Node" parent="MapNodes/StartPoint/EventChecker/EventSetter"]
+script = ExtResource( 4 )
+dialogue_path = "res://Dialogue/Area0/intro.json"
+
+[node name="Pass" type="Panel" parent="MapNodes"]
+margin_left = 240.0
+margin_top = 56.0
+margin_right = 280.0
+margin_bottom = 96.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Gayte")
+down = NodePath("../StartPoint")
+desc = "A tiny cave room. I can hear water droplets hitting the floor from time to time."
+
+[node name="EventChecker" type="Node" parent="MapNodes/Pass"]
+script = ExtResource( 10 )
+flag = "start_ev_2"
+
+[node name="EventSetter" type="Node" parent="MapNodes/Pass/EventChecker"]
+script = ExtResource( 11 )
+flag = "start_ev_2"
+bool_val = true
+
+[node name="CombatTutorialDialogue" type="Node" parent="MapNodes/Pass/EventChecker/EventSetter"]
+script = ExtResource( 4 )
+dialogue_path = "res://Dialogue/Area0/intro2.json"
+
+[node name="TutorialBattle" type="Node" parent="MapNodes/Pass/EventChecker/EventSetter/CombatTutorialDialogue"]
+script = ExtResource( 7 )
+scenario_path = "res://Scenes/CombatEncounters/tutorial_combat.tres"
+
+[node name="TutorialDialogue2" type="Node" parent="MapNodes/Pass/EventChecker/EventSetter/CombatTutorialDialogue/TutorialBattle"]
+script = ExtResource( 4 )
+dialogue_path = "res://Dialogue/Area0/intro3.json"
+
+[node name="Debug" type="Panel" parent="MapNodes"]
+margin_left = 432.0
+margin_top = 208.0
+margin_right = 472.0
+margin_bottom = 248.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+is_hidden = true
+left = NodePath("../StartPoint")
+desc = "[Lmao.]
+EV secret_boss_1
+[Congradulations.]
+EV BOSS_2
+[Ahahahaha]"
+
+[node name="ButtonEvent" type="Node" parent="MapNodes/Debug"]
+script = ExtResource( 3 )
+
+[node name="Start Test Combat" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 7 )
+
+[node name="Boss test" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 7 )
+scenario_path = "res://Scenes/CombatEncounters/boss_big_plant.tres"
+
+[node name="Test dialogue" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 4 )
+dialogue_path = "res://Dialogue/Area0/test.json"
+
+[node name="Move between maps" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 9 )
+map_path = "res://Scenes/Maps/Level2-down.tscn"
+dest_node_name = "Start"
+
+[node name="LOTSA MONEY" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 5 )
+repeat = 100
+
+[node name="Change party" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 6 )
+
+[node name="Change equipment" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 8 )
+
+[node name="Gayte" type="Panel" parent="MapNodes"]
+margin_left = 172.0
+margin_top = -104.0
+margin_right = 212.0
+margin_bottom = -64.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+down = NodePath("../Pass")
+desc = "The ivory gate is so blinding that the hole in the ground almost seems more inviting, actually."
+
+[node name="EventChecker" type="Node" parent="MapNodes/Gayte"]
+script = ExtResource( 10 )
+flag = "start_ev_3"
+
+[node name="EventSetter" type="Node" parent="MapNodes/Gayte/EventChecker"]
+script = ExtResource( 11 )
+flag = "start_ev_3"
+bool_val = true
+
+[node name="CombatTutorialDialogue" type="Node" parent="MapNodes/Gayte/EventChecker/EventSetter"]
+script = ExtResource( 4 )
+dialogue_path = "res://Dialogue/Area0/intro4.json"
+
+[node name="Interaction" type="Node" parent="MapNodes/Gayte"]
+script = ExtResource( 3 )
+
+[node name="Open the gate" type="Node" parent="MapNodes/Gayte/Interaction"]
+script = ExtResource( 4 )
+dialogue_path = "res://Dialogue/Area0/gate.json"
+
+[node name="Slide down the hole" type="Node" parent="MapNodes/Gayte/Interaction"]
+script = ExtResource( 4 )
+dialogue_path = "res://Dialogue/Area0/hole.json"
+
+[node name="Move between maps" type="Node" parent="MapNodes/Gayte/Interaction/Slide down the hole"]
+script = ExtResource( 9 )
+map_path = "res://Scenes/Maps/Level1.tscn"
+dest_node_name = "StartPoint"

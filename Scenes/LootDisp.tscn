@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Themes/f_dialogue.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Code/Interface/NukeOnPress.gd" type="Script" id=2]
+[ext_resource path="res://Code/Interface/AudioButton.gd" type="Script" id=3]
+
+[node name="LootDisp" type="Button"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = -24.0
+margin_top = -16.0
+margin_right = 1640.0
+margin_bottom = 944.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 664.0
+margin_top = 144.0
+margin_right = 984.0
+margin_bottom = 464.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 312.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 1 )
+text = "Loot!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+margin_left = 8.0
+margin_top = 48.0
+margin_right = 312.0
+margin_bottom = 272.0
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Panel"]
+margin_left = 8.0
+margin_top = 280.0
+margin_right = 312.0
+margin_bottom = 309.0
+text = "Confirm"
+script = ExtResource( 3 )
+
+[connection signal="pressed" from="." to="." method="_on_LootDisp_pressed"]
+[connection signal="pressed" from="Panel/Button" to="." method="_on_Button_pressed"]

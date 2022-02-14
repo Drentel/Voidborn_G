@@ -1,0 +1,14 @@
+[
+	{
+		"speaker": "Sign",
+		"line": "\"Turn order is random, but characters with higher speed act more on average.\""
+	},
+	{
+		"speaker": "Sign",
+		"line": "\"Although, regardless of speed, the same character can't act twice in a row.\""
+	},
+	{
+		"speaker": "Sign",
+		"line": "\"And neither can the same side act more than twice in a row. If two allies act, the third turn will always be an enemy.\""
+	},
+]

@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/PartyEdit.gd" type="Script" id=1]
+
+[node name="PartyEdit" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseBtn" type="Button" parent="."]
+margin_left = 8.0
+margin_top = 864.0
+margin_right = 320.0
+margin_bottom = 884.0
+text = "Finish"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 328.0
+margin_top = 40.0
+margin_right = 1288.0
+margin_bottom = 872.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 952.0
+margin_bottom = 824.0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SwapBtns" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="CloseBtn" to="." method="_on_CloseBtn_pressed"]

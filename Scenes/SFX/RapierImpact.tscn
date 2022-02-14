@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Pic/SFX/Sheets/CLEAN-[Attack]Spear01_panop.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/SFX/NukeAnimSprite.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 85, 85 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 85, 0, 85, 85 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 170, 0, 85, 85 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 255, 0, 85, 85 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 340, 0, 85, 85 )
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": false,
+"name": "default",
+"speed": 15.0
+} ]
+
+[node name="AnimatedSprite" type="AnimatedSprite"]
+scale = Vector2( 2, 2 )
+frames = SubResource( 17 )
+script = ExtResource( 2 )

@@ -1,0 +1,234 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Themes/map_big.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Code/Map/MapScene.gd" type="Script" id=2]
+[ext_resource path="res://Code/Map/LocDesc.gd" type="Script" id=3]
+[ext_resource path="res://Code/Map/MapActions.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Maps/StartMap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Code/Interface/AudioButton.gd" type="Script" id=6]
+[ext_resource path="res://Themes/old-default.tres" type="Theme" id=7]
+[ext_resource path="res://Scenes/TutLab.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Themes/map_buttons.tres" type="Theme" id=10]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.8, 0.666667, 0.466667, 1 )
+corner_detail = 1
+
+[sub_resource type="Animation" id=2]
+resource_name = "MapTextAnim"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 2.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="MapScene" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 7 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapRect" type="Panel" parent="."]
+margin_left = 246.0
+margin_top = 50.0
+margin_right = 698.0
+margin_bottom = 502.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapRoot" parent="MapRect" instance=ExtResource( 5 )]
+
+[node name="MapOverlay" type="Panel" parent="."]
+margin_left = 246.0
+margin_top = 50.0
+margin_right = 698.0
+margin_bottom = 502.0
+rect_clip_content = true
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnRight" type="Button" parent="MapOverlay"]
+margin_left = 510.0
+margin_top = -59.0
+margin_right = 944.0
+margin_bottom = 344.0
+rect_rotation = 45.0
+theme = ExtResource( 10 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnLeft" type="Button" parent="MapOverlay"]
+margin_left = -58.0
+margin_top = 511.0
+margin_right = 376.0
+margin_bottom = 914.0
+rect_rotation = 225.0
+theme = ExtResource( 10 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnDown" type="Button" parent="MapOverlay"]
+margin_left = 511.0
+margin_top = 510.0
+margin_right = 945.0
+margin_bottom = 913.0
+rect_rotation = 135.0
+theme = ExtResource( 10 )
+script = ExtResource( 6 )
+
+[node name="BtnUp" type="Button" parent="MapOverlay"]
+margin_left = -59.0
+margin_top = -58.0
+margin_right = 375.0
+margin_bottom = 345.0
+rect_rotation = -45.0
+theme = ExtResource( 10 )
+script = ExtResource( 6 )
+
+[node name="ButtonBlocker" type="Panel" parent="MapOverlay"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -547.0
+margin_top = -341.0
+margin_bottom = 1046.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBlocker2" type="Panel" parent="MapOverlay"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 452.0
+margin_top = -357.0
+margin_right = 999.0
+margin_bottom = 1030.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBlocker3" type="Panel" parent="MapOverlay"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -523.0
+margin_top = 452.0
+margin_right = 1008.0
+margin_bottom = 1255.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBlocker4" type="Panel" parent="MapOverlay"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -628.0
+margin_top = -803.0
+margin_right = 903.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LocDesc" type="Panel" parent="."]
+margin_left = 184.0
+margin_top = 512.0
+margin_right = 760.0
+margin_bottom = 752.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LocDesc"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 568.0
+margin_bottom = 232.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="LocDesc/ScrollContainer"]
+margin_right = 560.0
+margin_bottom = 224.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+autowrap = true
+
+[node name="MapActions" type="ScrollContainer" parent="."]
+margin_left = 184.0
+margin_top = 760.0
+margin_right = 760.0
+margin_bottom = 888.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="GridContainer" parent="MapActions"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 576.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="BigMapName" type="Label" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 240.0
+margin_top = 48.0
+margin_right = 704.0
+margin_bottom = 504.0
+custom_fonts/font = ExtResource( 1 )
+text = "MAP TEXT"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BigMapName"]
+anims/MapTextAnim = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[node name="TutLab" parent="." instance=ExtResource( 8 )]
+margin_left = 692.0
+margin_top = 42.0
+margin_right = 701.0
+margin_bottom = 61.0
+desc = "This is the map screen. Squares are locations, lines are paths between them, and you are in the center.
+Press in the desired direction on the map screen to move there. You can usually only move along paths."

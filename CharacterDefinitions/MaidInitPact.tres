@@ -1,0 +1,48 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Code/Combat/Customization/Soul.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+growth = {
+"ABS": 0.0,
+"ATK": 0.4,
+"AUR": 0.5,
+"AVD": 0.4,
+"CRM": 0.0,
+"CTD": 0.0,
+"CTR": 0.0,
+"DEF": 1.1,
+"HIT": 0.4,
+"MHP": 6.0,
+"MMP": 0.0,
+"SPD": 0.4,
+"TEC": 0.0
+}
+base = {
+"ABS": 0,
+"ATK": 0,
+"AUR": 0,
+"AVD": 0,
+"CRM": 0,
+"CTD": 0,
+"CTR": 0,
+"DEF": 0,
+"HIT": 0,
+"MHP": 0,
+"MMP": 0,
+"SPD": 0,
+"TEC": 0
+}
+type = "Pact"
+skills = [ {
+"req": 20,
+"skill": "res://Code/Combat/Customization/Skills/DefenderPact/Phalanx.gd"
+}, {
+"req": 40,
+"skill": "res://Code/Combat/Customization/Skills/DefenderPact/Stubborness.gd"
+}, {
+"req": 60,
+"skill": "res://Code/Combat/Customization/Skills/DefenderPact/Reinforce.gd"
+} ]
+name = "Guardian's pact"

@@ -1,0 +1,8 @@
+[[
+	{
+		"weight": 8,
+		"type": "money",
+		"amount_min": 400,
+		"amount_max": 600,
+	},
+]]

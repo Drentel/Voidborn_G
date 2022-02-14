@@ -1,0 +1,689 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Code/Interface/EditorStatNamer.gd" type="Script" id=1]
+[ext_resource path="res://Code/Interface/CharaEdit.gd" type="Script" id=2]
+[ext_resource path="res://Code/Interface/SkinChangeBtn.gd" type="Script" id=3]
+[ext_resource path="res://Code/Interface/EditScene.gd" type="Script" id=4]
+[ext_resource path="res://Code/Interface/PosAdjustDialog.gd" type="Script" id=5]
+[ext_resource path="res://Themes/old-default.tres" type="Theme" id=6]
+[ext_resource path="res://Code/Interface/CharaName.gd" type="Script" id=7]
+[ext_resource path="res://Code/Interface/AudioButton.gd" type="Script" id=8]
+[ext_resource path="res://Code/Interface/SwapList.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/LevelUpDialog.gd" type="Script" id=10]
+[ext_resource path="res://Themes/f_dialogue.tres" type="DynamicFont" id=11]
+[ext_resource path="res://Scenes/TutLab.tscn" type="PackedScene" id=12]
+
+[node name="EditScene" type="Control"]
+margin_left = 328.0
+margin_top = 8.0
+margin_right = 368.0
+margin_bottom = 48.0
+theme = ExtResource( 6 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_top = 32.0
+margin_right = 648.0
+margin_bottom = 480.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainInfo" type="Panel" parent="Panel"]
+margin_left = 456.0
+margin_right = 648.0
+margin_bottom = 400.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharaName" type="ToolButton" parent="Panel/MainInfo"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 184.0
+margin_bottom = 37.0
+text = "???"
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="Panel/MainInfo/CharaName"]
+margin_left = 272.0
+margin_top = 136.0
+margin_right = 472.0
+margin_bottom = 216.0
+window_title = "New name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="Panel/MainInfo/CharaName/ConfirmationDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 35.0
+
+[node name="StatNames" type="VBoxContainer" parent="Panel/MainInfo"]
+margin_left = 8.0
+margin_top = 96.0
+margin_right = 49.0
+margin_bottom = 392.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_right = 41.0
+margin_bottom = 19.0
+text = "MHP"
+
+[node name="Label2" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 23.0
+margin_right = 41.0
+margin_bottom = 42.0
+text = "MHP"
+
+[node name="Label3" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 46.0
+margin_right = 41.0
+margin_bottom = 65.0
+text = "MHP"
+
+[node name="Label4" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 69.0
+margin_right = 41.0
+margin_bottom = 88.0
+text = "MHP"
+
+[node name="Label5" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 92.0
+margin_right = 41.0
+margin_bottom = 111.0
+text = "MHP"
+
+[node name="Label6" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 115.0
+margin_right = 41.0
+margin_bottom = 134.0
+text = "MHP"
+
+[node name="Label7" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 138.0
+margin_right = 41.0
+margin_bottom = 157.0
+text = "MHP"
+
+[node name="Label8" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 161.0
+margin_right = 41.0
+margin_bottom = 180.0
+text = "MHP"
+
+[node name="Label9" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 184.0
+margin_right = 41.0
+margin_bottom = 203.0
+text = "MHP"
+
+[node name="Label10" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 207.0
+margin_right = 41.0
+margin_bottom = 226.0
+text = "MHP"
+
+[node name="Label11" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 230.0
+margin_right = 41.0
+margin_bottom = 249.0
+text = "MHP"
+
+[node name="Label12" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 253.0
+margin_right = 41.0
+margin_bottom = 272.0
+text = "MHP"
+
+[node name="Label13" type="Label" parent="Panel/MainInfo/StatNames"]
+margin_top = 276.0
+margin_right = 41.0
+margin_bottom = 295.0
+text = "MHP"
+
+[node name="StatValues" type="VBoxContainer" parent="Panel/MainInfo"]
+margin_left = 56.0
+margin_top = 96.0
+margin_right = 184.0
+margin_bottom = 392.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/MainInfo/StatValues"]
+margin_right = 128.0
+margin_bottom = 19.0
+text = "STVAL"
+
+[node name="SoulName" type="Label" parent="Panel/MainInfo"]
+margin_left = 8.0
+margin_top = 40.0
+margin_right = 184.0
+margin_bottom = 59.0
+mouse_filter = 1
+text = "Soul of ???"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelInfo" type="Label" parent="Panel/MainInfo"]
+margin_left = 8.0
+margin_top = 64.0
+margin_right = 184.0
+margin_bottom = 83.0
+text = "LEVEL"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PactButton" type="Button" parent="Panel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 448.0
+margin_bottom = 37.0
+text = "Pact of ???"
+script = ExtResource( 8 )
+
+[node name="WeaponButton" type="Button" parent="Panel"]
+margin_left = 8.0
+margin_top = 40.0
+margin_right = 448.0
+margin_bottom = 69.0
+text = "Weapon ???"
+script = ExtResource( 8 )
+
+[node name="ArtifactSlots" type="GridContainer" parent="Panel"]
+margin_left = 8.0
+margin_top = 80.0
+margin_right = 448.0
+margin_bottom = 184.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Panel/ArtifactSlots"]
+margin_right = 218.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Button2" type="Button" parent="Panel/ArtifactSlots"]
+margin_left = 222.0
+margin_right = 440.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Button3" type="Button" parent="Panel/ArtifactSlots"]
+margin_top = 33.0
+margin_right = 218.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Button4" type="Button" parent="Panel/ArtifactSlots"]
+margin_left = 222.0
+margin_top = 33.0
+margin_right = 440.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Button5" type="Button" parent="Panel/ArtifactSlots"]
+margin_top = 66.0
+margin_right = 218.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Button6" type="Button" parent="Panel/ArtifactSlots"]
+margin_left = 222.0
+margin_top = 66.0
+margin_right = 440.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="SkinChangeBtn" type="Button" parent="Panel"]
+margin_left = 184.0
+margin_top = 408.0
+margin_right = 368.0
+margin_bottom = 437.0
+text = "Change sprite"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="Panel/SkinChangeBtn"]
+margin_left = 352.0
+margin_top = -80.0
+margin_right = 976.0
+margin_bottom = 368.0
+window_title = "Open a Directory"
+mode = 2
+access = 2
+show_hidden_files = true
+current_dir = "/GDT/Voidborn"
+current_path = "/GDT/Voidborn/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PosAdj" type="Button" parent="Panel"]
+margin_left = 376.0
+margin_top = 408.0
+margin_right = 544.0
+margin_bottom = 437.0
+text = "Adjust sprite pos"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PosAdjustDialog" type="WindowDialog" parent="Panel/PosAdj"]
+visible = true
+margin_left = -136.0
+margin_top = 200.0
+margin_right = 184.0
+margin_bottom = 384.0
+window_title = "Adjust position"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" type="Button" parent="Panel/PosAdj/PosAdjustDialog"]
+margin_left = 8.0
+margin_top = 64.0
+margin_right = 56.0
+margin_bottom = 112.0
+text = "<"
+script = ExtResource( 8 )
+
+[node name="zoom_plus" type="Button" parent="Panel/PosAdj/PosAdjustDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 56.0
+text = "+"
+script = ExtResource( 8 )
+
+[node name="zoom_minus" type="Button" parent="Panel/PosAdj/PosAdjustDialog"]
+margin_left = 120.0
+margin_top = 8.0
+margin_right = 168.0
+margin_bottom = 56.0
+text = "-"
+script = ExtResource( 8 )
+
+[node name="up" type="Button" parent="Panel/PosAdj/PosAdjustDialog"]
+margin_left = 112.0
+margin_top = 8.0
+margin_right = 160.0
+margin_bottom = 56.0
+rect_rotation = 90.0
+text = "<"
+script = ExtResource( 8 )
+
+[node name="right" type="Button" parent="Panel/PosAdj/PosAdjustDialog"]
+margin_left = 168.0
+margin_top = 112.0
+margin_right = 216.0
+margin_bottom = 160.0
+rect_rotation = 180.0
+text = "<"
+script = ExtResource( 8 )
+
+[node name="down" type="Button" parent="Panel/PosAdj/PosAdjustDialog"]
+margin_left = 64.0
+margin_top = 112.0
+margin_right = 112.0
+margin_bottom = 160.0
+rect_rotation = 270.0
+text = "<"
+script = ExtResource( 8 )
+
+[node name="amount" type="LineEdit" parent="Panel/PosAdj/PosAdjustDialog"]
+margin_left = 8.0
+margin_top = 152.0
+margin_right = 168.0
+margin_bottom = 176.0
+text = "8"
+
+[node name="flip" type="Button" parent="Panel/PosAdj/PosAdjustDialog"]
+margin_left = 8.0
+margin_top = 120.0
+margin_right = 168.0
+margin_bottom = 149.0
+text = "Flip"
+script = ExtResource( 8 )
+
+[node name="OffInfo" type="RichTextLabel" parent="Panel/PosAdj/PosAdjustDialog"]
+margin_left = 176.0
+margin_top = 8.0
+margin_right = 312.0
+margin_bottom = 176.0
+focus_mode = 2
+bbcode_enabled = true
+bbcode_text = "\"offset_x\": 123,
+\"offset_y\": 123,
+\"zoom\": 123,
+\"flip\": false,"
+text = "\"offset_x\": 123,
+\"offset_y\": 123,
+\"zoom\": 123,
+\"flip\": false,"
+selection_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 8.0
+margin_top = 184.0
+margin_right = 57.0
+margin_bottom = 203.0
+text = "Skills:"
+
+[node name="SkillContainer" type="ScrollContainer" parent="Panel"]
+margin_left = 8.0
+margin_top = 208.0
+margin_right = 448.0
+margin_bottom = 400.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Panel/SkillContainer"]
+margin_right = 440.0
+margin_bottom = 192.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelUpBtn" type="Button" parent="Panel"]
+margin_left = 8.0
+margin_top = 408.0
+margin_right = 176.0
+margin_bottom = 437.0
+text = "Ascend"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelUpDialog" type="WindowDialog" parent="Panel/LevelUpBtn"]
+margin_left = 520.0
+margin_top = -120.0
+margin_right = 864.0
+margin_bottom = 288.0
+window_title = "Ascend"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 336.0
+margin_bottom = 27.0
+text = "Target level"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 8.0
+margin_top = 80.0
+margin_right = 336.0
+margin_bottom = 99.0
+text = "Current level"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 8.0
+margin_top = 144.0
+margin_right = 336.0
+margin_bottom = 163.0
+text = "Cost"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TargetLevelLabel" type="Label" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 8.0
+margin_top = 32.0
+margin_right = 336.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 11 )
+text = "100"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentLevelLabel" type="Label" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 8.0
+margin_top = 104.0
+margin_right = 336.0
+margin_bottom = 144.0
+custom_fonts/font = ExtResource( 11 )
+text = "???"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnMinus" type="Button" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 128.0
+margin_bottom = 72.0
+text = "-"
+script = ExtResource( 8 )
+
+[node name="BtnMinus2" type="Button" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 8.0
+margin_top = 32.0
+margin_right = 64.0
+margin_bottom = 72.0
+text = "--"
+script = ExtResource( 8 )
+
+[node name="BtnPlus" type="Button" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 216.0
+margin_top = 32.0
+margin_right = 272.0
+margin_bottom = 72.0
+text = "+"
+script = ExtResource( 8 )
+
+[node name="BtnPlus2" type="Button" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 280.0
+margin_top = 32.0
+margin_right = 336.0
+margin_bottom = 72.0
+text = "++"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CostsLabel" type="RichTextLabel" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 8.0
+margin_top = 168.0
+margin_right = 336.0
+margin_bottom = 344.0
+bbcode_enabled = true
+bbcode_text = "12432523 Macca
+Mundane soul shard x1
+Unusual soul shard x1
+Extraordionary soul shard x1"
+text = "12432523 Macca
+Mundane soul shard x1
+Unusual soul shard x1
+Extraordionary soul shard x1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmBtn" type="Button" parent="Panel/LevelUpBtn/LevelUpDialog"]
+margin_left = 8.0
+margin_top = 352.0
+margin_right = 336.0
+margin_bottom = 397.0
+text = "Ascend"
+script = ExtResource( 8 )
+
+[node name="CloseButton" type="Button" parent="."]
+margin_left = 552.0
+margin_top = 440.0
+margin_right = 640.0
+margin_bottom = 469.0
+text = "Close"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SwapList" type="Panel" parent="."]
+visible = false
+margin_top = 488.0
+margin_right = 648.0
+margin_bottom = 880.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SwapList"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 640.0
+margin_bottom = 384.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="SwapList/ScrollContainer"]
+margin_right = 632.0
+margin_bottom = 376.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharaSelect" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TutLabs" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="PactTut" parent="TutLabs" instance=ExtResource( 12 )]
+margin_left = 442.0
+margin_top = 33.0
+margin_right = 451.0
+margin_bottom = 52.0
+desc = "The character's pact is like their job - it grants an array of stats that scale with the character's level and a collection of abilities.
+Every pact is unique - there is only one copy out there, so two characters can't have the same one equipped.
+Scroll while hovering over a pact to review the abilities."
+
+[node name="SoulTut" parent="TutLabs" instance=ExtResource( 12 )]
+margin_left = 636.0
+margin_top = 72.0
+margin_right = 645.0
+margin_bottom = 91.0
+desc = "The character's soul is their essense - it grants an array of stats that scale with the character's level and a collection of abilities.
+Scroll while hovering over a soul to review the abilities.
+Souls are character-unique and can not be changed."
+
+[node name="NameTut" parent="TutLabs" instance=ExtResource( 12 )]
+margin_left = 636.0
+margin_top = 45.0
+margin_right = 645.0
+margin_bottom = 64.0
+desc = "You can click on the character's name to re-name them. Their soul will remain the same though."
+
+[node name="StatTut" parent="TutLabs" instance=ExtResource( 12 )]
+margin_left = 459.0
+margin_top = 118.0
+margin_right = 468.0
+margin_bottom = 137.0
+desc = "Hover over stat names to find out what each one does."
+
+[node name="WeapTut" parent="TutLabs" instance=ExtResource( 12 )]
+margin_left = 442.0
+margin_top = 65.0
+margin_right = 451.0
+margin_bottom = 84.0
+desc = "Press on the button to change the character's weapon.
+The weapon's attack is an always-usable ability that deals damage to enemies in some way. Different kinds of weapons have different attacks - hover over them to check their description."
+
+[node name="SkillsTut" parent="TutLabs" instance=ExtResource( 12 )]
+margin_left = 58.0
+margin_top = 216.0
+margin_right = 67.0
+margin_bottom = 235.0
+desc = "This is the summary of all of the character's skills, both passive and active. Hover over them for details on each one."
+
+[node name="ArtiTut" parent="TutLabs" instance=ExtResource( 12 )]
+margin_left = 7.0
+margin_top = 107.0
+margin_right = 16.0
+margin_bottom = 126.0
+desc = "Artifacts grant stat increases and sometimes abilities when equipped. Hover over them for details."
+
+[connection signal="pressed" from="Panel/MainInfo/CharaName" to="Panel/MainInfo/CharaName" method="_on_CharaName_pressed"]
+[connection signal="confirmed" from="Panel/MainInfo/CharaName/ConfirmationDialog" to="Panel/MainInfo/CharaName" method="_on_ConfirmationDialog_confirmed"]
+[connection signal="pressed" from="Panel/PactButton" to="SwapList" method="show_pacts"]
+[connection signal="pressed" from="Panel/WeaponButton" to="SwapList" method="show_weaps"]
+[connection signal="pressed" from="Panel/SkinChangeBtn" to="Panel/SkinChangeBtn" method="_on_SkinChangeBtn_pressed"]
+[connection signal="dir_selected" from="Panel/SkinChangeBtn/FileDialog" to="Panel/SkinChangeBtn" method="_on_FileDialog_dir_selected"]
+[connection signal="pressed" from="Panel/PosAdj" to="Panel/PosAdj/PosAdjustDialog" method="_on_Button_pressed"]
+[connection signal="about_to_show" from="Panel/PosAdj/PosAdjustDialog" to="Panel/PosAdj/PosAdjustDialog" method="_on_PosAdjustDialog_about_to_show"]
+[connection signal="pressed" from="Panel/PosAdj/PosAdjustDialog/left" to="Panel/PosAdj/PosAdjustDialog" method="_on_left_pressed"]
+[connection signal="pressed" from="Panel/PosAdj/PosAdjustDialog/zoom_plus" to="Panel/PosAdj/PosAdjustDialog" method="_on_zoom_plus_pressed"]
+[connection signal="pressed" from="Panel/PosAdj/PosAdjustDialog/zoom_minus" to="Panel/PosAdj/PosAdjustDialog" method="_on_zoom_minus_pressed"]
+[connection signal="pressed" from="Panel/PosAdj/PosAdjustDialog/up" to="Panel/PosAdj/PosAdjustDialog" method="_on_up_pressed"]
+[connection signal="pressed" from="Panel/PosAdj/PosAdjustDialog/right" to="Panel/PosAdj/PosAdjustDialog" method="_on_right_pressed"]
+[connection signal="pressed" from="Panel/PosAdj/PosAdjustDialog/down" to="Panel/PosAdj/PosAdjustDialog" method="_on_down_pressed"]
+[connection signal="pressed" from="Panel/PosAdj/PosAdjustDialog/flip" to="Panel/PosAdj/PosAdjustDialog" method="_on_flip_pressed"]
+[connection signal="pressed" from="Panel/LevelUpBtn/LevelUpDialog/BtnMinus" to="Panel/LevelUpBtn/LevelUpDialog" method="_on_BtnMinus_pressed"]
+[connection signal="pressed" from="Panel/LevelUpBtn/LevelUpDialog/BtnMinus2" to="Panel/LevelUpBtn/LevelUpDialog" method="_on_BtnMinus2_pressed"]
+[connection signal="pressed" from="Panel/LevelUpBtn/LevelUpDialog/BtnPlus" to="Panel/LevelUpBtn/LevelUpDialog" method="_on_BtnPlus_pressed"]
+[connection signal="pressed" from="Panel/LevelUpBtn/LevelUpDialog/BtnPlus2" to="Panel/LevelUpBtn/LevelUpDialog" method="_on_BtnPlus2_pressed"]
+[connection signal="pressed" from="Panel/LevelUpBtn/LevelUpDialog/ConfirmBtn" to="Panel/LevelUpBtn/LevelUpDialog" method="_on_ConfirmBtn_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]

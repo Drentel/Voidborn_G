@@ -1,0 +1,406 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Code/Map/MapRoot.gd" type="Script" id=1]
+[ext_resource path="res://Code/Map/MapNode.gd" type="Script" id=2]
+[ext_resource path="res://Code/Map/Events/ButtonActivateEvent.gd" type="Script" id=3]
+[ext_resource path="res://Code/Map/Events/FlagSet.gd" type="Script" id=4]
+[ext_resource path="res://Code/Map/Events/FlagCheck.gd" type="Script" id=5]
+[ext_resource path="res://Code/Map/Events/CombatEvent.gd" type="Script" id=6]
+[ext_resource path="res://Code/Map/Events/GiveItem.gd" type="Script" id=7]
+[ext_resource path="res://Code/Map/Events/DialogueEvent.gd" type="Script" id=8]
+[ext_resource path="res://Code/Map/Events/MapMoveEvent.gd" type="Script" id=9]
+[ext_resource path="res://Code/Map/Events/ReEnterNodeEvent.gd" type="Script" id=10]
+[ext_resource path="res://Code/Map/Events/AddCharacterEvent.gd" type="Script" id=11]
+[ext_resource path="res://Pic/Map/3d-stairs.png" type="Texture" id=12]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+uniform vec4 bg_color: hint_color;
+
+uint hash( uint x ) {
+    x += ( x << uint(10) );
+	x = x^( x >> uint(11) );
+    x += ( x << uint(3)  );
+	x = x^( x >> uint(6) );
+    x += ( x << uint(15) );
+    return x;
+}
+
+float floatConstruct( uint m ) {
+    const uint ieeeMantissa = uint(0x007FFFFF); // binary32 mantissa bitmask
+    const uint ieeeOne      = uint(0x3F800000); // 1.0 in IEEE binary32
+
+    m &= ieeeMantissa;                     // Keep only mantissa bits (fractional part)
+    m |= ieeeOne;                          // Add fractional part to 1.0
+
+    float  f = uintBitsToFloat( m );       // Range [1:2]
+    return f - 1.0;                        // Range [0:1]
+}
+
+float random(float x) 
+{ 
+	return floatConstruct(hash(floatBitsToUint(x))); 
+}
+
+void fragment() {
+	float color = 0.0;
+	
+	float r = random((SCREEN_UV.x*SCREEN_UV.y));
+	if(r > 0.99 && r < 1.0)
+	{
+		color = r * (sin((TIME/4.0) * (r * 5.0) + 720.0 * r));
+	}
+	
+	COLOR = vec4(vec3(color*0.3, color*0.3, color*0.8),1.0) + bg_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/bg_color = null
+
+[node name="MapRoot" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+map_name = "~ The Mansion F0 ~"
+
+[node name="BGStars" type="Polygon2D" parent="."]
+material = SubResource( 4 )
+polygon = PoolVector2Array( 48, -1304, -1136, -472, -1160, 952, 936, 1112, 1720, 664, 1664, -1016 )
+
+[node name="LineConnections" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="MapNodes" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Panel" parent="MapNodes"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+down = NodePath("../DAWAY")
+desc = "The tunnel back to the first floor is right where it's supposed to be."
+
+[node name="Node" type="Node" parent="MapNodes/Start"]
+script = ExtResource( 3 )
+
+[node name="Go up" type="Node" parent="MapNodes/Start/Node"]
+script = ExtResource( 9 )
+map_path = "res://Scenes/Maps/Level2.tscn"
+dest_node_name = "WayDown"
+
+[node name="TextureRect" type="TextureRect" parent="MapNodes/Start"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 34.0
+margin_bottom = 34.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DAWAY" type="Panel" parent="MapNodes"]
+margin_top = 64.0
+margin_right = 40.0
+margin_bottom = 104.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Start")
+right = NodePath("../DAWAY2")
+desc = "The dungeon really reminds me of the cave I originally woke up in. It's dark, cold and rather tight."
+
+[node name="DAWAY2" type="Panel" parent="MapNodes"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 104.0
+margin_bottom = 104.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+left = NodePath("../DAWAY")
+right = NodePath("../CellCorridor1")
+down = NodePath("../Storage")
+desc = "The way to the east seems to be the cells, while the way down is most likely some kind of storage area."
+
+[node name="CellCorridor1" type="Panel" parent="MapNodes"]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 168.0
+margin_bottom = 104.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Cells")
+left = NodePath("../DAWAY2")
+right = NodePath("../CellCorridor2")
+down = NodePath("../Cells3")
+desc = "The dark corridor splits four ways."
+
+[node name="CellCorridor2" type="Panel" parent="MapNodes"]
+margin_left = 192.0
+margin_top = 64.0
+margin_right = 232.0
+margin_bottom = 104.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Cells2")
+left = NodePath("../CellCorridor1")
+desc = "The dark corridor splits three ways, but the way south is filled with rubble to the point where there's no way anymore."
+
+[node name="Cells" type="Panel" parent="MapNodes"]
+margin_left = 128.0
+margin_right = 168.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+down = NodePath("../CellCorridor1")
+desc = "The rows of cells are all empty, and some of their doors are open. Nothing of interest inside any of them, sadly."
+
+[node name="Cells2" type="Panel" parent="MapNodes"]
+margin_left = 192.0
+margin_right = 232.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+down = NodePath("../CellCorridor2")
+desc = "[The thief is waiting for you to open the cell.]
+EV thief_recruit
+[This is the cell where the thief was rotting until we rescued them. Not much to do here now.]"
+
+[node name="Check" type="Node" parent="MapNodes/Cells2"]
+script = ExtResource( 5 )
+flag = "mansion_thief_dialogue"
+
+[node name="Dialogue" type="Node" parent="MapNodes/Cells2/Check"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/thief_intro.json"
+
+[node name="Node" type="Node" parent="MapNodes/Cells2/Check/Dialogue"]
+script = ExtResource( 4 )
+flag = "mansion_thief_dialogue"
+bool_val = true
+
+[node name="Btn" type="Node" parent="MapNodes/Cells2"]
+script = ExtResource( 3 )
+
+[node name="Cell door" type="Node" parent="MapNodes/Cells2/Btn"]
+script = ExtResource( 5 )
+flag = "mansion_dungeon_key"
+activate_if = true
+
+[node name="YesKey" type="Node" parent="MapNodes/Cells2/Btn/Cell door"]
+script = ExtResource( 5 )
+flag = "thief_recruit"
+
+[node name="FirstOpen" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/cell_open.json"
+
+[node name="Set" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen"]
+script = ExtResource( 4 )
+flag = "thief_recruit"
+bool_val = true
+
+[node name="Join" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen/Set"]
+script = ExtResource( 11 )
+soul_path = "res://CharacterDefinitions/ThiefSoul.tres"
+default_pact = "res://CharacterDefinitions/ThiefInitPact.tres"
+start_level = 15
+weapon_class = 3
+weapon_level = 8
+def_name = "Thief"
+
+[node name="ReEnter" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen/Set"]
+script = ExtResource( 10 )
+
+[node name="AlreadyOpen" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/cell_already_open.json"
+
+[node name="NoKey" type="Node" parent="MapNodes/Cells2/Btn/Cell door"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/cell_no_key.json"
+
+[node name="Cells3" type="Panel" parent="MapNodes"]
+margin_left = 128.0
+margin_top = 128.0
+margin_right = 168.0
+margin_bottom = 168.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../CellCorridor1")
+desc = "[One of the open cells contains a creepy skeleton. This one doesn't have anything on it, so I better don't touch it.]
+EV secret_boss_1_beat
+[Congradulations.]"
+
+[node name="BeatCheck" type="Node" parent="MapNodes/Cells3"]
+script = ExtResource( 5 )
+flag = "secret_boss_1_beat"
+
+[node name="Node" type="Node" parent="MapNodes/Cells3/BeatCheck"]
+script = ExtResource( 3 )
+
+[node name="Skeleton" type="Node" parent="MapNodes/Cells3/BeatCheck/Node"]
+script = ExtResource( 5 )
+flag = "secret_boss_1_1"
+activate_if = true
+
+[node name="Check2" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton"]
+script = ExtResource( 5 )
+flag = "secret_boss_1_2"
+activate_if = true
+
+[node name="Check3" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2"]
+script = ExtResource( 5 )
+flag = "secret_boss_1_3"
+
+[node name="Dialogue3" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2/Check3"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/secret_boss_3.json"
+
+[node name="Set" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2/Check3/Dialogue3"]
+script = ExtResource( 4 )
+flag = "secret_boss_1_3"
+bool_val = true
+
+[node name="SecretBoss" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2/Check3/Dialogue3/Set"]
+script = ExtResource( 6 )
+scenario_path = "res://Scenes/CombatEncounters/MansionInnards/mansion_secret.tres"
+
+[node name="Set" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2/Check3/Dialogue3/Set/SecretBoss"]
+script = ExtResource( 4 )
+flag = "secret_boss_1_beat"
+bool_val = true
+
+[node name="Node" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2/Check3/Dialogue3/Set/SecretBoss/Set"]
+script = ExtResource( 10 )
+
+[node name="CombatRepeat" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2/Check3"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/secret_boss_4.json"
+
+[node name="SecretBoss" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2/Check3/CombatRepeat"]
+script = ExtResource( 6 )
+scenario_path = "res://Scenes/CombatEncounters/MansionInnards/mansion_secret.tres"
+
+[node name="Set" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2/Check3/CombatRepeat/SecretBoss"]
+script = ExtResource( 4 )
+flag = "secret_boss_1_beat"
+bool_val = true
+
+[node name="Node" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2/Check3/CombatRepeat/SecretBoss/Set"]
+script = ExtResource( 10 )
+
+[node name="Dialogue2" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/secret_boss_2.json"
+
+[node name="Set" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Check2/Dialogue2"]
+script = ExtResource( 4 )
+flag = "secret_boss_1_2"
+bool_val = true
+
+[node name="Dialogue1" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/secret_boss_1.json"
+
+[node name="Set" type="Node" parent="MapNodes/Cells3/BeatCheck/Node/Skeleton/Dialogue1"]
+script = ExtResource( 4 )
+flag = "secret_boss_1_1"
+bool_val = true
+
+[node name="Storage" type="Panel" parent="MapNodes"]
+margin_left = 64.0
+margin_top = 128.0
+margin_right = 104.0
+margin_bottom = 168.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../DAWAY2")
+desc = "The storage area is a bit wider and better lit, but it's still a dungeon. Not much stuff here is of any use to me."
+
+[node name="Check" type="Node" parent="MapNodes/Storage"]
+script = ExtResource( 5 )
+flag = "mansion_dungeon_key"
+
+[node name="Dialogue" type="Node" parent="MapNodes/Storage/Check"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/dungeon_key_battle.json"
+
+[node name="Combat" type="Node" parent="MapNodes/Storage/Check/Dialogue"]
+script = ExtResource( 6 )
+scenario_path = "res://Scenes/CombatEncounters/MansionInnards/inner_mansion_F0.tres"
+
+[node name="Loot" type="Node" parent="MapNodes/Storage/Check/Dialogue/Combat"]
+script = ExtResource( 7 )
+loot_table = "res://LootTables/post_dungeon_battle.tres"
+
+[node name="Set" type="Node" parent="MapNodes/Storage/Check/Dialogue/Combat/Loot"]
+script = ExtResource( 4 )
+flag = "mansion_dungeon_key"
+bool_val = true
+
+[node name="KeyGet" type="Node" parent="MapNodes/Storage/Check/Dialogue/Combat/Loot/Set"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/post_dungeon_key_battle.json"
+
+[node name="Btn" type="Node" parent="MapNodes/Storage"]
+script = ExtResource( 3 )
+
+[node name="Stuff" type="Node" parent="MapNodes/Storage/Btn"]
+script = ExtResource( 5 )
+flag = "mansion_underground_stuff"
+
+[node name="GetStuff" type="Node" parent="MapNodes/Storage/Btn/Stuff"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/get_stuff.json"
+
+[node name="set" type="Node" parent="MapNodes/Storage/Btn/Stuff/GetStuff"]
+script = ExtResource( 4 )
+flag = "mansion_underground_stuff"
+bool_val = true
+
+[node name="give" type="Node" parent="MapNodes/Storage/Btn/Stuff/GetStuff/set"]
+script = ExtResource( 7 )
+loot_table = "res://LootTables/shed_loot.tres"
+repeat = 5
+
+[node name="Makka" type="Node" parent="MapNodes/Storage/Btn/Stuff/GetStuff/set/give"]
+script = ExtResource( 7 )
+loot_table = "res://LootTables/makka500s.tres"
+
+[node name="GotStuff" type="Node" parent="MapNodes/Storage/Btn/Stuff"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/got_stuff.json"

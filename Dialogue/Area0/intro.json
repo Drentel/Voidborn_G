@@ -1,0 +1,22 @@
+[
+	{
+		"speaker": "I",
+		"line": "\"Ugh, my head...\""
+	},
+	{
+		"speaker": "",
+		"line": "I woke up in an unfamilliar place."
+	},
+	{
+		"speaker": "",
+		"line": "Walls of rough stone surround me on all sides.\nIt's dark, but I can see a light coming from a twisting passage ahead."
+	},
+	{
+		"speaker": "",
+		"line": "I try hard to remember something, but nothing comes up, not even my name."
+	},
+	{
+		"speaker": "Tutorial",
+		"line": "Press on directional buttons on the map screen to move between places."
+	},
+]

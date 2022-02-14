@@ -1,0 +1,54 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Code/Combat/Customization/Soul.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+growth = {
+"ABS": 0.1,
+"ATK": 0.4,
+"AUR": 0.1,
+"AVD": 0.5,
+"CRM": 0.1,
+"CTD": 0.4,
+"CTR": 0.4,
+"DEF": 0.1,
+"HIT": 0.2,
+"MHP": 5.0,
+"MMP": 0,
+"SPD": 0.6,
+"TEC": 0.4
+}
+base = {
+"ABS": 0,
+"ATK": 0,
+"AUR": 0,
+"AVD": 0,
+"CRM": 0,
+"CTD": 50,
+"CTR": 0,
+"DEF": 0,
+"HIT": 0,
+"MHP": 0,
+"MMP": 100,
+"SPD": 0,
+"TEC": 0
+}
+type = "Soul"
+skills = [ {
+"req": 0,
+"skill": "res://Code/Combat/Customization/Skills/BaseSkill.gd"
+}, {
+"req": 0,
+"skill": "res://Code/Combat/Customization/Skills/SwitchSkill.gd"
+}, {
+"req": 10,
+"skill": "res://Code/Combat/Customization/Skills/Thief/StatSteal.gd"
+}, {
+"req": 30,
+"skill": "res://Code/Combat/Customization/Skills/Thief/SmokePop.gd"
+}, {
+"req": 50,
+"skill": "res://Code/Combat/Customization/Skills/Thief/Slippery.gd"
+} ]
+name = "Thief's soul"

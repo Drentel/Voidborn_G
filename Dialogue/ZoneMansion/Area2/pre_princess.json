@@ -1,0 +1,26 @@
+[
+	{
+		"speaker": "Guard",
+		"line": "\"Stop! The princess is currently being punished. No guests are allowed.\""
+	},
+	{
+		"speaker": "Maid",
+		"line": "\"Huh? And what is she being punished for?\""
+	},
+	{
+		"speaker": "Guard 2",
+		"line": "\"It is irrelevant. Lord's orders are absolute.\""
+	},
+	{
+		"speaker": "Maid",
+		"line": "\"Well we have important buisness. Either you let us through or we come in by force.\""
+	},
+	{
+		"speaker": "Guards",
+		"line": "..."
+	},
+	{
+		"speaker": "Guards",
+		"line": "\"En garde!\""
+	},
+]

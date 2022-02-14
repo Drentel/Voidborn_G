@@ -1,0 +1,298 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Pic/Interface/path1310.png" type="Texture" id=1]
+[ext_resource path="res://Placeholders/Chara/bust3.png" type="Texture" id=2]
+[ext_resource path="res://Themes/old-default.tres" type="Theme" id=3]
+[ext_resource path="res://Scenes/CharaCard.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Code/Interface/HelpMenu.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/MapScene.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Code/Interface/AudioButton.gd" type="Script" id=7]
+[ext_resource path="res://Code/GameRoot.gd" type="Script" id=8]
+[ext_resource path="res://Code/Interface/CharaBust.gd" type="Script" id=12]
+
+[node name="Root" type="Control"]
+theme = ExtResource( 3 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Path1310" type="TextureRect" parent="Background"]
+margin_right = 1600.0
+margin_bottom = 900.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DimSeparator" type="Panel" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.5 )
+margin_left = -48.0
+margin_top = -24.0
+margin_right = 1656.0
+margin_bottom = 928.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharaBust" type="TextureRect" parent="."]
+margin_right = 1600.0
+margin_bottom = 900.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharaCards" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 40.0
+margin_right = 320.0
+margin_bottom = 936.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="I" parent="CharaCards" instance=ExtResource( 4 )]
+lvl = 10
+soul = "res://CharacterDefinitions/MCSoul.tres"
+pact = "res://CharacterDefinitions/MCInitPact.tres"
+
+[node name="MapScene" parent="." instance=ExtResource( 6 )]
+margin_left = 328.0
+margin_top = 8.0
+margin_right = 368.0
+margin_bottom = 48.0
+
+[node name="HelpButton" type="Button" parent="."]
+margin_left = 8.0
+margin_top = 864.0
+margin_right = 320.0
+margin_bottom = 893.0
+text = "HELP"
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HelpMenu" type="Popup" parent="HelpButton"]
+margin_left = 344.0
+margin_top = 1056.0
+margin_right = 1072.0
+margin_bottom = 1576.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="HelpButton/HelpMenu"]
+margin_right = 728.0
+margin_bottom = 520.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HelpButton/HelpMenu/Panel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 236.0
+margin_bottom = 27.0
+text = "Help (press outside to close)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HelpButton/HelpMenu/Panel"]
+margin_left = 8.0
+margin_top = 32.0
+margin_right = 232.0
+margin_bottom = 512.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HelpButton/HelpMenu/Panel/ScrollContainer"]
+margin_right = 224.0
+margin_bottom = 480.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="turnorder" type="Button" parent="HelpButton/HelpMenu/Panel/ScrollContainer/VBoxContainer"]
+margin_right = 224.0
+margin_bottom = 29.0
+toggle_mode = true
+text = "Turn Order"
+
+[node name="Label" type="RichTextLabel" parent="HelpButton/HelpMenu/Panel/ScrollContainer/VBoxContainer/turnorder"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+bbcode_enabled = true
+bbcode_text = "The turn order is visible on the top left of the battle screen, showing you 5 turns ahead.
+It is determined randomly, but depends on the SPD stat of units participating in combat. So a unit with SPD 20 will, on average, take turns twice as often as a unit with SPD 10.
+
+Besides speed, there are also certain rules to the turn order:
+1) The first turn every combat is always an ally unit
+2) The same unit can not take two turns in a row
+3) The same side (enemies/allies) can not take more than two turns in a row.
+
+These rules are only applied when new units are added to the order - it won't be enforced if the turn order changes (because of units dying, for example)
+
+You can check out the probabilities by hovering over the order"
+text = "The turn order is visible on the top left of the battle screen, showing you 5 turns ahead.
+It is determined randomly, but depends on the SPD stat of units participating in combat. So a unit with SPD 20 will, on average, take turns twice as often as a unit with SPD 10.
+
+Besides speed, there are also certain rules to the turn order:
+1) The first turn every combat is always an ally unit
+2) The same unit can not take two turns in a row
+3) The same side (enemies/allies) can not take more than two turns in a row.
+
+These rules are only applied when new units are added to the order - it won't be enforced if the turn order changes (because of units dying, for example)
+
+You can check out the probabilities by hovering over the order"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stats" type="Button" parent="HelpButton/HelpMenu/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 33.0
+margin_right = 224.0
+margin_bottom = 62.0
+toggle_mode = true
+text = "Stats"
+
+[node name="Label" type="RichTextLabel" parent="HelpButton/HelpMenu/Panel/ScrollContainer/VBoxContainer/stats"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+bbcode_enabled = true
+bbcode_text = "Every unit posesses all of the following stats:
+
+MHP: Max HP. When HP runs out during combat a unit dies
+MMP: Max MP. MP is used up when using certain abilities. A unit can not use these abilities when they don't have enough MP
+ATK: Attack. Higher attack means that physical damage skills deal more damage 
+CRM: Charm. Works like attack, but for magical attacks
+TEC: Technique. Works like attack or charm, but for various miscelaneous effects, like healing and buffs/debuffs
+DEF: Defense. Reduces incoming physical damage, though some attacks can ignore it outright
+AUR: Aura. Same as defense, but for magical attacks
+CTR: Crit rate. Chance of attacks becoming critical
+CTD: Crit damage. The bonus damage that critical hits deal. Every point is a 1% increase
+SPD: Speed. Faster characters take more turns on average
+AVD: Grants a chance to completely evade an attack, tough some attacks are \"homing\" and ignore AVD
+HIT: Hit rate. Reduces the chances of missing the target when they have high AVD
+ABS: Absorption. Increases the % of mana the character absorbs from the battlefield when their turn starts"
+text = "Every unit posesses all of the following stats:
+
+MHP: Max HP. When HP runs out during combat a unit dies
+MMP: Max MP. MP is used up when using certain abilities. A unit can not use these abilities when they don't have enough MP
+ATK: Attack. Higher attack means that physical damage skills deal more damage 
+CRM: Charm. Works like attack, but for magical attacks
+TEC: Technique. Works like attack or charm, but for various miscelaneous effects, like healing and buffs/debuffs
+DEF: Defense. Reduces incoming physical damage, though some attacks can ignore it outright
+AUR: Aura. Same as defense, but for magical attacks
+CTR: Crit rate. Chance of attacks becoming critical
+CTD: Crit damage. The bonus damage that critical hits deal. Every point is a 1% increase
+SPD: Speed. Faster characters take more turns on average
+AVD: Grants a chance to completely evade an attack, tough some attacks are \"homing\" and ignore AVD
+HIT: Hit rate. Reduces the chances of missing the target when they have high AVD
+ABS: Absorption. Increases the % of mana the character absorbs from the battlefield when their turn starts"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mana" type="Button" parent="HelpButton/HelpMenu/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 33.0
+margin_right = 224.0
+margin_bottom = 62.0
+toggle_mode = true
+text = "Mana"
+
+[node name="Label" type="RichTextLabel" parent="HelpButton/HelpMenu/Panel/ScrollContainer/VBoxContainer/Mana"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+bbcode_enabled = true
+bbcode_text = "Mana (MP) is a resource that is used by allies in enemies in combat to use certain abilities.
+
+It does not regenerate by itself, but units absorb a portion of field mana when their turn starts, depending on their ABS stat. Units can't absorb mana beyond their MMP and when they die, all their mana gets returned to the field.
+
+Units can use abilities that require mana even when they don't have enough of it. When this happens, HP will be converted into mana at a 20:1 ratio (20 HP for every 1 MP). This is called overcasting."
+text = "Mana (MP) is a resource that is used by allies in enemies in combat to use certain abilities.
+
+It does not regenerate by itself, but units absorb a portion of field mana when their turn starts, depending on their ABS stat. Units can't absorb mana beyond their MMP and when they die, all their mana gets returned to the field.
+
+Units can use abilities that require mana even when they don't have enough of it. When this happens, HP will be converted into mana at a 20:1 ratio (20 HP for every 1 MP). This is called overcasting."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Targeting" type="Button" parent="HelpButton/HelpMenu/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 33.0
+margin_right = 224.0
+margin_bottom = 62.0
+toggle_mode = true
+text = "Enemy targeting"
+
+[node name="Label" type="RichTextLabel" parent="HelpButton/HelpMenu/Panel/ScrollContainer/VBoxContainer/Targeting"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+bbcode_enabled = true
+bbcode_text = "Enemies tend to target allies closer to the front (top of the screen).
+The actual probabilities for a 5-unit party are:
+
+Ally 1: 45%
+Ally 2: 25%
+Ally 3: 15%
+Ally 4: 10%
+Ally 5: 5%
+
+Dead units are ignored. When there are less than 5 units the proportion will stay the same (so, for a 2-person party, the probabilities will be ~64% and 35%)"
+text = "Enemies tend to target allies closer to the front (top of the screen).
+The actual probabilities for a 5-unit party are:
+
+Ally 1: 45%
+Ally 2: 25%
+Ally 3: 15%
+Ally 4: 10%
+Ally 5: 5%
+
+Dead units are ignored. When there are less than 5 units the proportion will stay the same (so, for a 2-person party, the probabilities will be ~64% and 35%)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HelpButton/HelpMenu"]
+margin_left = 256.0
+margin_top = 8.0
+margin_right = 720.0
+margin_bottom = 512.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator" type="VSeparator" parent="HelpButton/HelpMenu"]
+margin_left = 216.0
+margin_right = 272.0
+margin_bottom = 520.0
+
+[node name="CharaSwitchBtn" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="HelpButton" to="HelpButton/HelpMenu" method="_on_HelpButton_pressed"]

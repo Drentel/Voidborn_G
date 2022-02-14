@@ -1,0 +1,41 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Code/Map/LootTable.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+table = [ [ {
+"amount_max": 1,
+"amount_min": 1,
+"name": "Mundane soul shard",
+"type": "generic",
+"weight": 1
+}, {
+"amount_max": 1,
+"amount_min": 1,
+"name": "Unusual soul shard",
+"type": "generic",
+"weight": 1
+}, {
+"amount_max": 1,
+"amount_min": 1,
+"name": "Extraordinary soul shard",
+"type": "generic",
+"weight": 1
+}, {
+"amount_max": 1000,
+"amount_min": 100,
+"type": "money",
+"weight": 1
+}, {
+"power_max": 10,
+"power_min": 5,
+"type": "artifact",
+"weight": 1
+}, {
+"power_max": 10,
+"power_min": 5,
+"type": "weapon",
+"weight": 1
+} ] ]
+json_path = ""

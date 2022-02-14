@@ -1,0 +1,26 @@
+[
+	[
+		{
+			"weight": 1,
+			"type": "pact",
+			"pact": "res://CharacterDefinitions/KnightPact.tres",
+		},
+	],
+	[
+		{
+			"weight": 1,
+			"type": "generic",
+			"name": "Mundane soul shard",
+			"amount_min": 1,
+			"amount_max": 1,
+		},
+	],
+	[
+		{
+			"weight": 1,
+			"type": "money",
+			"amount_min": 800,
+			"amount_max": 1000,
+		},
+	]
+]

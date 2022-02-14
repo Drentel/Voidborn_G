@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Code/Interface/Curtain.gd" type="Script" id=1]
+[ext_resource path="res://Code/Interface/CurtainCanvas.gd" type="Script" id=2]
+[ext_resource path="res://Themes/old-default.tres" type="Theme" id=3]
+
+[node name="CurtainCanvas" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Curtain" type="Panel" parent="."]
+margin_left = -8.0
+margin_top = -376.0
+margin_right = 1616.0
+margin_bottom = 32.0
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Curtain"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 1600.0
+margin_bottom = 400.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Curtain/ScrollContainer"]
+margin_top = 373.0
+margin_right = 1584.0
+margin_bottom = 392.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 10
+text = "Curtain ready"
+valign = 2
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unread" type="Label" parent="Curtain"]
+visible = false
+margin_left = 1272.0
+margin_top = 384.0
+margin_right = 1584.0
+margin_bottom = 403.0
+text = "123 Unread"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="mouse_entered" from="Curtain" to="Curtain" method="_on_Curtain_mouse_entered"]
+[connection signal="mouse_exited" from="Curtain" to="Curtain" method="_on_Curtain_mouse_exited"]

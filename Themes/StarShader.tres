@@ -1,0 +1,46 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform vec4 bg_color: hint_color;
+
+uint hash( uint x ) {
+    x += ( x << uint(10) );
+	x = x^( x >> uint(11) );
+    x += ( x << uint(3)  );
+	x = x^( x >> uint(6) );
+    x += ( x << uint(15) );
+    return x;
+}
+
+float floatConstruct( uint m ) {
+    const uint ieeeMantissa = uint(0x007FFFFF); // binary32 mantissa bitmask
+    const uint ieeeOne      = uint(0x3F800000); // 1.0 in IEEE binary32
+
+    m &= ieeeMantissa;                     // Keep only mantissa bits (fractional part)
+    m |= ieeeOne;                          // Add fractional part to 1.0
+
+    float  f = uintBitsToFloat( m );       // Range [1:2]
+    return f - 1.0;                        // Range [0:1]
+}
+
+float random(float x) 
+{ 
+	return floatConstruct(hash(floatBitsToUint(x))); 
+}
+
+void fragment() {
+	float color = 0.0;
+	
+	float r = random((SCREEN_UV.x*SCREEN_UV.y));
+	if(r > 0.99 && r < 1.0)
+	{
+		color = r * (sin((TIME/4.0) * (r * 5.0) + 720.0 * r));
+	}
+	
+	COLOR = vec4(vec3(color*0.3, color*0.3, color*0.8),1.0) + bg_color;
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/bg_color = null

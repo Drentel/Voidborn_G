@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Code/Interface/PagedTooltip.gd" type="Script" id=1]
+[ext_resource path="res://Themes/old-default.tres" type="Theme" id=2]
+
+[node name="Tip" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.8 )
+margin_left = 1112.0
+margin_top = 592.0
+margin_right = 1592.0
+margin_bottom = 896.0
+theme = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PageLabel" type="Label" parent="Panel"]
+margin_left = 336.0
+margin_top = 8.0
+margin_right = 474.0
+margin_bottom = 27.0
+text = "PAGES"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 472.0
+margin_bottom = 296.0
+bbcode_enabled = true
+bbcode_text = "Asd
+Check
+this
+readability
+
+A brown dog jumps over the lazy fox"
+text = "Asd
+Check
+this
+readability
+
+A brown dog jumps over the lazy fox"
+__meta__ = {
+"_edit_use_anchors_": false
+}

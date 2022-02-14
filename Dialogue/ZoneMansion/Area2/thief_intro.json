@@ -1,0 +1,38 @@
+[
+	{
+		"speaker": "",
+		"line": "I enter the block, and see one of the cell beds occupied."
+	},
+	{
+		"speaker": "Maid",
+		"line": "\"Hey, thief, today's your lucky day!\""
+	},
+	{
+		"speaker": "",
+		"line": "The thief-y blob turns to us with a heavy expression."
+	},
+	{
+		"speaker": "Thief",
+		"line": "\"Hmm? You're strangely upbeat today.\""
+	},
+	{
+		"speaker": "",
+		"line": "The thief points at me."
+	},
+	{
+		"speaker": "Thief",
+		"line": "\"Is that one linked to my luck today?\""
+	},
+	{
+		"speaker": "Maid",
+		"line": "\"Yeah, he's the key to our freedom.\""
+	},
+	{
+		"speaker": "I",
+		"line": "\"I suppose we'll have to open the cell first.\""
+	},
+	{
+		"speaker": "Thief",
+		"line": "\"The guards around here should have it. They usually hang out in the storage area.\""
+	},
+]

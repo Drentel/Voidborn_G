@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Code/Dialogue.gd" type="Script" id=1]
+[ext_resource path="res://Themes/f_dialogue.tres" type="DynamicFont" id=2]
+
+[node name="Dialogue" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+DialogueJson = "res://Dialogue/Area1/test.json"
+
+[node name="Panel2" type="Panel" parent="."]
+margin_left = 328.0
+margin_top = 600.0
+margin_right = 616.0
+margin_bottom = 672.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 328.0
+margin_top = 648.0
+margin_right = 1272.0
+margin_bottom = 896.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line" type="RichTextLabel" parent="."]
+margin_left = 344.0
+margin_top = 664.0
+margin_right = 1256.0
+margin_bottom = 880.0
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "This is a dialogue box"
+text = "This is a dialogue box"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Speaker" type="RichTextLabel" parent="."]
+margin_left = 344.0
+margin_top = 608.0
+margin_right = 616.0
+margin_bottom = 656.0
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "Speaker"
+text = "Speaker"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 1608.0
+margin_bottom = 912.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="SkipBtn" type="Button" parent="."]
+margin_left = 1472.0
+margin_top = 864.0
+margin_right = 1592.0
+margin_bottom = 884.0
+text = "Skip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Button" to="." method="next_line"]
+[connection signal="pressed" from="SkipBtn" to="." method="_on_SkipBtn_pressed"]

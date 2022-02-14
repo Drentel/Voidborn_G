@@ -1,0 +1,406 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Code/Map/MapRoot.gd" type="Script" id=1]
+[ext_resource path="res://Code/Map/MapNode.gd" type="Script" id=2]
+[ext_resource path="res://Code/Map/Events/ButtonActivateEvent.gd" type="Script" id=3]
+[ext_resource path="res://Pic/Map/3d-stairs.png" type="Texture" id=4]
+[ext_resource path="res://Code/Map/Events/FlagBlockMov.gd" type="Script" id=5]
+[ext_resource path="res://Code/Map/Events/DialogueEvent.gd" type="Script" id=6]
+[ext_resource path="res://Code/Map/Events/ReEnterNodeEvent.gd" type="Script" id=7]
+[ext_resource path="res://Code/Map/Events/CombatEvent.gd" type="Script" id=8]
+[ext_resource path="res://Code/Map/Events/MapMoveEvent.gd" type="Script" id=9]
+[ext_resource path="res://Code/Map/Events/FlagCheck.gd" type="Script" id=10]
+[ext_resource path="res://Code/Map/Events/FlagSet.gd" type="Script" id=11]
+[ext_resource path="res://Code/Map/Events/AddCharacterEvent.gd" type="Script" id=12]
+[ext_resource path="res://Code/Map/Events/GiveItem.gd" type="Script" id=13]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+uniform vec4 bg_color: hint_color;
+
+uint hash( uint x ) {
+    x += ( x << uint(10) );
+	x = x^( x >> uint(11) );
+    x += ( x << uint(3)  );
+	x = x^( x >> uint(6) );
+    x += ( x << uint(15) );
+    return x;
+}
+
+float floatConstruct( uint m ) {
+    const uint ieeeMantissa = uint(0x007FFFFF); // binary32 mantissa bitmask
+    const uint ieeeOne      = uint(0x3F800000); // 1.0 in IEEE binary32
+
+    m &= ieeeMantissa;                     // Keep only mantissa bits (fractional part)
+    m |= ieeeOne;                          // Add fractional part to 1.0
+
+    float  f = uintBitsToFloat( m );       // Range [1:2]
+    return f - 1.0;                        // Range [0:1]
+}
+
+float random(float x) 
+{ 
+	return floatConstruct(hash(floatBitsToUint(x))); 
+}
+
+void fragment() {
+	float color = 0.0;
+	
+	float r = random((SCREEN_UV.x*SCREEN_UV.y));
+	if(r > 0.99 && r < 1.0)
+	{
+		color = r * (sin((TIME/4.0) * (r * 5.0) + 720.0 * r));
+	}
+	
+	COLOR = vec4(vec3(color*0.3, color*0.3, color*0.8),1.0) + bg_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/bg_color = null
+
+[node name="MapRoot" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+map_name = "~ The Mansion F2 ~"
+
+[node name="BGStars" type="Polygon2D" parent="."]
+material = SubResource( 4 )
+polygon = PoolVector2Array( 48, -1304, -1136, -472, -1160, 952, 936, 1112, 1720, 664, 1664, -1016 )
+
+[node name="LineConnections" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="MapNodes" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Panel" parent="MapNodes"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+down = NodePath("../Corridor")
+desc = "The stairway back to the first floor is right where it's supposed to be. One of the windows is also broken."
+
+[node name="Node" type="Node" parent="MapNodes/Start"]
+script = ExtResource( 3 )
+
+[node name="Go down" type="Node" parent="MapNodes/Start/Node"]
+script = ExtResource( 9 )
+map_path = "res://Scenes/Maps/Level2.tscn"
+dest_node_name = "WayUp"
+
+[node name="CheckPaintingInit" type="Node" parent="MapNodes/Start"]
+script = ExtResource( 10 )
+flag = "paintings_init"
+
+[node name="NoRepeat" type="Node" parent="MapNodes/Start/CheckPaintingInit"]
+script = ExtResource( 11 )
+flag = "paintings_init"
+bool_val = true
+
+[node name="Guest" type="Node" parent="MapNodes/Start/CheckPaintingInit/NoRepeat"]
+script = ExtResource( 11 )
+flag = "painting_1"
+bool_val = true
+
+[node name="Pool" type="Node" parent="MapNodes/Start/CheckPaintingInit/NoRepeat"]
+script = ExtResource( 11 )
+flag = "painting_2"
+
+[node name="Princess" type="Node" parent="MapNodes/Start/CheckPaintingInit/NoRepeat"]
+script = ExtResource( 11 )
+flag = "painting_3"
+
+[node name="TextureRect" type="TextureRect" parent="MapNodes/Start"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 34.0
+margin_bottom = 34.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PrePrincessCorridor" type="Panel" parent="MapNodes"]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 136.0
+margin_bottom = 136.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../PrincessRoom")
+left = NodePath("../Corridor")
+down = NodePath("../TreasureRoom")
+down_ev_override = NodePath("PaintingCheck")
+desc = "The mansion corridors are wide and decorated with an ovewhelming amount of useless junk."
+
+[node name="Check" type="Node" parent="MapNodes/PrePrincessCorridor"]
+script = ExtResource( 10 )
+flag = "pre_princess_battle"
+
+[node name="Dialogue" type="Node" parent="MapNodes/PrePrincessCorridor/Check"]
+script = ExtResource( 6 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/pre_princess.json"
+
+[node name="Combat" type="Node" parent="MapNodes/PrePrincessCorridor/Check/Dialogue"]
+script = ExtResource( 8 )
+scenario_path = "res://Scenes/CombatEncounters/MansionInnards/inner_mansion_F2_pre_princess.tres"
+
+[node name="Set" type="Node" parent="MapNodes/PrePrincessCorridor/Check/Dialogue/Combat"]
+script = ExtResource( 11 )
+flag = "pre_princess_battle"
+bool_val = true
+
+[node name="Makka" type="Node" parent="MapNodes/PrePrincessCorridor/Check/Dialogue/Combat/Set"]
+script = ExtResource( 13 )
+loot_table = "res://LootTables/makka500s.tres"
+repeat = 2
+
+[node name="PaintingCheck" type="Node" parent="MapNodes/PrePrincessCorridor"]
+script = ExtResource( 5 )
+flags = [ "painting_1", "painting_2", "painting_3" ]
+
+[node name="Dialogue" type="Node" parent="MapNodes/PrePrincessCorridor/PaintingCheck"]
+script = ExtResource( 6 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/painting_door.json"
+
+[node name="Corridor2" type="Panel" parent="MapNodes"]
+margin_left = -96.0
+margin_top = 96.0
+margin_right = -56.0
+margin_bottom = 136.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Pool")
+right = NodePath("../Corridor")
+down = NodePath("../GuestRoom")
+desc = "The mansion corridors are wide and decorated with an ovewhelming amount of useless junk."
+
+[node name="GuestRoom" type="Panel" parent="MapNodes"]
+margin_left = -96.0
+margin_top = 192.0
+margin_right = -56.0
+margin_bottom = 232.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Corridor2")
+desc = "[What seems to be the guest room is as lavishly decorated as the rest of the mansion is. You've straightened out the crooked painting.]
+EV painting_1
+[What seems to be the guest room is as lavishly decorated as the rest of the mansion is. A painting on one of the walls is crooked.]"
+
+[node name="Check" type="Node" parent="MapNodes/GuestRoom"]
+script = ExtResource( 10 )
+flag = "painting_1"
+
+[node name="BtnCrook" type="Node" parent="MapNodes/GuestRoom/Check"]
+script = ExtResource( 3 )
+
+[node name="Painting" type="Node" parent="MapNodes/GuestRoom/Check/BtnCrook"]
+script = ExtResource( 11 )
+flag = "painting_1"
+bool_val = true
+
+[node name="Node" type="Node" parent="MapNodes/GuestRoom/Check/BtnCrook/Painting"]
+script = ExtResource( 7 )
+
+[node name="BtnUnCrook" type="Node" parent="MapNodes/GuestRoom/Check"]
+script = ExtResource( 3 )
+
+[node name="Painting" type="Node" parent="MapNodes/GuestRoom/Check/BtnUnCrook"]
+script = ExtResource( 11 )
+flag = "painting_1"
+
+[node name="Node" type="Node" parent="MapNodes/GuestRoom/Check/BtnUnCrook/Painting"]
+script = ExtResource( 7 )
+
+[node name="Pool" type="Panel" parent="MapNodes"]
+margin_left = -96.0
+margin_right = -56.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+down = NodePath("../Corridor2")
+desc = "[This mansion has a full-featured pool on the second floor, somehow? There is a painting near the enterance.]
+EV painting_2
+[This mansion has a full-featured pool on the second floor, somehow? You've crooked the painting near the room's enterance.]"
+
+[node name="Check" type="Node" parent="MapNodes/Pool"]
+script = ExtResource( 10 )
+flag = "painting_2"
+
+[node name="BtnCrook" type="Node" parent="MapNodes/Pool/Check"]
+script = ExtResource( 3 )
+
+[node name="Painting" type="Node" parent="MapNodes/Pool/Check/BtnCrook"]
+script = ExtResource( 11 )
+flag = "painting_2"
+bool_val = true
+
+[node name="Node" type="Node" parent="MapNodes/Pool/Check/BtnCrook/Painting"]
+script = ExtResource( 7 )
+
+[node name="BtnUnCrook" type="Node" parent="MapNodes/Pool/Check"]
+script = ExtResource( 3 )
+
+[node name="Painting" type="Node" parent="MapNodes/Pool/Check/BtnUnCrook"]
+script = ExtResource( 11 )
+flag = "painting_2"
+
+[node name="Node" type="Node" parent="MapNodes/Pool/Check/BtnUnCrook/Painting"]
+script = ExtResource( 7 )
+
+[node name="PrincessRoom" type="Panel" parent="MapNodes"]
+margin_left = 96.0
+margin_right = 136.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+down = NodePath("../PrePrincessCorridor")
+desc = "[The princess' room is nicely decorated, but also unnerving with the metal bars on the windows and a surprisingly tough door. There is a painting on one of the walls.]
+EV painting_3
+[The princess' room is nicely decorated, but also unnerving with the metal bars on the windows and a surprisingly tough door. You've crooked the painting.]"
+
+[node name="Check" type="Node" parent="MapNodes/PrincessRoom"]
+script = ExtResource( 10 )
+flag = "princess_recruit"
+
+[node name="RecruitDialogue" type="Node" parent="MapNodes/PrincessRoom/Check"]
+script = ExtResource( 6 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/princess.json"
+
+[node name="Set" type="Node" parent="MapNodes/PrincessRoom/Check/RecruitDialogue"]
+script = ExtResource( 11 )
+flag = "princess_recruit"
+bool_val = true
+
+[node name="Recruit" type="Node" parent="MapNodes/PrincessRoom/Check/RecruitDialogue/Set"]
+script = ExtResource( 12 )
+soul_path = "res://CharacterDefinitions/PrincessSoul.tres"
+default_pact = "res://CharacterDefinitions/PrincessInitPact.tres"
+start_level = 15
+weapon_class = 1
+weapon_level = 10
+def_name = "Princess"
+
+[node name="PainCheck" type="Node" parent="MapNodes/PrincessRoom"]
+script = ExtResource( 10 )
+flag = "painting_3"
+
+[node name="BtnCrook" type="Node" parent="MapNodes/PrincessRoom/PainCheck"]
+script = ExtResource( 3 )
+
+[node name="Painting" type="Node" parent="MapNodes/PrincessRoom/PainCheck/BtnCrook"]
+script = ExtResource( 11 )
+flag = "painting_3"
+bool_val = true
+
+[node name="Node" type="Node" parent="MapNodes/PrincessRoom/PainCheck/BtnCrook/Painting"]
+script = ExtResource( 7 )
+
+[node name="BtnUnCrook" type="Node" parent="MapNodes/PrincessRoom/PainCheck"]
+script = ExtResource( 3 )
+
+[node name="Painting" type="Node" parent="MapNodes/PrincessRoom/PainCheck/BtnUnCrook"]
+script = ExtResource( 11 )
+flag = "painting_3"
+
+[node name="Node" type="Node" parent="MapNodes/PrincessRoom/PainCheck/BtnUnCrook/Painting"]
+script = ExtResource( 7 )
+
+[node name="Corridor" type="Panel" parent="MapNodes"]
+margin_top = 96.0
+margin_right = 40.0
+margin_bottom = 136.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Start")
+left = NodePath("../Corridor2")
+right = NodePath("../PrePrincessCorridor")
+down = NodePath("../BossRoom")
+down_ev_override = NodePath("ReqRecruitToMove")
+desc = "The door to the south is extremely large. I sense a threatening presence behind it."
+
+[node name="ReqRecruitToMove" type="Node" parent="MapNodes/Corridor"]
+script = ExtResource( 5 )
+flags = [ "princess_recruit", "thief_recruit" ]
+
+[node name="NotAllRecruit" type="Node" parent="MapNodes/Corridor/ReqRecruitToMove"]
+script = ExtResource( 6 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/boss_block.json"
+
+[node name="TreasureRoom" type="Panel" parent="MapNodes"]
+margin_left = 96.0
+margin_top = 192.0
+margin_right = 136.0
+margin_bottom = 232.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../PrePrincessCorridor")
+desc = "The door to the south is extremely large. I sense a threatening presence behind it."
+
+[node name="Check" type="Node" parent="MapNodes/TreasureRoom"]
+script = ExtResource( 10 )
+flag = "mansion_f2_loot"
+
+[node name="Set" type="Node" parent="MapNodes/TreasureRoom/Check"]
+script = ExtResource( 11 )
+flag = "mansion_f2_loot"
+bool_val = true
+
+[node name="Dialogue" type="Node" parent="MapNodes/TreasureRoom/Check/Set"]
+script = ExtResource( 6 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/loot_room.json"
+
+[node name="Loot" type="Node" parent="MapNodes/TreasureRoom/Check/Set/Dialogue"]
+script = ExtResource( 13 )
+loot_table = "res://LootTables/mansion_f2_loot.tres"
+repeat = 10
+
+[node name="BossRoom" type="Panel" parent="MapNodes"]
+margin_top = 192.0
+margin_right = 40.0
+margin_bottom = 232.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Corridor")
+desc = "The mansion master's room is lined with bookshelves full of books written in an unknown language.
+There is also a large portal embedded in a wall."
+
+[node name="Boss" type="Node" parent="MapNodes/BossRoom"]
+script = ExtResource( 8 )
+scenario_path = "res://Scenes/CombatEncounters/MansionInnards/inner_mansion_boss.tres"

@@ -1,0 +1,51 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Code/Combat/Customization/Soul.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+growth = {
+"ABS": 1,
+"ATK": 1,
+"AUR": 1,
+"AVD": 1,
+"CRM": 1,
+"CTD": 1,
+"CTR": 1,
+"DEF": 1,
+"HIT": 1,
+"MHP": 1,
+"MMP": 0,
+"SPD": 1,
+"TEC": 1
+}
+base = {
+"ABS": 0,
+"ATK": 0,
+"AUR": 0,
+"AVD": 0,
+"CRM": 0,
+"CTD": 0,
+"CTR": 0,
+"DEF": 0,
+"HIT": 0,
+"MHP": 0,
+"MMP": 50,
+"SPD": 0,
+"TEC": 0
+}
+type = "Soul"
+skills = [ {
+"req": 0,
+"skill": "res://Code/Combat/Customization/Skills/BaseSkill.gd"
+}, {
+"req": 0,
+"skill": "res://Code/Combat/Customization/Skills/TestTargetSkill.gd"
+}, {
+"req": 0,
+"skill": "res://Code/Combat/Customization/Skills/StatusTestSkill.gd"
+}, {
+"req": 0,
+"skill": "res://Code/Combat/Customization/PassiveSkills/BasePassiveSkill.gd"
+} ]
+name = "Soul of testing"

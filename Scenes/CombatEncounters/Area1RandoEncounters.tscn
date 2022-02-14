@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Code/Map/Events/CombatEvent.gd" type="Script" id=1]
+[ext_resource path="res://Code/Map/Events/ChanceActivate.gd" type="Script" id=2]
+[ext_resource path="res://Code/Map/Events/DialogueEvent.gd" type="Script" id=3]
+[ext_resource path="res://Code/Map/Events/GiveItem.gd" type="Script" id=4]
+
+[node name="RandEncounter" type="Node"]
+script = ExtResource( 2 )
+prob = 18
+
+[node name="Dialogue" type="Node" parent="."]
+script = ExtResource( 3 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/enemies1.json"
+
+[node name="Combat" type="Node" parent="Dialogue"]
+script = ExtResource( 1 )
+scenario_path = "res://Scenes/CombatEncounters/area1_combat2.tres"
+
+[node name="Loot" type="Node" parent="Dialogue/Combat"]
+script = ExtResource( 4 )
+loot_table = "res://LootTables/garden_normal_enemies.tres"
+
+[node name="Dialogue2" type="Node" parent="."]
+script = ExtResource( 3 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/enemies2.json"
+
+[node name="Combat" type="Node" parent="Dialogue2"]
+script = ExtResource( 1 )
+scenario_path = "res://Scenes/CombatEncounters/area1_combat.tres"
+
+[node name="Loot" type="Node" parent="Dialogue2/Combat"]
+script = ExtResource( 4 )
+loot_table = "res://LootTables/garden_normal_enemies.tres"

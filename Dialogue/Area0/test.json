@@ -1,0 +1,14 @@
+[
+	{
+		"speaker": "system",
+		"line": "This is a test line"
+	},
+	{
+		"speaker": "system",
+		"line": "This is a second line"
+	},
+	{
+		"speaker": "Test",
+		"line": "The speaker is now\"Test\". Last line"
+	},
+]

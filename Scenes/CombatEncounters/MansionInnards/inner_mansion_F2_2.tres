@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Code/Combat/Sys/CombatScenario.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+mana_min = 150
+mana_max = 300
+slots = [ {
+"enemies": [ "res://Scenes/Enemies/GuardElite.tscn" ],
+"pos": Vector2( 100, 300 )
+}, {
+"enemies": [ "res://Scenes/Enemies/GuardElite.tscn" ],
+"pos": Vector2( 500, 300 )
+} ]

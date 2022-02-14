@@ -1,0 +1,12 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Fonts/Anon/AnonymousPro-Regular.ttf"
+
+[resource]
+size = 18
+outline_color = Color( 0.8, 0.666667, 0.466667, 1 )
+use_filter = true
+extra_spacing_top = -100
+extra_spacing_bottom = -100
+font_data = SubResource( 1 )

@@ -1,0 +1,277 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Code/Map/MapRoot.gd" type="Script" id=1]
+[ext_resource path="res://Code/Map/MapNode.gd" type="Script" id=2]
+[ext_resource path="res://Code/Map/Events/ButtonActivateEvent.gd" type="Script" id=3]
+[ext_resource path="res://Code/Map/Events/FlagSet.gd" type="Script" id=6]
+[ext_resource path="res://Code/Map/Events/DialogueEvent.gd" type="Script" id=7]
+[ext_resource path="res://Code/Map/Events/FlagCheck.gd" type="Script" id=8]
+[ext_resource path="res://Code/Map/Events/MapMoveEvent.gd" type="Script" id=9]
+[ext_resource path="res://Pic/Map/3d-stairs.png" type="Texture" id=10]
+[ext_resource path="res://Pic/Map/door.png" type="Texture" id=11]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+uniform vec4 bg_color: hint_color;
+
+uint hash( uint x ) {
+    x += ( x << uint(10) );
+	x = x^( x >> uint(11) );
+    x += ( x << uint(3)  );
+	x = x^( x >> uint(6) );
+    x += ( x << uint(15) );
+    return x;
+}
+
+float floatConstruct( uint m ) {
+    const uint ieeeMantissa = uint(0x007FFFFF); // binary32 mantissa bitmask
+    const uint ieeeOne      = uint(0x3F800000); // 1.0 in IEEE binary32
+
+    m &= ieeeMantissa;                     // Keep only mantissa bits (fractional part)
+    m |= ieeeOne;                          // Add fractional part to 1.0
+
+    float  f = uintBitsToFloat( m );       // Range [1:2]
+    return f - 1.0;                        // Range [0:1]
+}
+
+float random(float x) 
+{ 
+	return floatConstruct(hash(floatBitsToUint(x))); 
+}
+
+void fragment() {
+	float color = 0.0;
+	
+	float r = random((SCREEN_UV.x*SCREEN_UV.y));
+	if(r > 0.99 && r < 1.0)
+	{
+		color = r * (sin((TIME/4.0) * (r * 5.0) + 720.0 * r));
+	}
+	
+	COLOR = vec4(vec3(color*0.3, color*0.3, color*0.8),1.0) + bg_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/bg_color = null
+
+[node name="MapRoot" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+map_name = "~ The Mansion F1 ~"
+
+[node name="BGStars" type="Polygon2D" parent="."]
+material = SubResource( 4 )
+polygon = PoolVector2Array( 48, -1304, -1136, -472, -1160, 952, 936, 1112, 1720, 664, 1664, -1016 )
+
+[node name="LineConnections" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="MapNodes" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Panel" parent="MapNodes"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Pass")
+desc = "The back enterance to the mansion is a dimly-lit claustrophibic corridor."
+
+[node name="Node" type="Node" parent="MapNodes/Start"]
+script = ExtResource( 3 )
+
+[node name="Return to the garden" type="Node" parent="MapNodes/Start/Node"]
+script = ExtResource( 9 )
+map_path = "res://Scenes/Maps/Level1.tscn"
+dest_node_name = "MazeExit"
+
+[node name="TextureRect" type="TextureRect" parent="MapNodes/Start"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 34.0
+margin_bottom = 34.0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pass" type="Panel" parent="MapNodes"]
+margin_top = -128.0
+margin_right = 40.0
+margin_bottom = -88.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+left = NodePath("../Fork")
+down = NodePath("../Start")
+desc = "The layer of dust on some of the surfaces here is just... sheesh."
+
+[node name="Fork" type="Panel" parent="MapNodes"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = -88.0
+margin_bottom = -88.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../WayUp")
+left = NodePath("../MainEntryway")
+right = NodePath("../Pass")
+down = NodePath("../WayDown")
+desc = "The large hall has three big exits to the north, south, and west, plus one shabby door to the east."
+
+[node name="Check" type="Node" parent="MapNodes/Fork"]
+script = ExtResource( 8 )
+flag = "mansion_fork"
+
+[node name="Set" type="Node" parent="MapNodes/Fork/Check"]
+script = ExtResource( 6 )
+flag = "mansion_fork"
+bool_val = true
+
+[node name="Dialogue" type="Node" parent="MapNodes/Fork/Check/Set"]
+script = ExtResource( 7 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/mansion_fork.json"
+
+[node name="MainEntryway" type="Panel" parent="MapNodes"]
+margin_left = -256.0
+margin_top = -128.0
+margin_right = -216.0
+margin_bottom = -88.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../MainEnterance")
+right = NodePath("../Fork")
+desc = "The corridor leading from the main enterance is a bit over-decorated. Almost like someone's compensating for something."
+
+[node name="MainEnterance" type="Panel" parent="MapNodes"]
+margin_left = -256.0
+margin_top = -256.0
+margin_right = -216.0
+margin_bottom = -216.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+down = NodePath("../MainEntryway")
+desc = "I are standing on the other side of the main door of the mansion, which leads to the garden."
+
+[node name="TextureRect" type="TextureRect" parent="MapNodes/MainEnterance"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 34.0
+margin_bottom = 34.0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node" type="Node" parent="MapNodes/MainEnterance"]
+script = ExtResource( 3 )
+
+[node name="Front door" type="Node" parent="MapNodes/MainEnterance/Node"]
+script = ExtResource( 8 )
+flag = "front_door_open"
+
+[node name="Dialogue" type="Node" parent="MapNodes/MainEnterance/Node/Front door"]
+script = ExtResource( 7 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/mansion_front_door.json"
+
+[node name="Set" type="Node" parent="MapNodes/MainEnterance/Node/Front door/Dialogue"]
+script = ExtResource( 6 )
+flag = "front_door_open"
+bool_val = true
+
+[node name="Move" type="Node" parent="MapNodes/MainEnterance/Node/Front door"]
+script = ExtResource( 9 )
+map_path = "res://Scenes/Maps/Level1.tscn"
+dest_node_name = "MaidEncounter"
+
+[node name="WayUp" type="Panel" parent="MapNodes"]
+margin_left = -128.0
+margin_top = -232.0
+margin_right = -88.0
+margin_bottom = -192.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+down = NodePath("../Fork")
+desc = "There is a nicely decorated stairway here, leading to the second floor."
+
+[node name="Node" type="Node" parent="MapNodes/WayUp"]
+script = ExtResource( 3 )
+
+[node name="Go up" type="Node" parent="MapNodes/WayUp/Node"]
+script = ExtResource( 9 )
+map_path = "res://Scenes/Maps/Level2-up.tscn"
+dest_node_name = "Start"
+
+[node name="TextureRect" type="TextureRect" parent="MapNodes/WayUp"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 34.0
+margin_bottom = 34.0
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WayDown" type="Panel" parent="MapNodes"]
+margin_left = -128.0
+margin_top = -24.0
+margin_right = -88.0
+margin_bottom = 16.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../Fork")
+desc = "The walls here are a bit scrathed up and the carpet-covered path is imprinted with pointy footsteps. There is a tunnel here leading down, to the dungeons"
+
+[node name="Node" type="Node" parent="MapNodes/WayDown"]
+script = ExtResource( 3 )
+
+[node name="Go down" type="Node" parent="MapNodes/WayDown/Node"]
+script = ExtResource( 9 )
+map_path = "res://Scenes/Maps/Level2-down.tscn"
+dest_node_name = "Start"
+
+[node name="TextureRect" type="TextureRect" parent="MapNodes/WayDown"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 34.0
+margin_bottom = 34.0
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}

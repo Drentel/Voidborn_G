@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Code/Combat/Sys/CombatScenario.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+mana_min = 100
+mana_max = 200
+slots = [ {
+"enemies": [ "res://Scenes/Enemies/AngeryPlant.tscn" ],
+"pos": Vector2( 300, 300 )
+} ]

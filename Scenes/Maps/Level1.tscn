@@ -1,0 +1,653 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Code/Map/MapRoot.gd" type="Script" id=1]
+[ext_resource path="res://Code/Map/MapNode.gd" type="Script" id=2]
+[ext_resource path="res://Code/Map/Events/ButtonActivateEvent.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Maps/FountainBtns.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Pic/Map/door.png" type="Texture" id=5]
+[ext_resource path="res://Code/Map/Events/FlagSet.gd" type="Script" id=6]
+[ext_resource path="res://Code/Map/Events/FlagCheck.gd" type="Script" id=7]
+[ext_resource path="res://Code/Map/Events/DialogueEvent.gd" type="Script" id=8]
+[ext_resource path="res://Pic/Map/fountain.png" type="Texture" id=9]
+[ext_resource path="res://Code/Map/Events/AddCharacterEvent.gd" type="Script" id=10]
+[ext_resource path="res://Themes/old-default.tres" type="Theme" id=11]
+[ext_resource path="res://Scenes/CombatEncounters/Area1RandoEncounters.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Code/Map/Events/CombatEvent.gd" type="Script" id=13]
+[ext_resource path="res://Code/Map/Events/GiveItem.gd" type="Script" id=14]
+[ext_resource path="res://Code/Map/Events/ReEnterNodeEvent.gd" type="Script" id=15]
+[ext_resource path="res://Code/Map/Events/MapMoveEvent.gd" type="Script" id=16]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+uniform vec4 bg_color: hint_color;
+
+uint hash( uint x ) {
+    x += ( x << uint(10) );
+	x = x^( x >> uint(11) );
+    x += ( x << uint(3)  );
+	x = x^( x >> uint(6) );
+    x += ( x << uint(15) );
+    return x;
+}
+
+float floatConstruct( uint m ) {
+    const uint ieeeMantissa = uint(0x007FFFFF); // binary32 mantissa bitmask
+    const uint ieeeOne      = uint(0x3F800000); // 1.0 in IEEE binary32
+
+    m &= ieeeMantissa;                     // Keep only mantissa bits (fractional part)
+    m |= ieeeOne;                          // Add fractional part to 1.0
+
+    float  f = uintBitsToFloat( m );       // Range [1:2]
+    return f - 1.0;                        // Range [0:1]
+}
+
+float random(float x) 
+{ 
+	return floatConstruct(hash(floatBitsToUint(x))); 
+}
+
+void fragment() {
+	float color = 0.0;
+	
+	float r = random((SCREEN_UV.x*SCREEN_UV.y));
+	if(r > 0.99 && r < 1.0)
+	{
+		color = r * (sin((TIME/4.0) * (r * 5.0) + 720.0 * r));
+	}
+	
+	COLOR = vec4(vec3(color*0.3, color*0.3, color*0.8),1.0) + bg_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 3 )
+shader_param/bg_color = null
+
+[node name="MapRoot" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 11 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+map_name = "~ Royal gardens ~"
+
+[node name="Decor" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGStars" type="Polygon2D" parent="Decor"]
+material = SubResource( 2 )
+polygon = PoolVector2Array( 48, -1304, -1136, -472, -1160, 952, 936, 1112, 1720, 664, 1664, -1016 )
+
+[node name="LineConnections" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="MapNodes" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartPoint" type="Panel" parent="MapNodes"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 48.0
+margin_bottom = 48.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+right = NodePath("../Fountain")
+desc = "The garden's enterance is a normal-lookig gate, but for some strange reason I can not see anything past it.
+I can see a mansion a bit east from where I'm standing."
+
+[node name="EventChecker" type="Node" parent="MapNodes/StartPoint"]
+script = ExtResource( 7 )
+flag = "garden_ev_1"
+
+[node name="EventSetter" type="Node" parent="MapNodes/StartPoint/EventChecker"]
+script = ExtResource( 6 )
+flag = "garden_ev_1"
+bool_val = true
+
+[node name="IntroDialogue" type="Node" parent="MapNodes/StartPoint/EventChecker/EventSetter"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/intro.json"
+
+[node name="Fountain" type="Panel" parent="MapNodes"]
+margin_left = 192.0
+margin_top = 8.0
+margin_right = 232.0
+margin_bottom = 48.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+left = NodePath("../StartPoint")
+right = NodePath("../MaidEncounter")
+desc = "I see a fountain in the center of the clearing, surrounded by a large variety of beautiful greenery."
+
+[node name="TextureRect" type="TextureRect" parent="MapNodes/Fountain"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 34.0
+margin_bottom = 34.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FountainBtns" parent="MapNodes/Fountain" instance=ExtResource( 4 )]
+
+[node name="EventChecker" type="Node" parent="MapNodes/Fountain"]
+script = ExtResource( 7 )
+flag = "garden_ev_fountain"
+
+[node name="EventSetter" type="Node" parent="MapNodes/Fountain/EventChecker"]
+script = ExtResource( 6 )
+flag = "garden_ev_fountain"
+bool_val = true
+
+[node name="IntroDialogue" type="Node" parent="MapNodes/Fountain/EventChecker/EventSetter"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/fountain.json"
+
+[node name="MaidEncounter" type="Panel" parent="MapNodes"]
+margin_left = 376.0
+margin_top = 8.0
+margin_right = 416.0
+margin_bottom = 48.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../MazeEnterance")
+left = NodePath("../Fountain")
+right = NodePath("../OffBeatPath")
+desc = "One of the windows on the second floor is broken and some bushes are a bit depressed, but otherwise it's a decently-decorated courtyard."
+
+[node name="EventChecker" type="Node" parent="MapNodes/MaidEncounter"]
+script = ExtResource( 7 )
+flag = "garden_ev_maid_recruit"
+
+[node name="EventSetter" type="Node" parent="MapNodes/MaidEncounter/EventChecker"]
+script = ExtResource( 6 )
+flag = "garden_ev_maid_recruit"
+bool_val = true
+
+[node name="Maid pre-recruit" type="Node" parent="MapNodes/MaidEncounter/EventChecker/EventSetter"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/premaid.json"
+
+[node name="EventChecker" type="Node" parent="MapNodes/MaidEncounter/EventChecker"]
+script = ExtResource( 7 )
+flag = "maid_recruit"
+activate_if = true
+
+[node name="Checker" type="Node" parent="MapNodes/MaidEncounter/EventChecker/EventChecker"]
+script = ExtResource( 7 )
+flag = "maid_notice"
+
+[node name="EventSetter" type="Node" parent="MapNodes/MaidEncounter/EventChecker/EventChecker/Checker"]
+script = ExtResource( 6 )
+flag = "maid_notice"
+bool_val = true
+
+[node name="MaidChange" type="Node" parent="MapNodes/MaidEncounter/EventChecker/EventChecker/Checker/EventSetter"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/maid_change.json"
+
+[node name="Btn" type="Node" parent="MapNodes/MaidEncounter"]
+script = ExtResource( 3 )
+
+[node name="Front door" type="Node" parent="MapNodes/MaidEncounter/Btn"]
+script = ExtResource( 7 )
+flag = "maid_recruit"
+activate_if = true
+
+[node name="DoorOpenCheck" type="Node" parent="MapNodes/MaidEncounter/Btn/Front door"]
+script = ExtResource( 7 )
+flag = "front_door_open"
+activate_if = true
+
+[node name="Move" type="Node" parent="MapNodes/MaidEncounter/Btn/Front door/DoorOpenCheck"]
+script = ExtResource( 16 )
+map_path = "res://Scenes/Maps/Level2.tscn"
+dest_node_name = "MainEnterance"
+
+[node name="yesmaid" type="Node" parent="MapNodes/MaidEncounter/Btn/Front door/DoorOpenCheck"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/main_door_maid.json"
+
+[node name="nomaid" type="Node" parent="MapNodes/MaidEncounter/Btn/Front door"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/main_door.json"
+
+[node name="TextureRect" type="TextureRect" parent="MapNodes/MaidEncounter"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 34.0
+margin_bottom = 34.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MazeEnterance" type="Panel" parent="MapNodes"]
+margin_left = 376.0
+margin_top = -104.0
+margin_right = 416.0
+margin_bottom = -64.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../MazeC1")
+down = NodePath("../MaidEncounter")
+desc = "The enterance to the next area of the garden is accompanied by a large stone plaque:
+\"The garden of death\"
+A piece of paper is attached to it, reading:
+\"The man-eaters' leaves are not trimmed properly. Do your job, gardeners, or you will be punished.\""
+
+[node name="MazeC1" type="Panel" parent="MapNodes"]
+margin_left = 376.0
+margin_top = -176.0
+margin_right = 416.0
+margin_bottom = -136.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../MazeSecret")
+left = NodePath("../MazeC2")
+down = NodePath("../MazeEnterance")
+desc = "The so-called \"Garden of death\" definetly does not look as inviting as other areas of the estate's grounds. Plenty of plants here are spiky, and I can sometimes hear rustling in the bushes."
+
+[node name="RandEncounter" parent="MapNodes/MazeC1" instance=ExtResource( 12 )]
+
+[node name="MazeC2" type="Panel" parent="MapNodes"]
+margin_left = 256.0
+margin_top = -184.0
+margin_right = 296.0
+margin_bottom = -144.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+left = NodePath("../MazeC3")
+right = NodePath("../MazeC1")
+desc = "It's awfully dark, damp and green."
+
+[node name="RandEncounter" parent="MapNodes/MazeC2" instance=ExtResource( 12 )]
+
+[node name="MazeC3" type="Panel" parent="MapNodes"]
+margin_left = 136.0
+margin_top = -216.0
+margin_right = 176.0
+margin_bottom = -176.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../MazeC4")
+right = NodePath("../MazeC2")
+desc = "You see a couple of signs planted haphazardly in the ground under the trees."
+
+[node name="RandEncounter" parent="MapNodes/MazeC3" instance=ExtResource( 12 )]
+
+[node name="Node" type="Node" parent="MapNodes/MazeC3"]
+script = ExtResource( 3 )
+
+[node name="Sign 1" type="Node" parent="MapNodes/MazeC3/Node"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/tutorial_1.json"
+
+[node name="Sign 2" type="Node" parent="MapNodes/MazeC3/Node"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/tutorial_2.json"
+
+[node name="MazeC4" type="Panel" parent="MapNodes"]
+margin_left = 152.0
+margin_top = -384.0
+margin_right = 192.0
+margin_bottom = -344.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+right = NodePath("../MazeC5")
+down = NodePath("../MazeC3")
+desc = "The overgrown bushes definetly weren't tended to in a very long time."
+
+[node name="RandEncounter" parent="MapNodes/MazeC4" instance=ExtResource( 12 )]
+
+[node name="MazeSecret" type="Panel" parent="MapNodes"]
+margin_left = 352.0
+margin_top = -304.0
+margin_right = 392.0
+margin_bottom = -264.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+is_hidden = true
+up = NodePath("../MazeC5")
+down = NodePath("../MazeC1")
+desc = "I find a path well-hidden by the vines and leaves"
+
+[node name="Check" type="Node" parent="MapNodes/MazeSecret"]
+script = ExtResource( 7 )
+flag = "maze_secret"
+
+[node name="Btn" type="Node" parent="MapNodes/MazeSecret/Check"]
+script = ExtResource( 3 )
+
+[node name="Body" type="Node" parent="MapNodes/MazeSecret/Check/Btn"]
+script = ExtResource( 6 )
+flag = "maze_secret"
+bool_val = true
+
+[node name="Dialogue" type="Node" parent="MapNodes/MazeSecret/Check/Btn/Body"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/body_find.json"
+
+[node name="Loot" type="Node" parent="MapNodes/MazeSecret/Check/Btn/Body/Dialogue"]
+script = ExtResource( 14 )
+loot_table = "res://LootTables/maze_secret.tres"
+
+[node name="Node" type="Node" parent="MapNodes/MazeSecret/Check/Btn/Body/Dialogue/Loot"]
+script = ExtResource( 15 )
+
+[node name="MazeC5" type="Panel" parent="MapNodes"]
+margin_left = 328.0
+margin_top = -448.0
+margin_right = 368.0
+margin_bottom = -408.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+left = NodePath("../MazeC4")
+right = NodePath("../MazeC6")
+down = NodePath("../MazeSecret")
+desc = "There are even more signs here!"
+
+[node name="RandEncounter" parent="MapNodes/MazeC5" instance=ExtResource( 12 )]
+
+[node name="Node" type="Node" parent="MapNodes/MazeC5"]
+script = ExtResource( 3 )
+
+[node name="Sign 1" type="Node" parent="MapNodes/MazeC5/Node"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/tutorial_3.json"
+
+[node name="Sign 2" type="Node" parent="MapNodes/MazeC5/Node"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/tutorial_4.json"
+
+[node name="MazeC6" type="Panel" parent="MapNodes"]
+margin_left = 456.0
+margin_top = -392.0
+margin_right = 496.0
+margin_bottom = -352.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+left = NodePath("../MazeC5")
+right = NodePath("../MazeC7")
+desc = "All the branches make movement problematic, but there is still a path forward."
+
+[node name="RandEncounter" parent="MapNodes/MazeC6" instance=ExtResource( 12 )]
+
+[node name="MazeC7" type="Panel" parent="MapNodes"]
+margin_left = 592.0
+margin_top = -440.0
+margin_right = 632.0
+margin_bottom = -400.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+left = NodePath("../MazeC6")
+down = NodePath("../MazeC8")
+desc = "There is a large clearing ahead"
+
+[node name="RandEncounter" parent="MapNodes/MazeC7" instance=ExtResource( 12 )]
+
+[node name="MazeC8" type="Panel" parent="MapNodes"]
+margin_left = 600.0
+margin_top = -280.0
+margin_right = 640.0
+margin_bottom = -240.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../MazeC7")
+left = NodePath("../MazeShackKey")
+down = NodePath("../MazeC9")
+desc = "[This area of the garden is awfully silent. I sense a threatening presense to the south.]
+EV boss_1
+[This area of the garden is awfully silent, even now when i don't feel any threat from the south.]"
+
+[node name="MazeShackKey" type="Panel" parent="MapNodes"]
+margin_left = 488.0
+margin_top = -248.0
+margin_right = 528.0
+margin_bottom = -208.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+right = NodePath("../MazeC8")
+desc = "The small clearing seems to be open and rather safe, unlike the rest of this place."
+
+[node name="CheckKey" type="Node" parent="MapNodes/MazeShackKey"]
+script = ExtResource( 7 )
+flag = "shack_key"
+
+[node name="Btn" type="Node" parent="MapNodes/MazeShackKey/CheckKey"]
+script = ExtResource( 3 )
+
+[node name="Glint in the leaves" type="Node" parent="MapNodes/MazeShackKey/CheckKey/Btn"]
+script = ExtResource( 6 )
+flag = "shack_key"
+bool_val = true
+
+[node name="Node" type="Node" parent="MapNodes/MazeShackKey/CheckKey/Btn/Glint in the leaves"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/key_get.json"
+
+[node name="ReEnter" type="Node" parent="MapNodes/MazeShackKey/CheckKey/Btn/Glint in the leaves/Node"]
+script = ExtResource( 15 )
+
+[node name="MazeC9" type="Panel" parent="MapNodes"]
+margin_left = 600.0
+margin_top = -88.0
+margin_right = 640.0
+margin_bottom = -48.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../MazeC8")
+down = NodePath("../MazeExit")
+desc = "The garden's exit is a large circular field, laid with stone brick."
+
+[node name="Check" type="Node" parent="MapNodes/MazeC9"]
+script = ExtResource( 7 )
+flag = "boss_1"
+
+[node name="Dialogue" type="Node" parent="MapNodes/MazeC9/Check"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/boss_spawn.json"
+
+[node name="BOSS" type="Node" parent="MapNodes/MazeC9/Check/Dialogue"]
+script = ExtResource( 13 )
+scenario_path = "res://Scenes/CombatEncounters/boss_big_plant.tres"
+
+[node name="SetFlag" type="Node" parent="MapNodes/MazeC9/Check/Dialogue/BOSS"]
+script = ExtResource( 6 )
+flag = "boss_1"
+bool_val = true
+
+[node name="Loot" type="Node" parent="MapNodes/MazeC9/Check/Dialogue/BOSS/SetFlag"]
+script = ExtResource( 14 )
+loot_table = "res://LootTables/mundane_sh.tres"
+repeat = 2
+
+[node name="MazeExit" type="Panel" parent="MapNodes"]
+margin_left = 600.0
+margin_top = 176.0
+margin_right = 640.0
+margin_bottom = 216.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../MazeC9")
+desc = "The back wall of the mansion is rather poor looking, compared to the exterier wall that is visible from the garden enterance."
+
+[node name="TextureRect" type="TextureRect" parent="MapNodes/MazeExit"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 34.0
+margin_bottom = 34.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn" type="Node" parent="MapNodes/MazeExit"]
+script = ExtResource( 3 )
+
+[node name="Enter the mansion" type="Node" parent="MapNodes/MazeExit/Btn"]
+script = ExtResource( 7 )
+flag = "maid_recruit"
+activate_if = true
+
+[node name="CheckOpen" type="Node" parent="MapNodes/MazeExit/Btn/Enter the mansion"]
+script = ExtResource( 7 )
+flag = "mansion_door_open"
+
+[node name="OneTime" type="Node" parent="MapNodes/MazeExit/Btn/Enter the mansion/CheckOpen"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/yes_maid_exit.json"
+
+[node name="SetOpen" type="Node" parent="MapNodes/MazeExit/Btn/Enter the mansion/CheckOpen/OneTime"]
+script = ExtResource( 6 )
+flag = "mansion_door_open"
+bool_val = true
+
+[node name="Node" type="Node" parent="MapNodes/MazeExit/Btn/Enter the mansion/CheckOpen/OneTime/SetOpen"]
+script = ExtResource( 15 )
+
+[node name="Enter the mansion" type="Node" parent="MapNodes/MazeExit/Btn/Enter the mansion/CheckOpen"]
+script = ExtResource( 16 )
+map_path = "res://Scenes/Maps/Level2.tscn"
+dest_node_name = "Start"
+
+[node name="NoMaid" type="Node" parent="MapNodes/MazeExit/Btn/Enter the mansion"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/no_maid_exit.json"
+
+[node name="OffBeatPath" type="Panel" parent="MapNodes"]
+margin_left = 464.0
+margin_top = 8.0
+margin_right = 504.0
+margin_bottom = 48.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+up = NodePath("../OffBeatPath2")
+left = NodePath("../MaidEncounter")
+desc = "The tight path seems to be something akin to a service area. There are a couple of gardening tools here and a shed to the north."
+
+[node name="OffBeatPath2" type="Panel" parent="MapNodes"]
+margin_left = 464.0
+margin_top = -48.0
+margin_right = 504.0
+margin_bottom = -8.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+down = NodePath("../OffBeatPath")
+desc = "The small area is most likely intended as a place for servants to store tools and such. There are two sheds here - one is tiny, and the other one is pretty big."
+
+[node name="MapButtonEvent" type="Node" parent="MapNodes/OffBeatPath2"]
+script = ExtResource( 3 )
+
+[node name="Big shed" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent"]
+script = ExtResource( 7 )
+flag = "maid_recruit"
+
+[node name="SetFlag" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Big shed"]
+script = ExtResource( 6 )
+flag = "maid_recruit"
+bool_val = true
+
+[node name="MaidRecruitDialogue" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Big shed/SetFlag"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/maid.json"
+
+[node name="MaidRecruit" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Big shed/SetFlag/MaidRecruitDialogue"]
+script = ExtResource( 10 )
+soul_path = "res://CharacterDefinitions/MaidSoul.tres"
+default_pact = "res://CharacterDefinitions/MaidInitPact.tres"
+weapon_class = 2
+def_name = "Maid"
+
+[node name="Generic" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Big shed"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/bigshed.json"
+
+[node name="Small shed" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent"]
+script = ExtResource( 7 )
+flag = "shack_key"
+activate_if = true
+
+[node name="YesKey" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Small shed"]
+script = ExtResource( 7 )
+flag = "garden_shed_open"
+
+[node name="Boop1" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Small shed/YesKey"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/shed_unlock.json"
+
+[node name="flagset" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Small shed/YesKey/Boop1"]
+script = ExtResource( 6 )
+flag = "garden_shed_open"
+bool_val = true
+
+[node name="Loot" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Small shed/YesKey/Boop1/flagset"]
+script = ExtResource( 14 )
+loot_table = "res://LootTables/shed_loot.tres"
+repeat = 16
+
+[node name="Boop2" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Small shed/YesKey"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/shed_empty.json"
+
+[node name="NoKey" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Small shed"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area1/shed_no_key.json"
