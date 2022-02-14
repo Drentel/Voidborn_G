@@ -124,6 +124,7 @@ var weapon_skills = [
 	"res://Code/Combat/Customization/Skills/WeaponSkills/ClaymoreWeapSkill.gd",
 	"res://Code/Combat/Customization/Skills/WeaponSkills/RapierWeapSkill.gd",
 	"res://Code/Combat/Customization/Skills/WeaponSkills/ScytheWeapSkill.gd",
+	"res://Code/Combat/Customization/Skills/WeaponSkills/WandWeapSkill.gd",
 ]
 
 func make_weapon(power: int, override = -1):

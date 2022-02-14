@@ -1,18 +1,16 @@
-extends BaseSkill
-class_name BaseWeaponSkill
-
-var level = 1
-var item_base_name = "Sword"
-var possible_stats = ["ATK"]
+extends BaseWeaponSkill
 
 func _init():
-	s_name = "Sword attack"
-	s_desc = "Deals 1xATK damage to target"
+	item_base_name = "Wand"
+	possible_stats = ["CRM", "MMP"]
+
+	s_name = "Wand attack"
+	s_desc = "Deals 0.8xCRM homing magic damage to target"
 
 func set_level(lvl: int):
 	level = lvl
 	s_desc = "Level %s\n" % [lvl]
-	s_desc += "Deals " + str(1 + level*0.1) + "xATK damage to target"
+	s_desc += "Deals " + str(0.8 + level*0.08) + "xCRM homing magic damage to target"
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -23,11 +21,12 @@ func use(user):
 	if not target is int:
 		Curtain.ln("%s uses %s" % [user.name, s_name])
 		var inst = DamageInstance.new()
-		inst.dmg_type = DamageInstance.TYPE.PHYS
+		inst.dmg_type = DamageInstance.TYPE.MAG
 		inst.sender = user
 		inst.target = target
-		inst.amount = user.get_stat_val("ATK")*(1+(level*0.1))
-		SFXR.frame_sfx("sword", inst.target.get_global_rect(), Color.wheat)
+		inst.is_homing = true
+		inst.amount = user.get_stat_val("CRM")*(0.8+(level*0.08))
+		SFXR.frame_sfx("star", inst.target.get_global_rect())
 		yield(get_tree().create_timer(0.15), "timeout")
 		$"/root/Root".screen_shake(0.1)
 		user.send_dmg(inst)
