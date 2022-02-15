@@ -8,7 +8,7 @@ func check_usability(unit):
 
 func _init():
 	s_name = "Barrier Burst"
-	s_desc = """Cost: 15 MP\nRemoves all barrier, and boosts ATK and DEF by 0.2x of its value for 3 turns
+	s_desc = """Cost: 15 MP\nConsumes all barrier, and boosts ATK and DEF by 0.2x of its value for 3 turns
 Also deals 0.5x of value as unavoidable magic damage to all enemies"""
 
 func use(user):
@@ -19,10 +19,10 @@ func use(user):
 	var targets = find_manager().get_enemies()
 	var barrier
 	for i in user.get_statuses():
-		if i.status_name == "BAR":
+		if i.script == preload("res://Code/Combat/Statuses/Barrier.gd"):
 			barrier = i
 	var barrier_stacks = barrier.stacks
-	Curtain.ln("Lost all barrier (%s)" % [barrier_stacks])
+	Curtain.ln("Consumed all barrier (%s)" % [barrier_stacks])
 	
 	var status = Node.new()
 	status.set_script(load("res://Code/Combat/Statuses/StatMod.gd"))
