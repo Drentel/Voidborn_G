@@ -56,10 +56,10 @@ const party_edit_order = [
 
 const loot_order = [
 	"Background",
-	"DimSeparator",
 	"CharaBust",
 	"CharaCards",
 	"MapScene",
+	"DimSeparator",
 	"HelpButton",
 	"CharaSwitchBtn",
 	"LootDisp",
@@ -157,8 +157,9 @@ func force_map_switch(location, node):
 	$MapScene.root.switch_map(location, node)
 
 func switch_map():
-	order(map_order)
-	$DimSeparator.visible = false
+	if get_children().size() == map_order.size():
+		order(map_order)
+		$DimSeparator.visible = false
 
 func switch_dialogue(dialogue_path = "res://Dialogue/Area1/test.json"):
 	var dia = load("res://Scenes/Dialogue.tscn").instance()
