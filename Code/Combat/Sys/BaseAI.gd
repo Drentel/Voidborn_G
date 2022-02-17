@@ -1,4 +1,5 @@
 extends Node
+class_name BaseAI
 
 func _ready():
 	get_parent().connect("turn_start", self, "act")

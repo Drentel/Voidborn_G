@@ -4,43 +4,27 @@ class_name CombatManager
 export var scenario_path: String
 
 var scenario
+var first = true
 
-var enemy_slots = []
 signal enemy_died(unit)
 signal combat_won()
 signal combat_lost()
 
 var name_appends = ["", " A", " B", " C", " D", " E", " F", " G"]
+var name_counter = 0
 
 func _ready():
 	scenario = load(scenario_path)
 	
 	$ManaLabel.text = str(randi() % (scenario.mana_max - scenario.mana_min) + scenario.mana_min)
 	
-	var counter
-	
 	if scenario.skip_first_name or scenario.slots.size() == 1:
-		counter = 0
+		name_counter = 0
 	else:
-		counter = 1
+		name_counter = 1
 	
 	for i in scenario.slots:
-		var slot = {"enemies":[], "current":0}
-		for j in i["enemies"]:
-			var enemy = load(j).instance()
-			enemy.name += name_appends[counter]
-			slot["enemies"].append(enemy)
-			enemy.rect_position = i["pos"]
-		
-		slot["current"] = slot["enemies"].pop_front()
-		$Enemies.add_child(slot["current"])
-		slot["current"].connect("died", self, "on_enemy_died", [slot])
-		slot["current"].connect("died", self, "on_unit_died", [slot["current"]])
-		slot["current"].emit_signal("entered_combat")
-		counter += 1
-	
-	if scenario.first_is_enough:
-		enemy_slots[0]["current"].connect("died", self, "combat_win")
+		add_new_slot(i)
 	
 	yield(get_turn_order(), "order_initialized")
 	
@@ -90,6 +74,25 @@ func on_enemy_died(slot):
 		slot["current"].connect("died", self, "on_unit_died", [slot["current"]])
 	
 	emit_signal("enemy_died", enmy)
+
+func add_new_slot(inp):
+	var slot = {"enemies":[]}
+	for j in inp["enemies"]:
+		var enemy = load(j).instance()
+		enemy.name += name_appends[name_counter]
+		slot["enemies"].append(enemy)
+		enemy.rect_position = inp["pos"]
+		
+	slot["current"] = slot["enemies"].pop_front()
+	$Enemies.add_child(slot["current"])
+	slot["current"].connect("died", self, "on_enemy_died", [slot])
+	slot["current"].connect("died", self, "on_unit_died", [slot["current"]])
+	if scenario.first_is_enough and first:
+		slot["current"].connect("died", self, "combat_win")
+	
+	slot["current"].emit_signal("entered_combat")
+	name_counter += 1
+	first = false
 
 func combat_win():
 	emit_signal("combat_won")

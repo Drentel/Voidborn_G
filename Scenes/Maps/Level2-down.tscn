@@ -397,10 +397,6 @@ script = ExtResource( 7 )
 loot_table = "res://LootTables/shed_loot.tres"
 repeat = 5
 
-[node name="Makka" type="Node" parent="MapNodes/Storage/Btn/Stuff/GetStuff/set/give"]
-script = ExtResource( 7 )
-loot_table = "res://LootTables/makka500s.tres"
-
 [node name="GotStuff" type="Node" parent="MapNodes/Storage/Btn/Stuff"]
 script = ExtResource( 8 )
 dialogue_path = "res://Dialogue/ZoneMansion/Area2/got_stuff.json"

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "BaseAI",
+"language": "GDScript",
+"path": "res://Code/Combat/Sys/BaseAI.gd"
+}, {
 "base": "BasePassiveSkill",
 "class": "BaseArtiSkill",
 "language": "GDScript",
@@ -120,6 +125,7 @@ _global_script_classes=[ {
 "path": "res://Code/WeightedPool.gd"
 } ]
 _global_script_class_icons={
+"BaseAI": "",
 "BaseArtiSkill": "",
 "BaseArtiStatus": "",
 "BasePassiveSkill": "",

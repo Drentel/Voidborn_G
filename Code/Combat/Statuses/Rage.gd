@@ -15,8 +15,9 @@ func handle_dupe(dupe):
 	stacks += dupe.stacks
 
 func on_sent_dmg(inst):
-	if inst.target != inst.sender:
-		Curtain.ln("Rage activates! " + str(stacks) + " bonus damage")
-		inst.amount += stacks
-		get_parent().remove_child(self)
-		queue_free()
+	if is_instance_valid(self) && get_parent() != null:
+		if inst.target != inst.sender:
+			Curtain.ln("Rage activates! " + str(stacks) + " bonus damage")
+			inst.amount += stacks
+			get_parent().remove_child(self)
+			queue_free()

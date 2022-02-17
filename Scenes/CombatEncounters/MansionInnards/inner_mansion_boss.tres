@@ -4,17 +4,11 @@
 
 [resource]
 script = ExtResource( 1 )
-skip_first_name = false
-first_is_enough = false
+skip_first_name = true
+first_is_enough = true
 mana_min = 150
 mana_max = 300
 slots = [ {
-"enemies": [ "res://Scenes/Enemies/MansionLord.tscn" ],
+"enemies": [ "res://Scenes/Enemies/MansionEndBoss.tscn" ],
 "pos": Vector2( 300, 300 )
-}, {
-"enemies": [ "res://Scenes/Enemies/GuardElite.tscn" ],
-"pos": Vector2( 0, 300 )
-}, {
-"enemies": [ "res://Scenes/Enemies/GuardElite.tscn" ],
-"pos": Vector2( 600, 300 )
 } ]

@@ -136,7 +136,7 @@ script = ExtResource( 7 )
 
 [node name="Boss test" type="Node" parent="MapNodes/Debug/ButtonEvent"]
 script = ExtResource( 7 )
-scenario_path = "res://Scenes/CombatEncounters/boss_big_plant.tres"
+scenario_path = "res://Scenes/CombatEncounters/MansionInnards/inner_mansion_boss.tres"
 
 [node name="Test dialogue" type="Node" parent="MapNodes/Debug/ButtonEvent"]
 script = ExtResource( 4 )

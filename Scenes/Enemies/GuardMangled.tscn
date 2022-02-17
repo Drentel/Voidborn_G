@@ -3,23 +3,23 @@
 [ext_resource path="res://Scenes/BarLabel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Themes/HPBar.tres" type="StyleBox" id=2]
 [ext_resource path="res://Code/Interface/NameLabel.gd" type="Script" id=3]
-[ext_resource path="res://Code/Interface/StatusDisplay.gd" type="Script" id=4]
-[ext_resource path="res://Code/Interface/GenUnitSfx.gd" type="Script" id=5]
-[ext_resource path="res://Code/Interface/HPBar.gd" type="Script" id=6]
-[ext_resource path="res://Code/Interface/MPBar.gd" type="Script" id=7]
-[ext_resource path="res://Code/Combat/Sys/BaseAI.gd" type="Script" id=8]
+[ext_resource path="res://Code/Interface/HPBar.gd" type="Script" id=4]
+[ext_resource path="res://Code/Interface/MPBar.gd" type="Script" id=5]
+[ext_resource path="res://Code/Interface/StatusDisplay.gd" type="Script" id=6]
+[ext_resource path="res://Code/Interface/GenUnitSfx.gd" type="Script" id=7]
+[ext_resource path="res://Pic/Enemy/ss27.png" type="Texture" id=8]
 [ext_resource path="res://Code/Combat/EnemyStuff/BasicAttackSkill.gd" type="Script" id=9]
-[ext_resource path="res://Scenes/Enemies/BossSpawnAnim.gd" type="Script" id=10]
-[ext_resource path="res://Scenes/Enemies/NMY-SFX-ER.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Enemies/NMY-SFX-ER.gd" type="Script" id=10]
+[ext_resource path="res://Code/Combat/Sys/BaseAI.gd" type="Script" id=11]
 [ext_resource path="res://Code/Combat/Sys/EnemyUnit.gd" type="Script" id=12]
-[ext_resource path="res://Pic/Enemy/human49.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/Enemies/NormalEnemySpawnAnim.gd" type="Script" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BobUpDown"
 length = 2.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:offset")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -28,7 +28,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 80, 112 ), Vector2( 80, 87 ), Vector2( 80, 112 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -20 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -45,17 +45,36 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, -20 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 80, 87 ) ]
+"values": [ 360.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "SpawnSpeen"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0, 720.0, 1080.0 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -122,38 +141,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "BossSpawn"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=10]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-
-[node name="Mansion Lord" type="Control"]
+[node name="Mangled Guard" type="Control"]
 margin_right = 168.0
 margin_bottom = 304.0
 rect_rotation = 360.0
@@ -161,21 +149,21 @@ script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-lvl = 35
+lvl = 25
 growth = {
-"ABS": 2.3,
-"ATK": 0.7,
-"AUR": 0.4,
+"ABS": 0.2,
+"ATK": 0.9,
+"AUR": 0.1,
 "AVD": 0.2,
-"CRM": 3.5,
-"CTD": 1.5,
+"CRM": 0.1,
+"CTD": 0.4,
 "CTR": 0.3,
-"DEF": 1.0,
-"HIT": 0.2,
-"MHP": 40.0,
+"DEF": 1.5,
+"HIT": 0.3,
+"MHP": 0.0,
 "MMP": 0.0,
-"SPD": 1.7,
-"TEC": 0.9
+"SPD": 0.5,
+"TEC": 0.1
 }
 base = {
 "ABS": 0,
@@ -187,30 +175,23 @@ base = {
 "CTR": 0,
 "DEF": 0,
 "HIT": 0,
-"MHP": 0,
-"MMP": 200,
+"MHP": 300,
+"MMP": 100,
 "SPD": 0,
 "TEC": 0
 }
 
 [node name="BaseAI" type="Node" parent="."]
-script = ExtResource( 8 )
+script = ExtResource( 11 )
 
 [node name="Attack" type="Node" parent="."]
 script = ExtResource( 9 )
-messages = [ " shoots arcane bolts!" ]
-scale_stat = "CRM"
-dmg_type = 0
-pierce = 0.3
-repeats_max = 2
-repeats_min = 3
-effect = "lightning"
-modulate = Color( 0.733333, 0, 1, 1 )
-mana_cost = 25
+messages = [ " trasnhes around!" ]
+scale_mult = 1.2
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 80, 87 )
-texture = ExtResource( 13 )
+position = Vector2( 80, 136 )
+texture = ExtResource( 8 )
 offset = Vector2( 0, -20 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
@@ -219,20 +200,21 @@ anims/BobUpDown = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
 [node name="HPBar" type="ProgressBar" parent="."]
+margin_left = 24.0
 margin_top = 232.0
-margin_right = 168.0
+margin_right = 136.0
 margin_bottom = 250.0
 mouse_filter = 1
 custom_styles/fg = ExtResource( 2 )
 value = 50.0
 percent_visible = false
-script = ExtResource( 6 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BarLabel" parent="HPBar" instance=ExtResource( 1 )]
-margin_right = 168.0
+margin_right = 112.0
 
 [node name="MPBar" type="ProgressBar" parent="."]
 margin_left = 24.0
@@ -242,10 +224,7 @@ margin_bottom = 274.0
 mouse_filter = 1
 value = 50.0
 percent_visible = false
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource( 5 )
 
 [node name="BarLabel" parent="MPBar" instance=ExtResource( 1 )]
 margin_right = 112.0
@@ -268,7 +247,7 @@ margin_left = 8.0
 margin_top = 296.0
 margin_right = 152.0
 margin_bottom = 392.0
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -281,10 +260,18 @@ size_flags_vertical = 3
 columns = 2
 
 [node name="SFX-ER" type="Node" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 7 )
+
+[node name="NormalEnemySpawnAnim" type="Tween" parent="."]
+script = ExtResource( 13 )
+
+[node name="SpawnRotation" type="AnimationPlayer" parent="."]
+autoplay = "SpawnSpeen"
+anims/RESET = SubResource( 3 )
+anims/SpawnSpeen = SubResource( 4 )
 
 [node name="NMY-SFX-ER" type="Node" parent="."]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 
 [node name="HurtAnim" type="AnimationPlayer" parent="NMY-SFX-ER"]
 root_node = NodePath("../../SFX-ER")
@@ -295,11 +282,3 @@ anims/RESET = SubResource( 6 )
 root_node = NodePath("../../SFX-ER")
 anims/ActAnim = SubResource( 7 )
 anims/RESET = SubResource( 8 )
-
-[node name="BossSpawnAnim" type="Tween" parent="."]
-script = ExtResource( 10 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "BossSpawn"
-anims/BossSpawn = SubResource( 9 )
-anims/RESET = SubResource( 10 )

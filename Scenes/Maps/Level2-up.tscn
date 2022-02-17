@@ -401,19 +401,57 @@ up = NodePath("../Corridor")
 desc = "The mansion master's room is lined with bookshelves full of books written in an unknown language.
 There is also a large portal embedded in a wall."
 
-[node name="RepeatCheck" type="Node" parent="MapNodes/BossRoom"]
+[node name="BeatCheck" type="Node" parent="MapNodes/BossRoom"]
+script = ExtResource( 10 )
+flag = "mansion_boss_beat"
+
+[node name="RepeatCheck" type="Node" parent="MapNodes/BossRoom/BeatCheck"]
 script = ExtResource( 10 )
 flag = "mansion_boss_encountered"
 
-[node name="FirstTime" type="Node" parent="MapNodes/BossRoom/RepeatCheck"]
+[node name="FirstTime" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck"]
 script = ExtResource( 6 )
 dialogue_path = "res://Dialogue/ZoneMansion/Area2/boss_1.json"
 
-[node name="Set" type="Node" parent="MapNodes/BossRoom/RepeatCheck/FirstTime"]
+[node name="Set" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck/FirstTime"]
 script = ExtResource( 11 )
 flag = "mansion_boss_encountered"
 bool_val = true
 
-[node name="Repeat" type="Node" parent="MapNodes/BossRoom/RepeatCheck"]
+[node name="Combat" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck/FirstTime/Set"]
+script = ExtResource( 8 )
+scenario_path = "res://Scenes/CombatEncounters/MansionInnards/inner_mansion_boss.tres"
+
+[node name="Set" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck/FirstTime/Set/Combat"]
+script = ExtResource( 11 )
+flag = "mansion_boss_beat"
+bool_val = true
+
+[node name="Dialogue" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck/FirstTime/Set/Combat/Set"]
+script = ExtResource( 6 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/boss_after.json"
+
+[node name="Loot" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck/FirstTime/Set/Combat/Set/Dialogue"]
+script = ExtResource( 13 )
+loot_table = "res://LootTables/mansion_final_boss.tres"
+
+[node name="Repeat" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck"]
 script = ExtResource( 6 )
 dialogue_path = "res://Dialogue/ZoneMansion/Area2/boss_repeat.json"
+
+[node name="Combat" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck/Repeat"]
+script = ExtResource( 8 )
+scenario_path = "res://Scenes/CombatEncounters/MansionInnards/inner_mansion_boss.tres"
+
+[node name="Set" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck/Repeat/Combat"]
+script = ExtResource( 11 )
+flag = "mansion_boss_beat"
+bool_val = true
+
+[node name="Dialogue" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck/Repeat/Combat/Set"]
+script = ExtResource( 6 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/boss_after.json"
+
+[node name="Loot" type="Node" parent="MapNodes/BossRoom/BeatCheck/RepeatCheck/Repeat/Combat/Set/Dialogue"]
+script = ExtResource( 13 )
+loot_table = "res://LootTables/mansion_final_boss.tres"
