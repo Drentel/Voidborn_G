@@ -10,15 +10,25 @@ signal enemy_died(unit)
 signal combat_won()
 signal combat_lost()
 
+var name_appends = ["", " A", " B", " C", " D", " E", " F", " G"]
+
 func _ready():
 	scenario = load(scenario_path)
 	
 	$ManaLabel.text = str(randi() % (scenario.mana_max - scenario.mana_min) + scenario.mana_min)
 	
+	var counter
+	
+	if scenario.skip_first_name or scenario.slots.size() == 1:
+		counter = 0
+	else:
+		counter = 1
+	
 	for i in scenario.slots:
 		var slot = {"enemies":[], "current":0}
 		for j in i["enemies"]:
 			var enemy = load(j).instance()
+			enemy.name += name_appends[counter]
 			slot["enemies"].append(enemy)
 			enemy.rect_position = i["pos"]
 		
@@ -27,6 +37,10 @@ func _ready():
 		slot["current"].connect("died", self, "on_enemy_died", [slot])
 		slot["current"].connect("died", self, "on_unit_died", [slot["current"]])
 		slot["current"].emit_signal("entered_combat")
+		counter += 1
+	
+	if scenario.first_is_enough:
+		enemy_slots[0]["current"].connect("died", self, "combat_win")
 	
 	yield(get_turn_order(), "order_initialized")
 	
@@ -40,12 +54,10 @@ func _ready():
 	
 	while true:
 		if get_enemies().size() == 0:
-			emit_signal("combat_won")
 			combat_win()
 			return
 		
 		if get_living_allies().size() == 0:
-			emit_signal("combat_lost")
 			combat_lose()
 			return
 		
@@ -80,6 +92,7 @@ func on_enemy_died(slot):
 	emit_signal("enemy_died", enmy)
 
 func combat_win():
+	emit_signal("combat_won")
 	$FadeAnim.play("FadeAnim")
 	for i in get_allies():
 		i.emit_signal("exited_combat")
@@ -91,6 +104,7 @@ func combat_win():
 	queue_free()
 
 func combat_lose():
+	emit_signal("combat_lost")
 	$FadeAnim.play("FadeAnim")
 	for i in get_allies():
 		i.emit_signal("exited_combat")

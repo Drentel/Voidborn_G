@@ -401,6 +401,19 @@ up = NodePath("../Corridor")
 desc = "The mansion master's room is lined with bookshelves full of books written in an unknown language.
 There is also a large portal embedded in a wall."
 
-[node name="Boss" type="Node" parent="MapNodes/BossRoom"]
-script = ExtResource( 8 )
-scenario_path = "res://Scenes/CombatEncounters/MansionInnards/inner_mansion_boss.tres"
+[node name="RepeatCheck" type="Node" parent="MapNodes/BossRoom"]
+script = ExtResource( 10 )
+flag = "mansion_boss_encountered"
+
+[node name="FirstTime" type="Node" parent="MapNodes/BossRoom/RepeatCheck"]
+script = ExtResource( 6 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/boss_1.json"
+
+[node name="Set" type="Node" parent="MapNodes/BossRoom/RepeatCheck/FirstTime"]
+script = ExtResource( 11 )
+flag = "mansion_boss_encountered"
+bool_val = true
+
+[node name="Repeat" type="Node" parent="MapNodes/BossRoom/RepeatCheck"]
+script = ExtResource( 6 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/boss_repeat.json"

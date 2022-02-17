@@ -1,6 +1,34 @@
 [
 	{
-		"speaker": "???",
-		"line": "Princess recruit dialogue"
-	}
+		"speaker": "",
+		"line": "Coming into the room, I see a princess-y blob laying on the bed, seemingly bored."
+	},
+	{
+		"speaker": "",
+		"line": "Without moving, the princess starts to talk."
+	},
+	{
+		"speaker": "Princess",
+		"line": "\"I've felt that you would come. Something happened, haven't it?\""
+	},
+	{
+		"speaker": "Maid",
+		"line": "\"Yeah, we have a new arrival.\""
+	},
+	{
+		"speaker": "",
+		"line": "The maid points at me."
+	},
+	{
+		"speaker": "Maid",
+		"line": "\"Get up, we're leaving this place. At least I hope we are.\""
+	},
+	{
+		"speaker": "Princess",
+		"line": "\"You have some nerve for a maid, bossing a princess around.\""
+	},
+	{
+		"speaker": "Princess",
+		"line": "\"But i'm letting this time slide. Something interesting is finally happening.\""
+	},
 ]
