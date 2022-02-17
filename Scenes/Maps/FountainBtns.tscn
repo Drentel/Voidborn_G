@@ -14,5 +14,5 @@ script = ExtResource( 3 )
 [node name="Change equipment" type="Node" parent="."]
 script = ExtResource( 2 )
 
-[node name="Change party" type="Node" parent="."]
+[node name="Change order" type="Node" parent="."]
 script = ExtResource( 1 )
