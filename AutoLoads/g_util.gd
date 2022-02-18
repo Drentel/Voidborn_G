@@ -132,6 +132,7 @@ func make_weapon(power: int, override = -1):
 	var ite = EquipItem.new()
 	ite.influence = []
 	ite.item_type = EquipItem.TYPE.WEAP
+	ite.power = power
 	
 	var ski
 	if override == -1:
@@ -142,17 +143,14 @@ func make_weapon(power: int, override = -1):
 	ite.influence.append({
 		"type": "skill",
 		"skill": ski,
-		"points": 1,
 	})
 	
-	var lski = Node.new()
-	lski.set_script(load(ski))
-	
+	var lski = load(ski).new()
+	#lski.set_script(load(ski))
 	
 	ite.influence.append({
 		"type": "stat",
 		"stat": GUtil.arr_rand(lski.possible_stats),
-		"points": 1,
 	})
 	
 	while ite.get_rank() < power:
@@ -174,38 +172,21 @@ func make_arti(power: int):
 	var ite = EquipItem.new()
 	ite.influence = []
 	ite.item_type = EquipItem.TYPE.ARTI
+	ite.power = power
 	
-	#Half of artifacts have 3 rando stats. Another half has 1 stat and an ability
-	if randi()%2 == 0:
-		var stats = []
-		while stats.size() < 3:
-			var sta = GUtil.arr_rand(stat_definitions.keys())
-			if sta in stats:
-				continue
-			else:
-				stats.append(sta)
-		
-		for i in stats:
-			ite.influence.append({
-				"type": "stat",
-				"stat": i,
-				"points": 1,
-			})
-	else:
-		ite.influence.append({
-			"type": "stat",
-			"stat": arr_rand(stat_definitions.keys()),
-			"points": 1,
-		})
-		
+	#80% of artifacts give a stat. The other 20% giev an ability
+	if randi()%5 == 0:
+		#Ability artifact
 		ite.influence.append({
 			"type": "skill",
 			"skill": arr_rand(artifact_skills),
-			"points": 1,
 		})
-	
-	while ite.get_rank() < power:
-		GUtil.arr_rand(ite.influence)["points"] += 1
+	else:
+		#Stat artifact
+		ite.influence.append({
+			"type": "stat",
+			"stat": arr_rand(stat_definitions.keys()),
+		})
 	
 	ite.name = gen_arti_name()
 	return ite
@@ -255,13 +236,19 @@ var postfixes = [
 
 func gen_weap_name(base):
 	var postrand = randi()%100
+	var name = ""
 	
 	if postrand < 60:
-		return arr_rand(prefixes) + base
+		name = arr_rand(prefixes) + base
 	if postrand < 80:
-		return base + GUtil.arr_rand(postfixes)
+		name = base + GUtil.arr_rand(postfixes)
 	else:
-		return arr_rand(prefixes) + base + arr_rand(postfixes)
+		name = arr_rand(prefixes) + base + arr_rand(postfixes)
+	
+	if name.length() > 25:
+		return gen_weap_name(base)
+	else:
+		return name
 
 var atifact_bases = [
 	"Rack",

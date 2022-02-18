@@ -49,7 +49,7 @@ func get_pact():
 func _ready():
 	
 	if weap is String:
-		weap = GUtil.make_weapon(0, 0)
+		weap = GUtil.make_weapon(3, 0)
 	
 	unpack()
 
