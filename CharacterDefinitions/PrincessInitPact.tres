@@ -46,3 +46,4 @@ skills = [ {
 "skill": "res://Code/Combat/Customization/Skills/LeaderPact/MoralSupport.gd"
 } ]
 name = "Leader's pact"
+shortname = "Leader"

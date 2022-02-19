@@ -39,6 +39,7 @@ export(String, "Soul", "Pact") var type = "Soul"
 export var skills = [{"skill": "res://Code/Combat/Customization/Skills/BaseSkill.gd", "req":0}]
 
 export var name: String
+export var shortname: String
 
 func get_growth(stat: String, lvl: int):
 	return ceil((growth[stat]*lvl) + base[stat])

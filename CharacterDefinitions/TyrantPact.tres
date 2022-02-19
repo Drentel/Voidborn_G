@@ -46,3 +46,4 @@ skills = [ {
 "skill": "res://Code/Combat/Customization/Skills/AssAssIn/Sharpen.gd"
 } ]
 name = "Tyrant's Pact (UNFINISHED)"
+shortname = "Tyrant"

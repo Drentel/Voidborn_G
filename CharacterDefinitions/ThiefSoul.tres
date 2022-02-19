@@ -52,3 +52,4 @@ skills = [ {
 "skill": "res://Code/Combat/Customization/Skills/Thief/Slippery.gd"
 } ]
 name = "Thief's soul"
+shortname = "Thief"

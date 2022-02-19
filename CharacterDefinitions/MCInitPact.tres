@@ -49,3 +49,4 @@ skills = [ {
 "skill": "res://Code/Combat/Customization/Skills/FallenPact/LastStand.gd"
 } ]
 name = "Pact of the fallen"
+shortname = "Fallen"

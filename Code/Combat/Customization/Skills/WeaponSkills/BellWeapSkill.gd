@@ -10,7 +10,7 @@ func _init():
 func set_level(lvl: int):
 	level = lvl
 	s_desc = "Level %s\n" % [lvl]
-	s_desc += "Deals " + str(0.2 + level*0.02) + "xATK+" + str(0.2 + level*0.02) + "xCRM damage to every enemy. Unavoidable"
+	s_desc += "Deals " + str(0.2 + level*0.02) + "xATK+" + str(0.2 + level*0.01) + "xCRM damage to every enemy. Unavoidable"
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -25,7 +25,7 @@ func use(user):
 		inst.is_homing = true
 		inst.sender = user
 		inst.target = i
-		inst.amount = user.get_stat_val("ATK")*(0.1+(level*0.01))+user.get_stat_val("CRM")*(0.1+(level*0.01))
+		inst.amount = user.get_stat_val("ATK")*(0.1+(level*0.005))+user.get_stat_val("CRM")*(0.1+(level*0.005))
 		SFXR.frame_sfx("bell", i.get_global_rect())
 		yield(get_tree().create_timer(0.2), "timeout")
 		$"/root/Root".screen_shake(0.1)

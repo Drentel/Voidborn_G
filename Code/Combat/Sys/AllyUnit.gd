@@ -12,6 +12,7 @@ var zoom_adjust = 0
 var flip = false
 
 signal selected()
+signal unpacked()
 
 func get_base_stat_val(stat: String):
 	return max(_gather_inlfuencers(stat, $Unpacks), 1)
@@ -109,6 +110,8 @@ func unpack():
 	hp_set(get_stat_val("MHP"))
 	mp_set(get_stat_val("MMP"))
 	
+	emit_signal("unpacked")
+
 func get_arti_slots():
 	return max(1, min((lvl+15)/15, 6))
 

@@ -46,3 +46,4 @@ skills = [ {
 "skill": "res://Code/Combat/Customization/Skills/Knight/Chainstrike.gd"
 } ]
 name = "Knight's pact"
+shortname = "Knight"

@@ -43,3 +43,4 @@ skills = [ {
 "skill": "res://Code/Combat/Customization/Skills/SwitchSkill.gd"
 } ]
 name = "Hollow soul"
+shortname = "Hollow"

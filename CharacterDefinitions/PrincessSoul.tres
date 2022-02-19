@@ -52,3 +52,4 @@ skills = [ {
 "skill": "res://Code/Combat/Customization/Skills/Princess/Determination.gd"
 } ]
 name = "Princess' soul"
+shortname = "Princess"

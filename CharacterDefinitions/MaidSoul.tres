@@ -52,3 +52,4 @@ skills = [ {
 "skill": "res://Code/Combat/Customization/Skills/Maid/BarrierBreak.gd"
 } ]
 name = "Maid's soul"
+shortname = "Maid"

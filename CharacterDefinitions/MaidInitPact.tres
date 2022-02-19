@@ -46,3 +46,4 @@ skills = [ {
 "skill": "res://Code/Combat/Customization/Skills/DefenderPact/Reinforce.gd"
 } ]
 name = "Guardian's pact"
+shortname = "Guardian"

@@ -10,7 +10,7 @@ func _init():
 func set_level(lvl: int):
 	level = lvl
 	s_desc = "Level %s\n" % [lvl]
-	s_desc += "Deals " + str(0.4 + level*0.04) + "xATK+" + str(0.4 + level*0.04) + "xDEF damage to target. Ignores " + str(ceil(40+GUtil.teddy(lvl)*60)) + "% of target DEF"
+	s_desc += "Deals " + str(0.4 + level*0.02) + "xATK+" + str(0.4 + level*0.02) + "xDEF damage to target. Ignores " + str(ceil(40+GUtil.teddy(lvl)*60)) + "% of target DEF"
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -24,7 +24,7 @@ func use(user):
 		inst.dmg_type = DamageInstance.TYPE.PHYS
 		inst.sender = user
 		inst.target = target
-		inst.amount = user.get_stat_val("ATK")*(0.4+(level*0.04))+user.get_stat_val("DEF")*(0.4+(level*0.04))
+		inst.amount = user.get_stat_val("ATK")*(0.4+(level*0.02))+user.get_stat_val("DEF")*(0.4+(level*0.02))
 		inst.pierce = 0.4+GUtil.teddy(level)*0.6
 		SFXR.frame_sfx("claymore", inst.target.get_global_rect(), Color.lightblue, true, false)
 		yield(get_tree().create_timer(0.2), "timeout")

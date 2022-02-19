@@ -46,3 +46,4 @@ skills = [ {
 "skill": "res://Code/Combat/Customization/Skills/AssAssIn/Sharpen.gd"
 } ]
 name = "Assassin's pact"
+shortname = "Assassin"

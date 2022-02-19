@@ -12,7 +12,7 @@ func set_level(lvl: int):
 	level = lvl
 	s_desc = "Level %s\n" % [lvl]
 	s_desc += """Consumes all charges and attacks once per charge consumed. 1 charge is gained at the start of turn.
-Every attack deals %sxCRM magic damage to one random enemy.""" % [0.3+(0.03*lvl)]
+Every attack deals %sxCRM magic damage to one random enemy.""" % [0.3+(0.015*lvl)]
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -30,7 +30,7 @@ func use(user):
 	for i in repeats:
 		if c_manager.get_enemies().size() > 0:
 			var inst = DamageInstance.new()
-			inst.amount = user.get_stat_val("CRM")*(0.3+(0.03*level))
+			inst.amount = user.get_stat_val("CRM")*(0.3+(0.015*level))
 			inst.dmg_type = DamageInstance.TYPE.MAG
 			inst.sender = user
 			inst.target = GUtil.arr_rand(c_manager.get_enemies())
