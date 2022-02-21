@@ -3,9 +3,12 @@ extends BaseWeaponSkill
 func _init():
 	item_base_name = "Wand"
 	possible_stats = ["CRM", "MMP"]
-
+	
 	s_name = "Wand attack"
 	s_desc = "Deals 0.8xCRM homing magic damage to target"
+
+func show_desc_tip(owner):
+	Tip.set_disp(["Deals [color=#0FF]" + str(ceil(owner.get_base_stat_val("CRM")*(0.8 + level*0.04))) + "[/color] homing magic damage to target"])
 
 func set_level(lvl: int):
 	level = lvl

@@ -26,25 +26,15 @@ func upd_vals():
 	$MainInfo/LevelInfo.text = "LEVEL " + str(unit.lvl)
 	
 	
-	
-	
 	$MainInfo/SoulName.text = unit.get_soul().name
 	GUtil.safe_connect($MainInfo/SoulName, "mouse_entered", Tip, "set_disp", [unit.get_soul().get_desc(unit.lvl)])
 	GUtil.safe_connect($MainInfo/SoulName, "mouse_exited", Tip, "hide")
 	GUtil.safe_connect($MainInfo/SoulName, "tree_exited", Tip, "hide")
-	#$MainInfo/SoulName.connect("mouse_entered", Tip, "set_disp", [unit.get_soul().get_desc(unit.lvl)])
-	#$MainInfo/SoulName.connect("mouse_exited", Tip, "hide")
-	#$MainInfo/SoulName.connect("tree_exited", Tip, "hide")
 	
 	$PactButton.text = load(unit.pact).name
 	GUtil.safe_connect($PactButton, "mouse_entered", Tip, "set_disp", [load(unit.pact).get_desc(unit.lvl)])
 	GUtil.safe_connect($PactButton, "mouse_exited", Tip, "hide")
 	GUtil.safe_connect($PactButton, "tree_exited", Tip, "hide")
-	#$PactButton.connect("mouse_entered", Tip, "set_disp", [load(unit.pact).get_desc(unit.lvl)])
-	#$PactButton.connect("mouse_exited", Tip, "hide")
-	#$PactButton.connect("tree_exited", Tip, "hide")
-	
-	
 	
 	
 	GUtil.annihilate_children($MainInfo/StatValues)
@@ -66,7 +56,9 @@ func upd_vals():
 		btn.text = i.s_name
 		btn.size_flags_horizontal = Button.SIZE_EXPAND_FILL
 		
-		btn.connect("mouse_entered", Tip, "set_disp", [[i.s_desc]])
+		#btn.connect("mouse_entered", Tip, "set_disp", [[i.s_desc]])
+		btn.connect("mouse_entered", i, "show_desc_tip", [unit])
+		
 		btn.connect("mouse_exited", Tip, "hide")
 		btn.connect("tree_exited", Tip, "hide")
 		

@@ -7,6 +7,9 @@ func _init():
 	s_name = "Scythe attack"
 	s_desc = "Deals 0.8xATK damage to one target, with a 10% chance to attack all enemies afterwards"
 
+func show_desc_tip(owner):
+	Tip.set_disp(["Deals [color=#0FF]" + str(ceil(owner.get_base_stat_val("ATK")*(0.8+(level*0.04)))) + "[/color] damage to target, with a 10% chance to attack all enemies afterwards"])
+
 func set_level(lvl: int):
 	level = lvl
 	s_desc = "Level %s\n" % [lvl]

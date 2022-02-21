@@ -9,6 +9,9 @@ func _init():
 	s_name = "Sword attack"
 	s_desc = "Deals 1xATK damage to target"
 
+func show_desc_tip(owner):
+	Tip.set_disp(["Deals [color=#0FF]" + str(ceil(owner.get_base_stat_val("ATK")*(1 + level*0.05))) + "[/color] damage to target"])
+
 func set_level(lvl: int):
 	level = lvl
 	s_desc = "Level %s\n" % [lvl]

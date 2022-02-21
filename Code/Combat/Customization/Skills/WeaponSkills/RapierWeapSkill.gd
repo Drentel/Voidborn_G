@@ -12,6 +12,9 @@ func set_level(lvl: int):
 	s_desc = "Level %s\n" % [lvl]
 	s_desc += "Deals " + str(0.5 + level*0.025) + "xATK damage to target, with a " + str(40 + ceil(GUtil.teddy(level*3)*60)) + "% chance to attack again"
 
+func show_desc_tip(owner):
+	Tip.set_disp(["Deals [color=#0FF]" + str(ceil(owner.get_base_stat_val("ATK")*(0.5 + level*0.025))) + "[/color] damage to target, with a [color=#0FF]" + str(40 + ceil(GUtil.teddy(level*3)*60)) + "%[/color] chance to attack again"])
+
 func use(user):
 	user.emit_signal("skill_start", self)
 	var c_manager = find_manager()

@@ -21,7 +21,8 @@ func display_skills(unit):
 	for i in unit.get_skills():
 		var btn = ClackButton.new()
 		btn.connect("pressed", self, "skill_btn_pressed", [unit, i])
-		btn.connect("mouse_entered", Tip, "set_disp", [[i.s_desc]])
+		#btn.connect("mouse_entered", Tip, "set_disp", [[i.s_desc]])
+		btn.connect("mouse_entered", i, "show_desc_tip", [unit])
 		btn.connect("mouse_exited", Tip, "hide")
 		btn.connect("tree_exited", Tip, "hide")
 		btn.text = i.s_name

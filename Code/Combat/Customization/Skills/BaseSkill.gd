@@ -5,6 +5,9 @@ class_name BaseSkill
 var s_name = "Pass"
 var s_desc = "End the turn"
 
+func show_desc_tip(owner):
+	Tip.set_disp([s_desc])
+
 func check_usability(_unit):
 	return true
 
