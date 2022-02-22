@@ -9,7 +9,7 @@ func _init():
 Every attack deals 0.3xCRM magic damage to one random enemy."""
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Consumes all charges and attacks once per charge consumed. 1 charge is gained at the start of turn.\nEvery attack deals [color=#0FF]" + str(ceil(owner.get_base_stat_val("CRM")*(0.3 + level*0.015))) + "[/color] magic damage to one random enemy"])
+	Tip.set_disp(["Consumes all charges and attacks once per charge consumed. 1 charge is gained at the start of turn.\nEvery attack deals [color=#0FF]" + GUtil.wrap_highlight(ceil(owner.get_base_stat_val("CRM")*(0.3 + level*0.015))) + "[/color] magic damage to one random enemy"])
 
 func set_level(lvl: int):
 	level = lvl

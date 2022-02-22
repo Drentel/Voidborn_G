@@ -46,6 +46,14 @@ const stat_weight = {
 	"ABS":1,
 }
 
+const highlight_color = "#0FF"
+
+func wrap_highlight(stuff):
+	return "[color=" + highlight_color + "]" + str(stuff) + "[/color]"
+
+func disp_decim(num, paces = 2):
+	return ceil(num*pow(10, paces))/pow(10.0, paces)
+
 var precalc_teddies = [0.0]
 
 var connections = []

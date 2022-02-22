@@ -8,7 +8,7 @@ func _init():
 	s_desc = "Deals 0.8xCRM homing magic damage to target"
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Deals [color=#0FF]" + str(ceil(owner.get_base_stat_val("CRM")*(0.8 + level*0.04))) + "[/color] homing magic damage to target"])
+	Tip.set_disp(["Deals " + GUtil.wrap_highlight(ceil(owner.get_base_stat_val("CRM")*(0.8 + level*0.04))) + " homing magic damage to target"])
 
 func set_level(lvl: int):
 	level = lvl

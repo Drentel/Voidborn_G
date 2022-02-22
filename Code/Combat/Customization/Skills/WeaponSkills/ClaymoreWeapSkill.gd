@@ -8,7 +8,7 @@ func _init():
 	s_desc = "Deals 0.4xATK+0.4xDEF damage to target. Ignores 40% of target DEF"
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Deals [color=#0FF]" + str(ceil((owner.get_base_stat_val("ATK")*(0.4 + level*0.02))+(owner.get_base_stat_val("DEF")*(0.4 + level*0.02)))) + "[/color] damage to target. Ignores [color=#0FF]" + str(ceil(40+GUtil.teddy(level)*60)) + "%[/color] of target DEF"])
+	Tip.set_disp(["Deals " + GUtil.wrap_highlight(ceil((owner.get_base_stat_val("ATK")*(0.4 + level*0.02))+(owner.get_base_stat_val("DEF")*(0.4 + level*0.02)))) + " damage to target. Ignores " + GUtil.wrap_highlight(GUtil.disp_decim(40+GUtil.teddy(level)*60)) + "% of target DEF"])
 
 func set_level(lvl: int):
 	level = lvl

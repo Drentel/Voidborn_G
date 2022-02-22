@@ -8,7 +8,7 @@ func _init():
 	s_desc = "Deals 0.2xATK+0.2xCRM damage to every enemy. Unavoidable"
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Deals [color=#0FF]" + str(ceil((owner.get_base_stat_val("ATK")*(0.2 + level*0.01))+(owner.get_base_stat_val("CRM")*(0.2 + level*0.01)))) + "[/color] damage to every enemy. Unavoidable"])
+	Tip.set_disp(["Deals " + GUtil.wrap_highlight(ceil((owner.get_base_stat_val("ATK")*(0.2 + level*0.01))+(owner.get_base_stat_val("CRM")*(0.2 + level*0.01)))) + " damage to every enemy. Unavoidable"])
 
 func set_level(lvl: int):
 	level = lvl
