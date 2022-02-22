@@ -6,18 +6,18 @@
 script = ExtResource( 1 )
 growth = {
 "ABS": 0.1,
-"ATK": 0.4,
+"ATK": 0.3,
 "AUR": 0.1,
 "AVD": 0.5,
 "CRM": 0.1,
-"CTD": 0.4,
-"CTR": 0.4,
+"CTD": 0.2,
+"CTR": 0.2,
 "DEF": 0.1,
 "HIT": 0.2,
 "MHP": 5.0,
 "MMP": 0,
 "SPD": 0.6,
-"TEC": 0.4
+"TEC": 0.9
 }
 base = {
 "ABS": 0,

@@ -4,6 +4,9 @@ func _init():
 	s_name = "Smoke pop"
 	s_desc = "Cost: 20 MP\nReduces HIT of all enemies by 0.8xTEC for 3 turns"
 
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: 20 MP\nReduces HIT of all enemies by " + GUtil.wrap_highlight(ceil(owner.get_stat_val("TEC")*0.8)) + " for 3 turns"])
+
 func use(user):
 	user.emit_signal("skill_start", self)
 	Curtain.ln("%s uses %s" % [user.name, s_name])
@@ -21,4 +24,4 @@ func use(user):
 	yield(get_tree().create_timer(0.4), "timeout")
 	user.emit_signal("skill_end", self)
 	user.end_turn()
-	
+
