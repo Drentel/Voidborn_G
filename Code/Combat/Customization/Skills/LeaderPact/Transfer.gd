@@ -5,7 +5,10 @@ func check_usability(unit):
 
 func _init():
 	s_name = "Transfer"
-	s_desc = """Cost: 1/2 MP\nTransfers half of MMP to target ally. Will not consume more MP than necessary."""
+	s_desc = """Cost: 0.5xMMP\nTransfers half of MMP to target ally. Will not consume more MP than the target can hold."""
+
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: " + GUtil.wrap_highlight(ceil(owner.get_stat_val("MMP")*0.5)) + " MP\nTransfers half of MMP to target ally. Will not consume more MP than the target can hold."])
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -16,7 +19,7 @@ func use(user):
 	if not target is int:
 		var transfer = user.get_stat_val("MMP")/2
 		transfer = min(transfer, target.get_stat_val("MMP") - target.mp)
-		Curtain.ln(user.name + " transfers" + str(transfer) + " MP to " + target.name)
+		Curtain.ln(user.name + " transfers " + str(transfer) + " MP to " + target.name)
 		user.spend_mp(transfer)
 		target.mp_set(transfer + target.mp)
 		user.emit_signal("skill_end", self)
