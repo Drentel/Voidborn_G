@@ -128,15 +128,6 @@ desc = "Lmao"
 [node name="ButtonEvent" type="Node" parent="MapNodes/Debug"]
 script = ExtResource( 3 )
 
-[node name="Thief join" type="Node" parent="MapNodes/Debug/ButtonEvent"]
-script = ExtResource( 12 )
-soul_path = "res://CharacterDefinitions/ThiefSoul.tres"
-default_pact = "res://CharacterDefinitions/ThiefInitPact.tres"
-start_level = 15
-weapon_class = 3
-weapon_level = 8
-def_name = "Thief"
-
 [node name="Start Test Combat" type="Node" parent="MapNodes/Debug/ButtonEvent"]
 script = ExtResource( 7 )
 
@@ -171,6 +162,22 @@ start_level = 15
 weapon_class = 1
 weapon_level = 10
 def_name = "Princess"
+
+[node name="Thief join" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 12 )
+soul_path = "res://CharacterDefinitions/ThiefSoul.tres"
+default_pact = "res://CharacterDefinitions/ThiefInitPact.tres"
+start_level = 15
+weapon_class = 3
+weapon_level = 8
+def_name = "Thief"
+
+[node name="Maid join" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 12 )
+soul_path = "res://CharacterDefinitions/MaidSoul.tres"
+default_pact = "res://CharacterDefinitions/MaidInitPact.tres"
+weapon_class = 2
+def_name = "Maid"
 
 [node name="Gayte" type="Panel" parent="MapNodes"]
 margin_left = 172.0

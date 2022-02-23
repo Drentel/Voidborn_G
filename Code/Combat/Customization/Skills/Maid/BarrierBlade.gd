@@ -4,6 +4,9 @@ func _init():
 	s_name = "Barrier Blade"
 	s_desc = "Cost: 35 MP\nDeals 2xDEF magic dmg to one target, and grants barrier equal to 3xDEF"
 
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: 35 MP\nDeals " + GUtil.wrap_highlight(ceil(owner.get_stat_val("DEF")*2)) + " magic dmg to one target, and grants " + GUtil.wrap_highlight(ceil(owner.get_stat_val("DEF")*3)) + " barrier"])
+
 func use(user):
 	user.emit_signal("skill_start", self)
 	var c_manager = find_manager()

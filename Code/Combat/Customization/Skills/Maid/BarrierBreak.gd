@@ -11,6 +11,19 @@ func _init():
 	s_desc = """Cost: 15 MP\nConsumes all barrier, and boosts ATK and DEF by 0.2x of its value for 3 turns
 Also deals 0.5x of value as unavoidable magic damage to all enemies"""
 
+func show_desc_tip(owner):
+	if "BAR" in owner.get_status_names():
+		var barrier
+		for i in owner.get_statuses():
+			if i.script == preload("res://Code/Combat/Statuses/Barrier.gd"):
+				barrier = i
+				break
+		var barrier_stacks = barrier.stacks
+		
+		Tip.set_disp(["Cost: 15 MP\nConsumes all barrier, and boosts ATK and DEF by " + GUtil.wrap_highlight(ceil(barrier_stacks*0.2)) + " for 3 turns.\nAlso grants " + GUtil.wrap_highlight(ceil(barrier_stacks*0.5)) + " unavoidbale magic damage to all enemies"])
+	else:
+		.show_desc_tip(owner)
+
 func use(user):
 	user.emit_signal("skill_start", self)
 	Curtain.ln("%s uses %s" % [user.name, s_name])
@@ -21,6 +34,7 @@ func use(user):
 	for i in user.get_statuses():
 		if i.script == preload("res://Code/Combat/Statuses/Barrier.gd"):
 			barrier = i
+			break
 	var barrier_stacks = barrier.stacks
 	Curtain.ln("Consumed all barrier (%s)" % [barrier_stacks])
 	
