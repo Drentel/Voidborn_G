@@ -2,10 +2,10 @@ extends BaseSkill
 
 func _init():
 	s_name = "Determination"
-	s_desc = "Cost: 50 MP\nReduces the duration of all STT decreases on all allies by 1. Has a TEC-dependent chance of reducing twice"
+	s_desc = "Cost: 50 MP\nReduces the duration of all STT decreases on all allies by 1. Has a TEC-dependent chance of reducing by 2"
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Cost: 50 MP\nnReduces the duration of all STT decreases on all allies by 1. Has a " + GUtil.wrap_highlight(GUtil.disp_decim(GUtil.teddy(owner.get_stat_val("TEC"))*100)) + "% chance of reducing twice"])
+	Tip.set_disp(["Cost: 50 MP\nnReduces the duration of all STT decreases on all allies by 1. Has a " + GUtil.wrap_highlight(GUtil.disp_decim(GUtil.teddy(owner.get_stat_val("TEC"))*100)) + "% chance of reducing by 2"])
 
 func use(user):
 	user.emit_signal("skill_start", self)

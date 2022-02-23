@@ -2,7 +2,10 @@ extends BaseSkill
 
 func _init():
 	s_name = "Phalanx"
-	s_desc = "Cost: 20 MP\nGrants barrier equal to 1xDEF to all allies."
+	s_desc = "Cost: 20 MP\nGrants barrier equal to 1xDEF to all allies"
+
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: 20 MP\nGrants barrier equal to " + GUtil.wrap_highlight(ceil(owner.get_stat_val("DEF"))) + " to all allies"])
 
 func use(user):
 	user.emit_signal("skill_start", self)

@@ -8,12 +8,12 @@ func _init():
 	s_desc = "Deals 0.5xATK damage to target, with a 40% chance to attack again"
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Deals" + GUtil.wrap_highlight(ceil(owner.get_base_stat_val("ATK")*(0.5 + level*0.025))) + " damage to target, with a " + GUtil.wrap_highlight(40 + GUtil.disp_decim(GUtil.teddy(level*3)*60)) + "% chance to attack again"])
+	Tip.set_disp(["Deals " + GUtil.wrap_highlight(ceil(owner.get_base_stat_val("ATK")*(0.5 + level*0.025))) + " damage to target, with a " + GUtil.wrap_highlight(40 + GUtil.disp_decim(GUtil.teddy(level*3)*60)) + "% chance to attack again"])
 
 func set_level(lvl: int):
 	level = lvl
 	s_desc = "Level %s\n" % [lvl]
-	s_desc += "Deals " + str(0.5 + level*0.025) + "xATK damage to target, with a " + str(40 + GUtil.disp_decim(GUtil.teddy(level*3)*60)) + "% chance to attack again"
+	s_desc += "Deals " + str(GUtil.disp_decim(0.5 + level*0.025)) + "xATK damage to target, with a " + str(40 + GUtil.disp_decim(GUtil.teddy(level*3)*60)) + "% chance to attack again"
 
 func use(user):
 	user.emit_signal("skill_start", self)

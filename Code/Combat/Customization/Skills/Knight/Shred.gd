@@ -4,6 +4,9 @@ func _init():
 	s_name = "Shred"
 	s_desc = "Cost: 60 MP\nDeals 2xATK damage thrice, and then reduces the target's DEF by 0.3xATK for 3 turns"
 
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: 60 MP\nDeals " + GUtil.wrap_highlight(ceil(owner.get_stat_val("ATK")*2)) + " damage thrice, and then reduces the target's DEF by " + GUtil.wrap_highlight(ceil(owner.get_stat_val("ATK")*0.3)) + " for 3 turns"])
+
 func use(user):
 	user.emit_signal("skill_start", self)
 	var c_manager = find_manager()

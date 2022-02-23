@@ -7,6 +7,9 @@ func _init():
 	s_name = "Rally"
 	s_desc = """Cost: 25 MP\nBuffs SPD and AVD of all allies except self by 0.35x TEC"""
 
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: 25 MP\nBuffs SPD and AVD of all allies except self by " + GUtil.wrap_highlight(ceil(owner.get_stat_val("TEC")*0.35))])
+
 func use(user):
 	user.emit_signal("skill_start", self)
 	Curtain.ln("%s uses %s" % [user.name, s_name])

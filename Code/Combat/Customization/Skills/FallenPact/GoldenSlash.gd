@@ -2,7 +2,10 @@ extends BaseSkill
 
 func _init():
 	s_name = "Golden slash"
-	s_desc = "Cost: All MP\nDeals 1xATK damage to single target. Damage is increased by 0.1x for every point of MP spent to cast this skill. Never triggers an overcast. Homing."
+	s_desc = "Cost: All MP\nDeals 1xATK damage to single target. Damage is increased by 0.1x for every point of MP spent to cast this skill. Never triggers an overcast. Homing"
+
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: All MP\nDeals " + GUtil.wrap_highlight(ceil(owner.get_stat_val("ATK"))) + " damage to single target. Damage is increased by 0.1x for every point of MP spent to cast this skill. Never triggers an overcast. Homing"])
 
 func use(user):
 	user.emit_signal("skill_start", self)

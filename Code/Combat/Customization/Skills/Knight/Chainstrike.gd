@@ -2,7 +2,10 @@ extends BaseSkill
 
 func _init():
 	s_name = "Chainstrike"
-	s_desc = "Cost: 20 MP\nDeals 1.5xATK damage, and buffs ATK and DEF by 0.2x ATK for 5 turns."
+	s_desc = "Cost: 20 MP\nDeals 1.5xATK damage, and buffs ATK and DEF by 0.2x ATK for 5 turns"
+
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: 20 MP\nDeals " + GUtil.wrap_highlight(ceil(owner.get_stat_val("ATK")*1.5)) + " damage, and buffs ATK and DEF by " + GUtil.wrap_highlight(ceil(owner.get_stat_val("ATK")*0.2)) + " for 5 turns"])
 
 func use(user):
 	user.emit_signal("skill_start", self)

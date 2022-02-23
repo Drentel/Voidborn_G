@@ -2,7 +2,7 @@ extends BaseSkill
 
 func _init():
 	s_name = "Shadowstrike"
-	s_desc = "Cost: 15 MP\nDeals 0.5xATK damage to single target. Damage is multiplied 4x if this attack crits."
+	s_desc = "Cost: 25 MP\nDeals physical damage equal to the target's missing HP. Damage is additionally multiplied 2x if this attack crits"
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -12,13 +12,13 @@ func use(user):
 	var target = yield(c_manager.get_controls(), "target_selected")
 	if not target is int:
 		Curtain.ln("%s uses %s" % [user.name, s_name])
-		user.spend_mp(15)
+		user.spend_mp(25)
 		
 		var inst = DamageInstance.new()
 		inst.dmg_type = DamageInstance.TYPE.PHYS
 		inst.sender = user
 		inst.target = target
-		inst.amount = user.get_stat_val("ATK")*0.5
+		inst.amount = max(1, target.get_stat_val("MHP") - target.hp)
 		SFXR.frame_sfx("claymore", target.get_global_rect(), Color.red, true)
 		yield(get_tree().create_timer(0.3), "timeout")
 		$"/root/Root".screen_shake(0.1)
@@ -32,5 +32,5 @@ func use(user):
 
 func on_instance_crit(inst: DamageInstance):
 	if inst.did_crit:
-		Curtain.ln("Shadowstrike! Damage is multiplied by 4")
-		inst.amount *= 4
+		Curtain.ln("Shadowstrike crits! Damage is multiplied by 2")
+		inst.amount *= 2

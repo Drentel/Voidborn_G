@@ -48,8 +48,9 @@ func activate():
 					tot_generics[j["name"]] += amount
 				else:
 					tot_generics[j["name"]] = amount
-	
-	var tot = str(tot_makka) + " makka\n"
+	var tot = ""
+	if tot_makka > 0:
+		tot += str(tot_makka) + " makka\n"
 	for i in tot_pacts + tot_weaps + tot_artis:
 		tot += i + "\n"
 	

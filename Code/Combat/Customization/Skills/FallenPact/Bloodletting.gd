@@ -2,12 +2,15 @@ extends BaseSkill
 
 func _init():
 	s_name = "Bloodletting"
-	s_desc = "Cost: 30 MP\nBuffs ATK and CRM by 1xTEC. Buff is doubled if overcasted"
+	s_desc = "Cost: 35 MP\nBuffs ATK and CRM by 1xTEC. Buff is doubled if overcasted"
+
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: 35 MP\nBuffs ATK and CRM by " + GUtil.wrap_highlight(ceil(owner.get_stat_val("TEC"))) + ". Buff is doubled if overcasted"])
 
 func use(user):
 	user.emit_signal("skill_start", self)
 	Curtain.ln("%s uses %s" % [user.name, s_name])
-	user.spend_mp(30)
+	user.spend_mp(35)
 	
 	var nod = Node.new()
 	nod.set_script(preload("res://Code/Combat/Statuses/StatMod.gd"))

@@ -2,7 +2,10 @@ extends BaseSkill
 
 func _init():
 	s_name = "Sharpen"
-	s_desc = """Cost: 70 MP\nBuffs CTD and CTR by 0.8x TEC, but halves DEF for 3 turns."""
+	s_desc = "Cost: 70 MP\nBuffs CTD and CTR by 1x TEC, but halves DEF for 3 turns"
+
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: 70 MP\nBuffs CTD and CTR by " + GUtil.wrap_highlight(ceil(owner.get_stat_val("TEC"))) + ", but halves DEF for 3 turns."])
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -12,10 +15,10 @@ func use(user):
 	status.set_script(load("res://Code/Combat/Statuses/StatMod.gd"))
 	status.stacks = [
 		{"stat": "CTD",
-		"val": user.get_stat_val("TEC")*0.8,
+		"val": user.get_stat_val("TEC"),
 		"duration": 4},
 		{"stat": "CTR",
-		"val": user.get_stat_val("TEC")*0.8,
+		"val": user.get_stat_val("TEC"),
 		"duration": 4},
 		{"stat": "DEF",
 		"val": user.get_stat_val("DEF")*(-0.5),
