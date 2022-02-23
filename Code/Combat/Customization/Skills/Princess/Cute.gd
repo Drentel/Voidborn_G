@@ -1,6 +1,5 @@
 extends BasePassiveSkill
 
-
 func _init():
 	s_name = "Cute"
 	s_desc = "Receiving damage grants all allies except self fury equal to half of it."

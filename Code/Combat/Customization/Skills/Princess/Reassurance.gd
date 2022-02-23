@@ -2,7 +2,11 @@ extends BaseSkill
 
 func _init():
 	s_name = "Reassurance"
-	s_desc = "Cost: 50 MP\nIncreases the duration of all positive STT increases on all allies by 1."
+	s_desc = "Cost: 50 MP\nIncreases the duration of all positive STT increases on all allies by 1. Has a TEC-dependent chance of increasing twice"
+
+func show_desc_tip(owner):
+	Tip.set_disp(["Cost: 50 MP\nIncreases the duration of all positive STT increases on all allies by 1. Has a " + GUtil.wrap_highlight(GUtil.disp_decim(GUtil.teddy(owner.get_stat_val("TEC")))) + "% chance of increasing twice"])
+
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -17,8 +21,10 @@ func use(user):
 			if j is StatModStatus:
 				for idk in j.stacks:
 					if idk["val"] > 0:
-						idk["duration"] += 1
-						# this is way too deep lmao
+						if randi()%100 < GUtil.teddy(user.get_stat_val("TEC")*100):
+							idk["duration"] += 1
+						else:
+							idk["duration"] += 2
 	
 	user.emit_signal("skill_end", self)
 	user.end_turn()
