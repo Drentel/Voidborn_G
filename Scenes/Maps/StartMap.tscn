@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Code/Map/MapRoot.gd" type="Script" id=1]
 [ext_resource path="res://Code/Map/MapNode.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Code/Map/Events/MapMoveEvent.gd" type="Script" id=9]
 [ext_resource path="res://Code/Map/Events/FlagCheck.gd" type="Script" id=10]
 [ext_resource path="res://Code/Map/Events/FlagSet.gd" type="Script" id=11]
+[ext_resource path="res://Code/Map/Events/AddCharacterEvent.gd" type="Script" id=12]
 [ext_resource path="res://Themes/StarShader.tres" type="Material" id=13]
 
 [node name="MapRoot" type="Control"]
@@ -122,14 +123,19 @@ __meta__ = {
 }
 is_hidden = true
 left = NodePath("../StartPoint")
-desc = "[Lmao.]
-EV secret_boss_1
-[Congradulations.]
-EV BOSS_2
-[Ahahahaha]"
+desc = "Lmao"
 
 [node name="ButtonEvent" type="Node" parent="MapNodes/Debug"]
 script = ExtResource( 3 )
+
+[node name="Thief join" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 12 )
+soul_path = "res://CharacterDefinitions/ThiefSoul.tres"
+default_pact = "res://CharacterDefinitions/ThiefInitPact.tres"
+start_level = 15
+weapon_class = 3
+weapon_level = 8
+def_name = "Thief"
 
 [node name="Start Test Combat" type="Node" parent="MapNodes/Debug/ButtonEvent"]
 script = ExtResource( 7 )

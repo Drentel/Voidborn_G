@@ -49,7 +49,7 @@ func get_stats_desc():
 		res += "[font=res://Themes/monospace.tres]" + str(i) + "\t[/font]"
 		
 		if i in GUtil.teddy_definitions:
-			res += str(ceil(GUtil.teddy(get_stat_val(i))*10000)/100.0) + "% "
+			res += str(GUtil.disp_decim(GUtil.teddy(get_stat_val(i)))) + "% "
 		res += str(get_stat_val(i)) + " ("
 		res += str(get_base_stat_val(i)) + "+"
 		res += str(get_stat_val(i) - get_base_stat_val(i)) + ")\n"

@@ -23,6 +23,7 @@ func handle_dupe(dupe):
 
 func _ready():
 	status_owner.connect("turn_end", self, "on_turn_end")
+	upd()
 
 func on_turn_end():
 	for i in stacks:
