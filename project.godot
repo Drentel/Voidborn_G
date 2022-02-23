@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "BaseStatus",
 "class": "BaseArtiStatus",
 "language": "GDScript",
-"path": "res://Code/Combat/Statuses/Passives/ArtiRegenStatus.gd"
+"path": "res://Code/Combat/Statuses/Passives/BaseArtiStatus.gd"
 }, {
 "base": "Node",
 "class": "BasePassiveSkill",

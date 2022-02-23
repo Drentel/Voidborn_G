@@ -10,9 +10,6 @@ func get_desc():
 	return """CON
 """ + str(lvl*2) + "% of overhealing is converted into barrier"
 
-func on_turn_start():
-	pass
-
 func on_overheal(amount):
 	var nod = Node.new()
 	nod.set_script(load("res://Code/Combat/Statuses/Barrier.gd"))

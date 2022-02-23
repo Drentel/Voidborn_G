@@ -25,6 +25,3 @@ func on_sent_dmg(inst: DamageInstance):
 func on_crit(_instance):
 	stacks = 0
 	GUtil.annihilate_children(self)
-
-func on_turn_start():
-	pass

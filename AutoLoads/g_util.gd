@@ -174,6 +174,7 @@ var artifact_skills = [
 	"res://Code/Combat/Customization/ArtiSkills/ArtiCritDamage.gd",
 	"res://Code/Combat/Customization/ArtiSkills/ArtiOverhealBarrier.gd",
 	"res://Code/Combat/Customization/ArtiSkills/ArtiHomingChance.gd",
+	"res://Code/Combat/Customization/ArtiSkills/ArtiPierceAdd.gd",
 ]
 
 func make_arti(power: int):

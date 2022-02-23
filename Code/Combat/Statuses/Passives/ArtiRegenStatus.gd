@@ -1,9 +1,7 @@
-extends BaseStatus
-class_name BaseArtiStatus
-
-var lvl = 1
+extends BaseArtiStatus
 
 func _init():
+	lvl = 1
 	status_name = "REG"
 
 func _ready():
@@ -11,10 +9,6 @@ func _ready():
 
 func get_desc():
 	return "REG\nHeals for " + str(round(GUtil.teddy(lvl)*100)/100.0) + "x MHP at the start of turn"
-
-# This ususally will not be called for statuses that are inflicted by artifact passives
-func handle_dupe(dupe):
-	lvl = max(dupe.lvl, lvl)
 
 func on_turn_start():
 	var dmg = DamageInstance.new()
