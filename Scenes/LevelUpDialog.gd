@@ -96,7 +96,7 @@ func _on_BtnPlus2_pressed():
 
 
 func _on_ConfirmBtn_pressed():
-	GPlayer.money -= money_cost
+	GPlayer.money_set(GPlayer.money - money_cost)
 	for i in item_cost:
 		GPlayer.generic_items[i] -= item_cost[i]
 	

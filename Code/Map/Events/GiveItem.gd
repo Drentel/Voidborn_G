@@ -17,7 +17,7 @@ func activate():
 		for j in res:
 			if j["type"] == "money":
 				var am = randi()%int(j["amount_max"] - j["amount_min"]+1) + j["amount_min"]
-				GPlayer.money += am
+				GPlayer.money_set(am + GPlayer.money)
 				Curtain.ln("Got " + str(am) + " makka")
 				tot_makka += am
 			elif j["type"] == "artifact":
@@ -58,6 +58,5 @@ func activate():
 		tot += str(tot_generics[i]) + "x " + i + "\n"
 	
 	$"/root/Root".switch_loot(tot)
-	
 	
 	.activate()

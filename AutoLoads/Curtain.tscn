@@ -42,12 +42,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Unread" type="Label" parent="Curtain"]
+[node name="Stacker" type="HBoxContainer" parent="Curtain"]
+margin_left = 1184.0
+margin_top = 376.0
+margin_right = 1576.0
+margin_bottom = 408.0
+custom_constants/separation = 32
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Makka" type="Label" parent="Curtain/Stacker"]
+margin_left = 291.0
+margin_top = 6.0
+margin_right = 392.0
+margin_bottom = 25.0
+text = "1000 Makka"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unread" type="Label" parent="Curtain/Stacker"]
 visible = false
-margin_left = 1272.0
-margin_top = 384.0
-margin_right = 1584.0
-margin_bottom = 403.0
+margin_left = 297.0
+margin_top = 6.0
+margin_right = 392.0
+margin_bottom = 25.0
 text = "123 Unread"
 align = 2
 __meta__ = {
