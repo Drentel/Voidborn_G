@@ -5,7 +5,7 @@ func _init():
 	s_desc = "Cost: 50 MP\nReduces the duration of all STT decreases on all allies by 1. Has a TEC-dependent chance of reducing twice"
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Cost: 50 MP\nnReduces the duration of all STT decreases on all allies by 1. Has a " + GUtil.wrap_highlight(GUtil.disp_decim(GUtil.teddy(owner.get_stat_val("TEC")))) + "% chance of reducing twice"])
+	Tip.set_disp(["Cost: 50 MP\nnReduces the duration of all STT decreases on all allies by 1. Has a " + GUtil.wrap_highlight(GUtil.disp_decim(GUtil.teddy(owner.get_stat_val("TEC"))*100)) + "% chance of reducing twice"])
 
 func use(user):
 	user.emit_signal("skill_start", self)

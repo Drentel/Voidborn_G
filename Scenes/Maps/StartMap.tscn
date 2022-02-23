@@ -163,6 +163,15 @@ script = ExtResource( 6 )
 [node name="Change equipment" type="Node" parent="MapNodes/Debug/ButtonEvent"]
 script = ExtResource( 8 )
 
+[node name="Princess join" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 12 )
+soul_path = "res://CharacterDefinitions/PrincessSoul.tres"
+default_pact = "res://CharacterDefinitions/PrincessInitPact.tres"
+start_level = 15
+weapon_class = 1
+weapon_level = 10
+def_name = "Princess"
+
 [node name="Gayte" type="Panel" parent="MapNodes"]
 margin_left = 172.0
 margin_top = -104.0
