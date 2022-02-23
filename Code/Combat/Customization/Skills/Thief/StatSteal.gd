@@ -1,11 +1,11 @@
 extends BaseSkill
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Cost: 25 MP\nOne of the enemy's target stats is reduced by " + GUtil.wrap_highlight(GUtil.disp_decim(30 + GUtil.teddy(owner.get_stat_val("TEC"))*65)) + "%, and the user gains an equivalent increase in the same stat. Target stat is random, but higher stats will be stolen more often."])
+	Tip.set_disp(["Cost: 25 MP\nOne of the enemy's target stats is reduced by " + GUtil.wrap_highlight(GUtil.disp_decim(30 + GUtil.teddy(owner.get_stat_val("TEC"))*65)) + "%, and the user gains an equivalent increase in the same stat. Target stat is random, but higher stats will be stolen more often"])
 
 func _init():
 	s_name = "Steal"
-	s_desc = "Cost: 25 MP\nOne of the enemy's target stats is reduced by % that depends on user TEC, and the user gains an equivalent increase in the same stat. Target stat is random, but higher stats will be stolen more often."
+	s_desc = "Cost: 25 MP\nOne of the enemy's target stats is reduced by % that depends on user TEC, and the user gains an equivalent increase in the same stat. Target stat is random, but higher stats will be stolen more often"
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -25,8 +25,6 @@ func use(user):
 		
 		var stn = stats.pick()
 		var stv = target.get_base_stat_val(stn)
-		
-		# Something is wrong here
 		
 		var stat_nod = Node.new()
 		stat_nod.set_script(preload("res://Code/Combat/Statuses/StatMod.gd"))
