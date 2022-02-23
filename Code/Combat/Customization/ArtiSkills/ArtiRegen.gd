@@ -1,9 +1,7 @@
-extends BasePassiveSkill
-class_name BaseArtiSkill
-
-export var level = 1
+extends BaseArtiSkill
 
 func _init():
+	level = 1
 	s_name = "Regeneration"
 	s_desc = "Heal for 0.01xMHP at the start of turn"
 

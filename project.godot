@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "BasePassiveSkill",
 "class": "BaseArtiSkill",
 "language": "GDScript",
-"path": "res://Code/Combat/Customization/ArtiSkills/ArtiRegen.gd"
+"path": "res://Code/Combat/Customization/ArtiSkills/BaseArtiSkill.gd"
 }, {
 "base": "BaseStatus",
 "class": "BaseArtiStatus",
