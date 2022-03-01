@@ -1,27 +1,5 @@
 extends Panel
 
-func show_pacts():
-	$ScrollContainer/GridContainer.columns = 2
-	visible = true
-	GUtil.annihilate_children($ScrollContainer/GridContainer)
-	for i in GPlayer.pacts:
-		var btn = ClackButton.new()
-		btn.text = load(i).name
-		btn.size_flags_horizontal = Button.SIZE_EXPAND_FILL
-		btn.connect("pressed", self, "swap_pacts", [i])
-		btn.connect("mouse_entered", Tip, "set_disp", [load(i).get_desc($"../Panel".unit.lvl)])
-		btn.connect("mouse_exited", Tip, "hide")
-		btn.connect("tree_exiting", Tip, "hide")
-		$ScrollContainer/GridContainer.add_child(btn)
-
-func swap_pacts(pact):
-	GPlayer.pacts.append($"../Panel".unit.pact)
-	GPlayer.pacts.erase(pact)
-	$"../Panel".unit.pact = pact
-	$"../Panel".unit.unpack()
-	$"../Panel".upd_vals()
-	visible = false
-
 func show_weaps():
 	$ScrollContainer/GridContainer.columns = 2
 	visible = true
@@ -40,23 +18,67 @@ func show_weaps():
 			$ScrollContainer/GridContainer.add_child(btn)
 
 func swap_weaps(weap):
-	visible = false
+	hide()
 	GPlayer.equip_items.append($"../Panel".unit.weap)
 	GPlayer.equip_items.erase(weap)
 	$"../Panel".unit.weap = weap
 	$"../Panel".unit.unpack()
 	$"../Panel".upd_vals()
 
-func show_artis(button):
-	$ScrollContainer/GridContainer.columns = 3
+func show_skills(button):
+	$ScrollContainer/GridContainer.columns = 2
 	visible = true
-	
 	GUtil.annihilate_children($ScrollContainer/GridContainer)
 	
 	var un_btn = ClackButton.new()
 	un_btn.text = "Unequip"
 	un_btn.size_flags_horizontal = Button.SIZE_EXPAND_FILL
-	un_btn.connect("pressed", self, "swap_artis", ["unequip", button.get_meta("arti")])
+	un_btn.connect("pressed", self, "swap_skills", ["none", button.get_meta("skill")])
+	
+	$ScrollContainer/GridContainer.add_child(un_btn)
+	
+	for i in GPlayer.skills:
+		var skill = load(i).new()
+		var btn = ClackButton.new()
+		btn.text = skill.s_name
+		btn.size_flags_horizontal = Button.SIZE_EXPAND_FILL
+		
+		btn.connect("pressed", self, "swap_skills", [i, button.get_meta("skill")])
+		
+		btn.connect("mouse_entered", Tip, "set_disp", [[skill.s_desc]])
+		btn.connect("mouse_exited", Tip, "hide")
+		btn.connect("tree_exited", Tip, "hide")
+		
+		$ScrollContainer/GridContainer.add_child(btn)
+
+func swap_skills(new, old):
+	hide()
+	
+	if new == "none" && old == "none": #swapping nothings
+		return
+	elif new == "none" && not old == "none": #unequipping
+		GPlayer.skills.append(old)
+		$"../Panel".unit.equip_skills.erase(old)
+	elif not new == "none" && old == "none": #equipping into an empty slot
+		GPlayer.skills.erase(new)
+		$"../Panel".unit.equip_skills.append(new)
+	elif not new == "none" && not old == "none": #swapping two skills
+		GPlayer.skills.append(old)
+		$"../Panel".unit.equip_skills[$"../Panel".unit.equip_skills.find(old)] = new
+		GPlayer.skills.erase(new)
+	
+	$"../Panel".unit.unpack()
+	$"../Panel".upd_vals()
+
+func show_artis(button):
+	$ScrollContainer/GridContainer.columns = 3
+	visible = true
+	GUtil.annihilate_children($ScrollContainer/GridContainer)
+	
+	var un_btn = ClackButton.new()
+	un_btn.text = "Unequip"
+	un_btn.size_flags_horizontal = Button.SIZE_EXPAND_FILL
+	un_btn.connect("pressed", self, "swap_artis", ["none", button.get_meta("arti")])
 	
 	$ScrollContainer/GridContainer.add_child(un_btn)
 	
@@ -75,7 +97,7 @@ func show_artis(button):
 			$ScrollContainer/GridContainer.add_child(btn)
 
 func swap_artis(new, old):
-	visible = false
+	hide()
 	if new is String && old is String: #swapping nothings
 		return
 	elif new is String && not old is String: #unequipping
@@ -91,3 +113,7 @@ func swap_artis(new, old):
 	
 	$"../Panel".unit.unpack()
 	$"../Panel".upd_vals()
+
+
+func _on_Button_pressed():
+	hide()

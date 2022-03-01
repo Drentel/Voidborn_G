@@ -65,7 +65,6 @@ __meta__ = {
 [node name="I" parent="CharaCards" instance=ExtResource( 4 )]
 lvl = 10
 soul = "res://CharacterDefinitions/MCSoul.tres"
-pact = "res://CharacterDefinitions/MCInitPact.tres"
 
 [node name="MapScene" parent="." instance=ExtResource( 6 )]
 margin_left = 328.0

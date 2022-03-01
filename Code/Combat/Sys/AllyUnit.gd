@@ -2,9 +2,9 @@ extends UnitBase
 
 var dead = false
 export var soul = "res://Placeholders/test_soul.tres"
-export var pact = "res://Placeholders/test_pact.tres"
 var weap = ""
 var artis = []
+var equip_skills = []
 
 var skin_dir = ""
 var pos_adjust = Vector2(0,0)
@@ -44,11 +44,7 @@ func set_skin(path: String):
 func get_soul():
 	return load(soul)
 
-func get_pact():
-	return load(pact)
-
 func _ready():
-	
 	if weap is String:
 		weap = GUtil.make_weapon(3, 0)
 	
@@ -69,22 +65,27 @@ func unpack():
 		inf.influence = i["amount"]
 		$Unpacks.add_child(inf)
 	
-	var souls = [load(soul), load(pact)]
+	var l_soul = load(soul)
 	
-	for i in souls:
-		
-		for j in i.growth:
-			var inf = Influencer.new()
-			inf.target_stat = j
-			inf.influence = i.get_growth(j, lvl)
-			$Unpacks.add_child(inf)
-		
-		for j in i.skills:
-			if j["req"] <= lvl:
-				var nod = Node.new()
-				var ski = load(j["skill"])
-				nod.set_script(ski)
-				$Unpacks.add_child(nod)
+	
+	for i in l_soul.growth:
+		var inf = Influencer.new()
+		inf.target_stat = i
+		inf.influence = l_soul.get_growth(i, lvl)
+		$Unpacks.add_child(inf)
+	
+	for i in l_soul.skills:
+		if i["req"] <= lvl:
+			var nod = Node.new()
+			var ski = load(i["skill"])
+			nod.set_script(ski)
+			$Unpacks.add_child(nod)
+	
+	for i in equip_skills:
+		var nod = Node.new()
+		var ski = load(i)
+		nod.set_script(ski)
+		$Unpacks.add_child(nod)
 	
 	for i in artis:
 		for j in i.get_skills():
@@ -114,6 +115,9 @@ func unpack():
 
 func get_arti_slots():
 	return max(1, min((lvl+15)/15, 6))
+
+func get_skill_slots():
+	return max(1, min((lvl+20)/15, 6))
 
 func die():
 	.die()

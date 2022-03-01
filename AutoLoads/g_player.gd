@@ -7,12 +7,12 @@ var settings = {
 
 var flags = {}
 var generic_items = {}
-var pacts = []
 var equip_items = []
 var money = 1000 setget money_set
 var respawn_loc = "res://Scenes/Maps/Level1.tscn"
 var respawn_node = "Fountain"
 var reserve_characters = []
+var skills = []
 
 signal money_changed(oldval)
 
@@ -28,7 +28,11 @@ func get_item(item_name):
 		return 0
 
 func _ready():
-	pass
+	skills += [
+		"res://Code/Combat/Customization/Skills/LeaderPact/MoralSupport.gd",
+		"res://Code/Combat/Customization/Skills/LeaderPact/Rally.gd",
+		"res://Code/Combat/Customization/Skills/LeaderPact/Transfer.gd",
+	]
 
 func respawn():
 	for i in $"/root/Root/CharaCards".get_children():

@@ -192,75 +192,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PactButton" type="Button" parent="Panel"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 448.0
-margin_bottom = 37.0
-text = "Pact of ???"
-script = ExtResource( 8 )
-
-[node name="WeaponButton" type="Button" parent="Panel"]
-margin_left = 8.0
-margin_top = 40.0
-margin_right = 448.0
-margin_bottom = 69.0
-text = "Weapon ???"
-script = ExtResource( 8 )
-
-[node name="ArtifactSlots" type="GridContainer" parent="Panel"]
-margin_left = 8.0
-margin_top = 80.0
-margin_right = 448.0
-margin_bottom = 184.0
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="Panel/ArtifactSlots"]
-margin_right = 218.0
-margin_bottom = 29.0
-size_flags_horizontal = 3
-text = "Artifact ???"
-
-[node name="Button2" type="Button" parent="Panel/ArtifactSlots"]
-margin_left = 222.0
-margin_right = 440.0
-margin_bottom = 29.0
-size_flags_horizontal = 3
-text = "Artifact ???"
-
-[node name="Button3" type="Button" parent="Panel/ArtifactSlots"]
-margin_top = 33.0
-margin_right = 218.0
-margin_bottom = 62.0
-size_flags_horizontal = 3
-text = "Artifact ???"
-
-[node name="Button4" type="Button" parent="Panel/ArtifactSlots"]
-margin_left = 222.0
-margin_top = 33.0
-margin_right = 440.0
-margin_bottom = 62.0
-size_flags_horizontal = 3
-text = "Artifact ???"
-
-[node name="Button5" type="Button" parent="Panel/ArtifactSlots"]
-margin_top = 66.0
-margin_right = 218.0
-margin_bottom = 95.0
-size_flags_horizontal = 3
-text = "Artifact ???"
-
-[node name="Button6" type="Button" parent="Panel/ArtifactSlots"]
-margin_left = 222.0
-margin_top = 66.0
-margin_right = 440.0
-margin_bottom = 95.0
-size_flags_horizontal = 3
-text = "Artifact ???"
-
 [node name="SkinChangeBtn" type="Button" parent="Panel"]
 margin_left = 184.0
 margin_top = 408.0
@@ -398,14 +329,17 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Panel"]
 margin_left = 8.0
-margin_top = 184.0
+margin_top = 192.0
 margin_right = 57.0
-margin_bottom = 203.0
+margin_bottom = 211.0
 text = "Skills:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SkillContainer" type="ScrollContainer" parent="Panel"]
 margin_left = 8.0
-margin_top = 208.0
+margin_top = 216.0
 margin_right = 448.0
 margin_bottom = 400.0
 __meta__ = {
@@ -414,7 +348,7 @@ __meta__ = {
 
 [node name="GridContainer" type="GridContainer" parent="Panel/SkillContainer"]
 margin_right = 440.0
-margin_bottom = 192.0
+margin_bottom = 184.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
@@ -564,6 +498,157 @@ margin_bottom = 397.0
 text = "Ascend"
 script = ExtResource( 8 )
 
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 448.0
+margin_bottom = 184.0
+tab_align = 0
+all_tabs_in_front = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gear" type="Control" parent="Panel/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 27.0
+margin_right = -2.0
+margin_bottom = -2.0
+
+[node name="WeaponButton" type="Button" parent="Panel/TabContainer/Gear"]
+margin_left = 6.0
+margin_top = 5.0
+margin_right = 430.0
+margin_bottom = 37.0
+text = "Weapon ???"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArtifactSlots" type="GridContainer" parent="Panel/TabContainer/Gear"]
+margin_left = 6.0
+margin_top = 45.0
+margin_right = 430.0
+margin_bottom = 149.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Panel/TabContainer/Gear/ArtifactSlots"]
+margin_right = 210.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Button2" type="Button" parent="Panel/TabContainer/Gear/ArtifactSlots"]
+margin_left = 214.0
+margin_right = 424.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Button3" type="Button" parent="Panel/TabContainer/Gear/ArtifactSlots"]
+margin_top = 33.0
+margin_right = 210.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Button4" type="Button" parent="Panel/TabContainer/Gear/ArtifactSlots"]
+margin_left = 214.0
+margin_top = 33.0
+margin_right = 424.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Button5" type="Button" parent="Panel/TabContainer/Gear/ArtifactSlots"]
+margin_top = 66.0
+margin_right = 210.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Button6" type="Button" parent="Panel/TabContainer/Gear/ArtifactSlots"]
+margin_left = 214.0
+margin_top = 66.0
+margin_right = 424.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Artifact ???"
+
+[node name="Skills" type="Control" parent="Panel/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 27.0
+margin_right = -2.0
+margin_bottom = -2.0
+
+[node name="SkillSlots" type="GridContainer" parent="Panel/TabContainer/Skills"]
+margin_left = 6.0
+margin_top = 5.0
+margin_right = 430.0
+margin_bottom = 141.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Panel/TabContainer/Skills/SkillSlots"]
+margin_right = 210.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+text = "Skill"
+
+[node name="Button2" type="Button" parent="Panel/TabContainer/Skills/SkillSlots"]
+margin_left = 214.0
+margin_right = 424.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+text = "Skill"
+
+[node name="Button3" type="Button" parent="Panel/TabContainer/Skills/SkillSlots"]
+margin_top = 33.0
+margin_right = 210.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+text = "Skill"
+
+[node name="Button4" type="Button" parent="Panel/TabContainer/Skills/SkillSlots"]
+margin_left = 214.0
+margin_top = 33.0
+margin_right = 424.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+text = "Skill"
+
+[node name="Button5" type="Button" parent="Panel/TabContainer/Skills/SkillSlots"]
+margin_top = 66.0
+margin_right = 210.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Skill"
+
+[node name="Button6" type="Button" parent="Panel/TabContainer/Skills/SkillSlots"]
+margin_left = 214.0
+margin_top = 66.0
+margin_right = 424.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Skill"
+
+[node name="Soul compass" type="Control" parent="Panel/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 25.0
+
 [node name="CloseButton" type="Button" parent="."]
 margin_left = 552.0
 margin_top = 440.0
@@ -576,7 +661,6 @@ __meta__ = {
 }
 
 [node name="SwapList" type="Panel" parent="."]
-visible = false
 margin_top = 488.0
 margin_right = 648.0
 margin_bottom = 880.0
@@ -589,17 +673,28 @@ __meta__ = {
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 640.0
-margin_bottom = 384.0
+margin_bottom = 344.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GridContainer" type="GridContainer" parent="SwapList/ScrollContainer"]
 margin_right = 632.0
-margin_bottom = 376.0
+margin_bottom = 336.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="SwapList"]
+margin_left = 8.0
+margin_top = 352.0
+margin_right = 93.0
+margin_bottom = 381.0
+text = "Cancel"
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -609,17 +704,9 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="TutLabs" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
-
-[node name="PactTut" parent="TutLabs" instance=ExtResource( 12 )]
-margin_left = 442.0
-margin_top = 33.0
-margin_right = 451.0
-margin_bottom = 52.0
-desc = "The character's pact is like their job - it grants an array of stats that scale with the character's level and a collection of abilities.
-Every pact is unique - there is only one copy out there, so two characters can't have the same one equipped.
-Scroll while hovering over a pact to review the abilities."
 
 [node name="SoulTut" parent="TutLabs" instance=ExtResource( 12 )]
 margin_left = 636.0
@@ -645,31 +732,29 @@ margin_bottom = 137.0
 desc = "Hover over stat names to find out what each one does."
 
 [node name="WeapTut" parent="TutLabs" instance=ExtResource( 12 )]
-margin_left = 442.0
-margin_top = 65.0
-margin_right = 451.0
-margin_bottom = 84.0
+margin_left = 443.0
+margin_top = 32.0
+margin_right = 452.0
+margin_bottom = 51.0
 desc = "Press on the button to change the character's weapon.
 The weapon's attack is an always-usable ability that deals damage to enemies in some way. Different kinds of weapons have different attacks - hover over them to check their description."
 
 [node name="SkillsTut" parent="TutLabs" instance=ExtResource( 12 )]
-margin_left = 58.0
-margin_top = 216.0
-margin_right = 67.0
-margin_bottom = 235.0
+margin_left = 48.0
+margin_top = 176.0
+margin_right = 57.0
+margin_bottom = 195.0
 desc = "This is the summary of all of the character's skills, both passive and active. Hover over them for details on each one."
 
 [node name="ArtiTut" parent="TutLabs" instance=ExtResource( 12 )]
-margin_left = 7.0
-margin_top = 107.0
-margin_right = 16.0
-margin_bottom = 126.0
+margin_left = 8.0
+margin_top = 74.0
+margin_right = 17.0
+margin_bottom = 93.0
 desc = "Artifacts grant stat increases and sometimes abilities when equipped. Hover over them for details."
 
 [connection signal="pressed" from="Panel/MainInfo/CharaName" to="Panel/MainInfo/CharaName" method="_on_CharaName_pressed"]
 [connection signal="confirmed" from="Panel/MainInfo/CharaName/ConfirmationDialog" to="Panel/MainInfo/CharaName" method="_on_ConfirmationDialog_confirmed"]
-[connection signal="pressed" from="Panel/PactButton" to="SwapList" method="show_pacts"]
-[connection signal="pressed" from="Panel/WeaponButton" to="SwapList" method="show_weaps"]
 [connection signal="pressed" from="Panel/SkinChangeBtn" to="Panel/SkinChangeBtn" method="_on_SkinChangeBtn_pressed"]
 [connection signal="dir_selected" from="Panel/SkinChangeBtn/FileDialog" to="Panel/SkinChangeBtn" method="_on_FileDialog_dir_selected"]
 [connection signal="pressed" from="Panel/PosAdj" to="Panel/PosAdj/PosAdjustDialog" method="_on_Button_pressed"]
@@ -686,4 +771,6 @@ desc = "Artifacts grant stat increases and sometimes abilities when equipped. Ho
 [connection signal="pressed" from="Panel/LevelUpBtn/LevelUpDialog/BtnPlus" to="Panel/LevelUpBtn/LevelUpDialog" method="_on_BtnPlus_pressed"]
 [connection signal="pressed" from="Panel/LevelUpBtn/LevelUpDialog/BtnPlus2" to="Panel/LevelUpBtn/LevelUpDialog" method="_on_BtnPlus2_pressed"]
 [connection signal="pressed" from="Panel/LevelUpBtn/LevelUpDialog/ConfirmBtn" to="Panel/LevelUpBtn/LevelUpDialog" method="_on_ConfirmBtn_pressed"]
+[connection signal="pressed" from="Panel/TabContainer/Gear/WeaponButton" to="SwapList" method="show_weaps"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="SwapList/Button" to="SwapList" method="_on_Button_pressed"]
