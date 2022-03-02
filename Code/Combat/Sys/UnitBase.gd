@@ -17,7 +17,6 @@ signal received_dmg(dmg_instance)
 signal applied_dmg(dmg_instance)
 signal sent_dmg(dmg_instance)
 signal missed(dmg_instance)
-signal critted(dmg_instance)
 signal overheal(amount)
 signal skill_start(skill)
 signal skill_end(skill)
@@ -27,6 +26,8 @@ signal pre_applied_dmg(inst)
 signal overcast(amount)
 signal pre_determine_hit(inst)
 signal dodge(inst)
+
+signal critted(dmg_instance)
 
 signal status_added(status)
 signal status_removed(status)
@@ -49,7 +50,7 @@ func get_stats_desc():
 		res += "[font=res://Themes/monospace.tres]" + str(i) + "\t[/font]"
 		
 		if i in GUtil.teddy_definitions:
-			res += str(GUtil.disp_decim(GUtil.teddy(get_stat_val(i)))) + "% "
+			res += str(GUtil.disp_decim(GUtil.teddy(get_stat_val(i))*100)) + "% "
 		res += str(get_stat_val(i)) + " ("
 		res += str(get_base_stat_val(i)) + "+"
 		res += str(get_stat_val(i) - get_base_stat_val(i)) + ")\n"
@@ -151,7 +152,16 @@ func start_turn():
 	emit_signal("turn_start")
 
 func end_turn():
+	var crit = (randi() % 10000)/10000.0 < GUtil.teddy(get_stat_val("CTR"))
+	
+	if crit:
+		Curtain.ln(name + "'s attacks became critical until end of next turn!")
+	
 	emit_signal("turn_end")
+	# The actual status needs to be applied afterwards to give the previous instance time to expire
+	if crit:
+		var status = preload("res://Code/Combat/Statuses/Critical.gd").new()
+		apply_status(status)
 
 func get_stat_val(stat: String):
 	return max(_gather_inlfuencers(stat), 1)
@@ -192,19 +202,15 @@ func get_passives(node = self):
 	return res
 
 func die():
+	Curtain.ln(name + " is defeated!")
 	emit_signal("died")
 
 func send_dmg(inst: DamageInstance):
 	var hitrand = (randi() % 10000)/10000.0
-	var critrand = (randi() % 10000)/10000.0
 	
 	emit_signal("pre_determine_hit", inst)
 	
 	if hitrand > GUtil.teddy(inst.target.get_stat_val("AVD") - get_stat_val("HIT")) or inst.is_homing:
-		if critrand < GUtil.teddy(get_stat_val("CTR")) and inst.is_able_crit:
-			inst.amount *= ((get_stat_val("CTD")/100.0)+1)
-			inst.did_crit = true
-			emit_signal("critted", inst)
 		
 		emit_signal("sent_dmg", inst)
 		inst.target.receive_dmg(inst)

@@ -1,4 +1,4 @@
-extends BaseArtiStatus
+extends BaseStatus
 
 func _init():
 	status_name = "PIR"
@@ -8,9 +8,9 @@ func _ready():
 
 func get_desc():
 	return """PIR
-Every attack ignores """ + str(GUtil.disp_decim(80*GUtil.teddy(lvl))) + "% of target DEF"
+Every attack ignores aditional 20% of target damage reduction"""
 
 func on_pre_determine_hit(inst):
-	inst.pierce += GUtil.teddy(lvl)*0.8
+	inst.pierce += 0.2
 	if inst.pierce > 1.0:
 		inst.pierce = 1.0

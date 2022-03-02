@@ -19,16 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Code/Combat/Sys/BaseAI.gd"
 }, {
-"base": "BasePassiveSkill",
-"class": "BaseArtiSkill",
-"language": "GDScript",
-"path": "res://Code/Combat/Customization/ArtiSkills/BaseArtiSkill.gd"
-}, {
-"base": "BaseStatus",
-"class": "BaseArtiStatus",
-"language": "GDScript",
-"path": "res://Code/Combat/Statuses/Passives/BaseArtiStatus.gd"
-}, {
 "base": "Node",
 "class": "BasePassiveSkill",
 "language": "GDScript",
@@ -63,6 +53,11 @@ _global_script_classes=[ {
 "class": "CombatScenario",
 "language": "GDScript",
 "path": "res://Code/Combat/Sys/CombatScenario.gd"
+}, {
+"base": "BaseStatus",
+"class": "CriticalStatus",
+"language": "GDScript",
+"path": "res://Code/Combat/Statuses/Critical.gd"
 }, {
 "base": "Resource",
 "class": "DamageInstance",
@@ -132,8 +127,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AllyUnit": "",
 "BaseAI": "",
-"BaseArtiSkill": "",
-"BaseArtiStatus": "",
 "BasePassiveSkill": "",
 "BaseSkill": "",
 "BaseStatus": "",
@@ -141,6 +134,7 @@ _global_script_class_icons={
 "ClackButton": "",
 "CombatManager": "",
 "CombatScenario": "",
+"CriticalStatus": "",
 "DamageInstance": "",
 "EquipItem": "",
 "Influencer": "",

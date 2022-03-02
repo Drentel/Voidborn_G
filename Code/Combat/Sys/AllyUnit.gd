@@ -16,7 +16,7 @@ var attunement = {
 const attunement_binds = {
 	"earth": ["DEF", "AUR", "MHP"],
 	"fire": ["ATK", "CRM", "CTD"],
-	"air": ["CTD", "SPD", "AVD"],
+	"air": ["CTR", "SPD", "AVD"],
 	"water": ["TEC", "ABS", "HIT"],
 }
 

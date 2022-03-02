@@ -13,9 +13,6 @@ func show_stat_tip():
 	Tip.set_disp([get_parent().get_stats_desc()])
 
 func on_dmg(inst):
-	if inst.did_crit == true:
-		Curtain.ln("Crit!")
-	
 	if inst.dmg_type == DamageInstance.TYPE.HEAL:
 		Curtain.ln(get_parent().name + " recovered " + str(inst.amount) + " HP")
 		SFXR.heal_particles(get_parent().get_global_rect())

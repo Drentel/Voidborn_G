@@ -1,4 +1,4 @@
-extends BaseArtiStatus
+extends BaseStatus
 
 func _init():
 	status_name = "ACC"
@@ -8,9 +8,9 @@ func _ready():
 
 func get_desc():
 	return """ACC
-""" + str(ceil(100*GUtil.teddy(lvl))) + "% chance to make any attack homing"
+20% chance to make any attack homing"""
 
 func on_pre_determine_hit(inst):
-	if randi()%100 < ceil(100*GUtil.teddy(lvl)):
+	if randi()%100 < 20:
 		Curtain.ln("ACC activates! Attack became homing")
 		inst.is_homing = true

@@ -32,6 +32,12 @@ func _ready():
 		"res://Code/Combat/Customization/Skills/LeaderPact/MoralSupport.gd",
 		"res://Code/Combat/Customization/Skills/LeaderPact/Rally.gd",
 		"res://Code/Combat/Customization/Skills/LeaderPact/Transfer.gd",
+		"res://Code/Combat/Customization/Skills/Passives/CritChance.gd",
+		"res://Code/Combat/Customization/Skills/Passives/CritDamage.gd",
+		"res://Code/Combat/Customization/Skills/Passives/HomingChance.gd",
+		"res://Code/Combat/Customization/Skills/Passives/OverhealBarrier.gd",
+		"res://Code/Combat/Customization/Skills/Passives/PierceAdd.gd",
+		"res://Code/Combat/Customization/Skills/Passives/Regen.gd",
 	]
 
 func respawn():

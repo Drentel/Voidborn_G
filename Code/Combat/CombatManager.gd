@@ -97,6 +97,7 @@ func add_new_slot(inp):
 func combat_win():
 	emit_signal("combat_won")
 	$FadeAnim.play("FadeAnim")
+	yield(get_tree(), "idle_frame")
 	for i in get_allies():
 		i.emit_signal("exited_combat")
 		for j in i.get_statuses():
