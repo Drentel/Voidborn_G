@@ -167,34 +167,16 @@ func make_weapon(power: int, override = -1):
 	
 	return ite
 
-var artifact_skills = [
-	"res://Code/Combat/Customization/ArtiSkills/ArtiRegen.gd",
-	"res://Code/Combat/Customization/ArtiSkills/ArtiCritChance.gd",
-	"res://Code/Combat/Customization/ArtiSkills/ArtiCritDamage.gd",
-	"res://Code/Combat/Customization/ArtiSkills/ArtiOverhealBarrier.gd",
-	"res://Code/Combat/Customization/ArtiSkills/ArtiHomingChance.gd",
-	"res://Code/Combat/Customization/ArtiSkills/ArtiPierceAdd.gd",
-]
-
 func make_arti(power: int):
 	var ite = EquipItem.new()
 	ite.influence = []
 	ite.item_type = EquipItem.TYPE.ARTI
 	ite.power = power
 	
-	#80% of artifacts give a stat. The other 20% giev an ability
-	if randi()%5 == 0:
-		#Ability artifact
-		ite.influence.append({
-			"type": "skill",
-			"skill": arr_rand(artifact_skills),
-		})
-	else:
-		#Stat artifact
-		ite.influence.append({
-			"type": "stat",
-			"stat": arr_rand(stat_definitions.keys()),
-		})
+	ite.influence.append({
+		"type": "stat",
+		"stat": arr_rand(stat_definitions.keys()),
+	})
 	
 	ite.name = gen_arti_name()
 	return ite
