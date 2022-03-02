@@ -8,12 +8,7 @@ func _init():
 	s_desc = "Deals 0.5xATK damage to target, with a 40% chance to attack again"
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Deals " + GUtil.wrap_highlight(ceil(owner.get_base_stat_val("ATK")*(0.5 + level*0.025))) + " damage to target, with a " + GUtil.wrap_highlight(40 + GUtil.disp_decim(GUtil.teddy(level*3)*60)) + "% chance to attack again"])
-
-func set_level(lvl: int):
-	level = lvl
-	s_desc = "Level %s\n" % [lvl]
-	s_desc += "Deals " + str(GUtil.disp_decim(0.5 + level*0.025)) + "xATK damage to target, with a " + str(40 + GUtil.disp_decim(GUtil.teddy(level*3)*60)) + "% chance to attack again"
+	Tip.set_disp(["Deals " + GUtil.wrap_highlight(ceil(owner.get_base_stat_val("ATK")*0.5)) + " damage to target, with a 40% chance to attack again"])
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -30,17 +25,18 @@ func use(user):
 					target = GUtil.arr_rand(c_manager.get_enemies())
 				else:
 					break
+			
 			var inst = DamageInstance.new()
 			inst.dmg_type = DamageInstance.TYPE.PHYS
 			inst.sender = user
 			inst.target = target
-			inst.amount = user.get_stat_val("ATK")*(0.5+(level*0.025))
+			inst.amount = user.get_stat_val("ATK")*0.5
 			SFXR.frame_sfx("rapier", inst.target.get_global_rect(), Color.wheat, false, false, false)
 			yield(get_tree().create_timer(0.15), "timeout")
 			$"/root/Root".screen_shake(0.1)
 			user.send_dmg(inst)
 			
-			if randi()%100 > (40+ceil(GUtil.teddy(level*3)*60)):
+			if randi()%100 > 40:
 				break
 		
 		user.emit_signal("skill_end", self)

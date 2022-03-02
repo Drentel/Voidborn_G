@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Code/Interface/EditorStatNamer.gd" type="Script" id=1]
 [ext_resource path="res://Code/Interface/CharaEdit.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scenes/LevelUpDialog.gd" type="Script" id=10]
 [ext_resource path="res://Themes/f_dialogue.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Scenes/TutLab.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Code/Interface/AttunementPanel.gd" type="Script" id=13]
 
 [node name="EditScene" type="Control"]
 margin_left = 328.0
@@ -510,7 +511,6 @@ __meta__ = {
 }
 
 [node name="Gear" type="Control" parent="Panel/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
@@ -583,6 +583,7 @@ size_flags_horizontal = 3
 text = "Artifact ???"
 
 [node name="Skills" type="Control" parent="Panel/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
@@ -643,11 +644,72 @@ margin_bottom = 95.0
 size_flags_horizontal = 3
 text = "Skill"
 
-[node name="Soul compass" type="Control" parent="Panel/TabContainer"]
+[node name="Attunement" type="Control" parent="Panel/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 25.0
+margin_left = 2.0
+margin_top = 27.0
+margin_right = -2.0
+margin_bottom = -2.0
+script = ExtResource( 13 )
+
+[node name="Names" type="VBoxContainer" parent="Panel/TabContainer/Attunement"]
+margin_left = 6.0
+margin_top = 5.0
+margin_right = 62.0
+margin_bottom = 141.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Values" type="VBoxContainer" parent="Panel/TabContainer/Attunement"]
+margin_left = 62.0
+margin_top = 5.0
+margin_right = 86.0
+margin_bottom = 141.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Increments" type="VBoxContainer" parent="Panel/TabContainer/Attunement"]
+margin_left = 134.0
+margin_top = 5.0
+margin_right = 174.0
+margin_bottom = 141.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Decrements" type="VBoxContainer" parent="Panel/TabContainer/Attunement"]
+margin_left = 86.0
+margin_top = 5.0
+margin_right = 126.0
+margin_bottom = 141.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Modsums" type="VBoxContainer" parent="Panel/TabContainer/Attunement"]
+margin_left = 182.0
+margin_top = 5.0
+margin_right = 430.0
+margin_bottom = 141.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AP" type="Label" parent="Panel/TabContainer/Attunement"]
+margin_left = 326.0
+margin_top = -27.0
+margin_right = 437.0
+margin_bottom = -8.0
+text = "AP: asd"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CloseButton" type="Button" parent="."]
 margin_left = 552.0

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "UnitBase",
+"class": "AllyUnit",
+"language": "GDScript",
+"path": "res://Code/Combat/Sys/AllyUnit.gd"
+}, {
 "base": "Node",
 "class": "BaseAI",
 "language": "GDScript",
@@ -125,6 +130,7 @@ _global_script_classes=[ {
 "path": "res://Code/WeightedPool.gd"
 } ]
 _global_script_class_icons={
+"AllyUnit": "",
 "BaseAI": "",
 "BaseArtiSkill": "",
 "BaseArtiStatus": "",

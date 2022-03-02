@@ -134,6 +134,7 @@ func upd_vals():
 	
 	
 	$"../SwapList".hide()
+	$TabContainer/Attunement.unpack()
 
 func _on_CharaSelected(chara):
 	unit.disconnect("selected", self, "upd_vals")

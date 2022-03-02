@@ -154,7 +154,6 @@ func make_weapon(power: int, override = -1):
 	})
 	
 	var lski = load(ski).new()
-	#lski.set_script(load(ski))
 	
 	ite.influence.append({
 		"type": "stat",

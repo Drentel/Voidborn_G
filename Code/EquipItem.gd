@@ -53,7 +53,6 @@ func get_desc():
 			var nod = Node.new()
 			var ski = load(i["skill"])
 			nod.set_script(ski)
-			nod.set_level(power) 
 			res += "Grants skill: " + nod.s_name + "\n" + nod.s_desc + "\n"
 	return res
 

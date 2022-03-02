@@ -209,9 +209,9 @@ __meta__ = {
 }
 
 [node name="Mana" type="Button" parent="HelpButton/HelpMenu/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 33.0
+margin_top = 66.0
 margin_right = 224.0
-margin_bottom = 62.0
+margin_bottom = 95.0
 toggle_mode = true
 text = "Mana"
 
@@ -235,9 +235,9 @@ __meta__ = {
 }
 
 [node name="Targeting" type="Button" parent="HelpButton/HelpMenu/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 33.0
+margin_top = 99.0
 margin_right = 224.0
-margin_bottom = 62.0
+margin_bottom = 128.0
 toggle_mode = true
 text = "Enemy targeting"
 

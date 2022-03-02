@@ -8,13 +8,7 @@ func _init():
 	s_desc = "Deals 0.8xATK damage to one target, with a 10% chance to attack all enemies afterwards"
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Deals " + GUtil.wrap_highlight(ceil(owner.get_base_stat_val("ATK")*(0.8+(level*0.04)))) + " damage to target, with a 10% chance to attack all enemies afterwards"])
-
-func set_level(lvl: int):
-	level = lvl
-	s_desc = "Level %s\n" % [lvl]
-	s_desc += "Deals %sxATK damage to one target, with a 10%% chance to attack all enemies afterwards"
-	s_desc = s_desc % [(0.8+(level*0.04))]
+	Tip.set_disp(["Deals " + GUtil.wrap_highlight(ceil(owner.get_base_stat_val("ATK")*0.8)) + " damage to target, with a 10% chance to attack all enemies afterwards"])
 
 func use(user):
 	user.emit_signal("skill_start", self)
@@ -31,7 +25,7 @@ func use(user):
 		dmg.pierce = 0.0
 		dmg.sender = user
 		dmg.target = target
-		dmg.amount = user.get_stat_val("ATK")*(0.8+(level*0.04))
+		dmg.amount = user.get_stat_val("ATK")*0.8
 		SFXR.frame_sfx("claymore", dmg.target.get_global_rect(), Color.red)
 		yield(get_tree().create_timer(0.2), "timeout")
 		$"/root/Root".screen_shake(0.1)
@@ -46,7 +40,7 @@ func use(user):
 				inst.dmg_type = DamageInstance.TYPE.PHYS
 				inst.sender = user
 				inst.target = i
-				inst.amount = user.get_stat_val("ATK")*(0.8+(level*0.08))
+				inst.amount = user.get_stat_val("ATK")*0.8
 				SFXR.frame_sfx("claymore", inst.target.get_global_rect(), Color.red, false, false, false)
 				yield(get_tree().create_timer(0.2), "timeout")
 				$"/root/Root".screen_shake(0.1)

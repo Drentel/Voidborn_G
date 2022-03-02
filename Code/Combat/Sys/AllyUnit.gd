@@ -1,10 +1,26 @@
 extends UnitBase
+class_name AllyUnit
 
 var dead = false
 export var soul = "res://Placeholders/test_soul.tres"
 var weap = ""
 var artis = []
 var equip_skills = []
+var attunement = {
+	"earth": 0,
+	"fire": 0,
+	"air": 0,
+	"water": 0,
+}
+
+const attunement_binds = {
+	"earth": ["DEF", "AUR", "MHP"],
+	"fire": ["ATK", "CRM", "CTD"],
+	"air": ["CTD", "SPD", "AVD"],
+	"water": ["TEC", "ABS", "HIT"],
+}
+
+const attunement_power = 5
 
 var skin_dir = ""
 var pos_adjust = Vector2(0,0)
@@ -16,6 +32,14 @@ signal unpacked()
 
 func get_base_stat_val(stat: String):
 	return max(_gather_inlfuencers(stat, $Unpacks), 1)
+
+func get_attunement_pts():
+	var points = lvl/5
+	
+	for i in attunement.values():
+		points -= i
+	
+	return points
 
 func set_skin(path: String):
 	skin_dir = path
@@ -54,10 +78,7 @@ func unpack():
 	GUtil.annihilate_children($Unpacks)
 	
 	for i in weap.get_skills():
-		var nod = Node.new()
-		nod.set_script(load(i["skill"]))
-		nod.set_level(i["level"])
-		$Unpacks.add_child(nod)
+		$Unpacks.add_child(load(i["skill"]).new())
 	
 	for i in weap.get_influences():
 		var inf = Influencer.new()
@@ -67,6 +88,13 @@ func unpack():
 	
 	var l_soul = load(soul)
 	
+	for i in attunement.keys():
+		if attunement[i] > 0:
+			for j in attunement_binds[i]:
+				var inf = Influencer.new()
+				inf.target_stat = j
+				inf.influence = attunement[i]*attunement_power*GUtil.stat_weight[j]
+				$Unpacks.add_child(inf)
 	
 	for i in l_soul.growth:
 		var inf = Influencer.new()
