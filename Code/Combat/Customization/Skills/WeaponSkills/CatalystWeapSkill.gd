@@ -15,7 +15,6 @@ func use(user):
 	user.emit_signal("skill_start", self)
 	Curtain.ln("%s uses %s" % [user.name, s_name])
 	var c_manager = find_manager()
-	var targets = c_manager.get_enemies()
 	
 	var repeats = 0
 	

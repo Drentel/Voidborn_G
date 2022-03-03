@@ -7,7 +7,7 @@ func _init():
 
 func _ready():
 	status_owner.connect("turn_start", self, "turn_start")
-	status_owner.connect("critted", self, "status_removed")
+	status_owner.connect("status_removed", self, "status_removed")
 
 func get_desc():
 	return """FOC
@@ -21,7 +21,7 @@ func turn_start():
 	inf.influence = stacks
 	add_child(inf)
 
-func critted(status):
+func status_removed(status):
 	if status is CriticalStatus:
 		stacks = 0
 		GUtil.annihilate_children(self)
