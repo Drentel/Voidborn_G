@@ -20,21 +20,19 @@ export var growth = {
 
 export var base = {
 	"MHP": 0, 
-	"MMP": 50, 
+	"MMP": 100, 
 	"ATK": 0, 
 	"CRM": 0, 
 	"TEC": 0, 
 	"DEF": 0, 
 	"AUR": 0, 
 	"CTR": 0, 
-	"CTD": 0, 
+	"CTD": 50, 
 	"SPD": 0, 
 	"HIT": 0, 
 	"AVD": 0, 
 	"ABS": 0,
 }
-
-export(String, "Soul", "Pact") var type = "Soul"
 
 export var skills = [{"skill": "res://Code/Combat/Customization/Skills/BaseSkill.gd", "req":0}]
 

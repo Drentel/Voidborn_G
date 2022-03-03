@@ -34,7 +34,6 @@ base = {
 "SPD": 0,
 "TEC": 0
 }
-type = "Pact"
 skills = [ {
 "req": 20,
 "skill": "res://Code/Combat/Customization/Skills/Knight/Devotion.gd"

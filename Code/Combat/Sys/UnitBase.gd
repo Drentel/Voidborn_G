@@ -16,6 +16,7 @@ signal mp_changed(old, new)
 signal received_dmg(dmg_instance)
 signal applied_dmg(dmg_instance)
 signal sent_dmg(dmg_instance)
+signal sent_dmg_priority(priority, dmg_instance)
 signal missed(dmg_instance)
 signal overheal(amount)
 signal skill_start(skill)
@@ -211,7 +212,8 @@ func send_dmg(inst: DamageInstance):
 	emit_signal("pre_determine_hit", inst)
 	
 	if hitrand > GUtil.teddy(inst.target.get_stat_val("AVD") - get_stat_val("HIT")) or inst.is_homing:
-		
+		for i in range(0, 10):
+			emit_signal("sent_dmg_priority", i, inst)
 		emit_signal("sent_dmg", inst)
 		inst.target.receive_dmg(inst)
 	else:

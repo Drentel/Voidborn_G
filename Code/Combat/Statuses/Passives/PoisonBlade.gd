@@ -7,7 +7,7 @@ func _ready():
 	status_owner.connect("sent_dmg", self, "sent_dmg")
 
 func get_desc():
-	return "PSB\nCritical hits poison for 0.4x TEC"
+	return "PSB\nCritical hits poison for 0.4xTEC"
 
 func handle_dupe(dupe):
 	pass
