@@ -34,7 +34,7 @@ base = {
 "SPD": 0,
 "TEC": 0
 }
-type = "Soul"
+bonus_skill_slots = 2
 skills = [ {
 "req": 0,
 "skill": "res://Code/Combat/Customization/Skills/BaseSkill.gd"

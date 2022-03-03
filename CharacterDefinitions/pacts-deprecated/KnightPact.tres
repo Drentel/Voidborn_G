@@ -34,6 +34,7 @@ base = {
 "SPD": 0,
 "TEC": 0
 }
+bonus_skill_slots = 0
 skills = [ {
 "req": 20,
 "skill": "res://Code/Combat/Customization/Skills/Knight/Devotion.gd"

@@ -12,6 +12,32 @@ var money = 1000 setget money_set
 var respawn_loc = "res://Scenes/Maps/Level1.tscn"
 var respawn_node = "Fountain"
 var reserve_characters = []
+
+var skill_pool = [
+	"res://Code/Combat/Customization/Skills/Actives/Bloodletting.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Chainstrike.gd",
+	"res://Code/Combat/Customization/Skills/Actives/GoldenSlash.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Phalanx.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Rally.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Reinforce.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Shadowstrike.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Sharpen.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Shred.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Transfer.gd",
+	"res://Code/Combat/Customization/Skills/Passives/CritChance.gd",
+	"res://Code/Combat/Customization/Skills/Passives/CritDamage.gd",
+	"res://Code/Combat/Customization/Skills/Passives/Devotion.gd",
+	"res://Code/Combat/Customization/Skills/Passives/HighHpBonusDmg.gd",
+	"res://Code/Combat/Customization/Skills/Passives/HomingChance.gd",
+	"res://Code/Combat/Customization/Skills/Passives/KeenEdge.gd",
+	"res://Code/Combat/Customization/Skills/Passives/LastStand.gd",
+	"res://Code/Combat/Customization/Skills/Passives/MoralSupport.gd",
+	"res://Code/Combat/Customization/Skills/Passives/OverhealBarrier.gd",
+	"res://Code/Combat/Customization/Skills/Passives/PierceAdd.gd",
+	"res://Code/Combat/Customization/Skills/Passives/PoisonBlade.gd",
+	"res://Code/Combat/Customization/Skills/Passives/Regen.gd",
+	"res://Code/Combat/Customization/Skills/Passives/Stubborness.gd",
+]
 var skills = []
 
 signal money_changed(oldval)
@@ -28,17 +54,8 @@ func get_item(item_name):
 		return 0
 
 func _ready():
-	skills += [
-		"res://Code/Combat/Customization/Skills/LeaderPact/MoralSupport.gd",
-		"res://Code/Combat/Customization/Skills/LeaderPact/Rally.gd",
-		"res://Code/Combat/Customization/Skills/LeaderPact/Transfer.gd",
-		"res://Code/Combat/Customization/Skills/Passives/CritChance.gd",
-		"res://Code/Combat/Customization/Skills/Passives/CritDamage.gd",
-		"res://Code/Combat/Customization/Skills/Passives/HomingChance.gd",
-		"res://Code/Combat/Customization/Skills/Passives/OverhealBarrier.gd",
-		"res://Code/Combat/Customization/Skills/Passives/PierceAdd.gd",
-		"res://Code/Combat/Customization/Skills/Passives/Regen.gd",
-	]
+	skill_pool.shuffle()
+	generic_items["Aspect"] = 3
 
 func respawn():
 	for i in $"/root/Root/CharaCards".get_children():

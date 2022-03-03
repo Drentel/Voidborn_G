@@ -34,6 +34,8 @@ export var base = {
 	"ABS": 0,
 }
 
+export var bonus_skill_slots = 0
+
 export var skills = [{"skill": "res://Code/Combat/Customization/Skills/BaseSkill.gd", "req":0}]
 
 export var name: String
@@ -49,6 +51,9 @@ func get_desc(lvl):
 		var val = ceil((growth[i]*lvl) + base[i])
 		if val > 0:
 			desc += i + " + " + str(val) + "\n"
+	if bonus_skill_slots > 0:
+		desc += str(bonus_skill_slots) + " additional skill slots"
+	
 	res.append(desc)
 	
 	for i in skills:

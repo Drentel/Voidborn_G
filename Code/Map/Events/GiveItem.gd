@@ -7,7 +7,6 @@ export var repeat = 1
 func activate():
 	var tab = load(loot_table)
 	var tot_makka = 0
-	var tot_pacts = []
 	var tot_weaps = []
 	var tot_artis = []
 	var tot_generics = {}
@@ -32,11 +31,6 @@ func activate():
 				GPlayer.equip_items.append(weap)
 				Curtain.ln("Got a weapon: " + weap.get_name())
 				tot_weaps.append("Weapon: " + weap.get_name())
-			elif j["type"] == "pact":
-				GPlayer.pacts.append(j["pact"])
-				var pac = load(j["pact"])
-				Curtain.ln("Got a new pact: " + pac.name)
-				tot_pacts.append("Pact: " + pac.name)
 			elif j["type"] == "generic":
 				var amount = randi()%int(j["amount_max"] - j["amount_min"]+1) + j["amount_min"]
 				if j["name"] in GPlayer.generic_items:
@@ -51,7 +45,7 @@ func activate():
 	var tot = ""
 	if tot_makka > 0:
 		tot += str(tot_makka) + " makka\n"
-	for i in tot_pacts + tot_weaps + tot_artis:
+	for i in tot_weaps + tot_artis:
 		tot += i + "\n"
 	
 	for i in tot_generics.keys():

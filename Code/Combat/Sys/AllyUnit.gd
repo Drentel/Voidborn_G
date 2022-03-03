@@ -145,7 +145,7 @@ func get_arti_slots():
 	return max(1, min((lvl+15)/15, 6))
 
 func get_skill_slots():
-	return max(1, min((lvl+20)/15, 6))
+	return max(1, min((lvl+20)/15, 6))+load(soul).bonus_skill_slots
 
 func die():
 	.die()

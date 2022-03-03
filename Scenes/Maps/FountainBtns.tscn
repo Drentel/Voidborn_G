@@ -1,18 +1,40 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Code/Map/Events/ChangePartyEvent.gd" type="Script" id=1]
 [ext_resource path="res://Code/Map/Events/CharaEditEvent.gd" type="Script" id=2]
 [ext_resource path="res://Code/Map/Events/MapRecoverEvent.gd" type="Script" id=3]
 [ext_resource path="res://Code/Map/Events/ButtonActivateEvent.gd" type="Script" id=4]
+[ext_resource path="res://Code/Map/Events/AutoStartEvent.gd" type="Script" id=5]
+[ext_resource path="res://Code/Map/Events/ItemCheck.gd" type="Script" id=6]
+[ext_resource path="res://Code/Map/Events/DialogueEvent.gd" type="Script" id=7]
+[ext_resource path="res://Code/Map/Events/GiveSkill.gd" type="Script" id=8]
 
-[node name="FountainBtns" type="Node"]
+[node name="FountainRoot" type="Node"]
+script = ExtResource( 5 )
+
+[node name="FountainBtns" type="Node" parent="."]
 script = ExtResource( 4 )
 
-[node name="Recover" type="Node" parent="."]
+[node name="Recover" type="Node" parent="FountainBtns"]
 script = ExtResource( 3 )
 
-[node name="Change equipment" type="Node" parent="."]
+[node name="Change equipment" type="Node" parent="FountainBtns"]
 script = ExtResource( 2 )
 
-[node name="Change order" type="Node" parent="."]
+[node name="Change order" type="Node" parent="FountainBtns"]
 script = ExtResource( 1 )
+
+[node name="Wish" type="Node" parent="FountainBtns"]
+script = ExtResource( 6 )
+item_name = "Aspect"
+
+[node name="NewAbil" type="Node" parent="FountainBtns/Wish"]
+script = ExtResource( 7 )
+dialogue_path = "res://Dialogue/yes_wish.json"
+
+[node name="GrantSkill" type="Node" parent="FountainBtns/Wish/NewAbil"]
+script = ExtResource( 8 )
+
+[node name="NoItem" type="Node" parent="FountainBtns/Wish"]
+script = ExtResource( 7 )
+dialogue_path = "res://Dialogue/no_wish.json"

@@ -119,7 +119,7 @@ func upd_vals():
 		$TabContainer/Skills/SkillSlots.add_child(btn)
 	
 	if $TabContainer/Skills/SkillSlots.get_child_count() < unit.get_skill_slots():
-		for _i in range(unit.get_arti_slots() - $TabContainer/Skills/SkillSlots.get_child_count()):
+		for _i in range(unit.get_skill_slots() - $TabContainer/Skills/SkillSlots.get_child_count()):
 			var btn = ClackButton.new()
 			btn.text = "skill slot"
 			
