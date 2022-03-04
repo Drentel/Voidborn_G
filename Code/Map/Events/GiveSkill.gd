@@ -20,8 +20,11 @@ func activate():
 	
 	GPlayer.skills.append(give_skill)
 	var dialog = AcceptDialog.new()
-	dialog.dialog_text = "New skill obtained!\n"
-	dialog.dialog_text += load(give_skill).new().s_name
+	dialog.dialog_autowrap = true
+	dialog.rect_size = Vector2(300, 200)
+	var lski = load(give_skill).new()
+	dialog.dialog_text += lski.s_name + "\n"
+	dialog.dialog_text += lski.s_desc
 	
 	dialog.window_title = "New skill!"
 	
