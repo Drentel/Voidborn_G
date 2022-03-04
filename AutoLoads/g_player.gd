@@ -16,8 +16,6 @@ var reserve_characters = []
 var skill_pool = [
 	"res://Code/Combat/Customization/Skills/Actives/Bloodletting.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Chainstrike.gd",
-	"res://Code/Combat/Customization/Skills/Actives/GoldenSlash.gd",
-	"res://Code/Combat/Customization/Skills/Actives/Phalanx.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Rally.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Reinforce.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Shadowstrike.gd",

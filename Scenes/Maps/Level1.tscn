@@ -613,8 +613,8 @@ dialogue_path = "res://Dialogue/ZoneMansion/Area1/maid.json"
 [node name="MaidRecruit" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Big shed/SetFlag/MaidRecruitDialogue"]
 script = ExtResource( 10 )
 soul_path = "res://CharacterDefinitions/MaidSoul.tres"
-default_pact = "res://CharacterDefinitions/MaidInitPact.tres"
 weapon_class = 2
+default_skills = [ "res://Code/Combat/Customization/Skills/Actives/Phalanx.gd" ]
 def_name = "Maid"
 
 [node name="Generic" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Big shed"]

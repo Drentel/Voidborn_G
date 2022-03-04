@@ -5,7 +5,7 @@ var dead = false
 export var soul = "res://Placeholders/test_soul.tres"
 var weap = ""
 var artis = []
-var equip_skills = []
+export var equip_skills = []
 var attunement = {
 	"earth": 0,
 	"fire": 0,
@@ -142,10 +142,10 @@ func unpack():
 	emit_signal("unpacked")
 
 func get_arti_slots():
-	return max(1, min((lvl+15)/15, 6))
+	return min((lvl+15)/15, 6)
 
 func get_skill_slots():
-	return max(1, min((lvl+20)/15, 6))+load(soul).bonus_skill_slots
+	return min((lvl+15)/15, 6)+load(soul).bonus_skill_slots
 
 func die():
 	.die()
