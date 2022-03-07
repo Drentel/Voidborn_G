@@ -211,6 +211,7 @@ var prefixes = [
 	"Supreme ",
 	"Sticky ",
 	"Floppy ",
+	"Meek ",
 	]
 
 var postfixes = [
@@ -253,6 +254,8 @@ var atifact_bases = [
 	"Needle",
 	"Charm",
 	"Seal",
+	"Lute",
+	"Band",
 ]
 
 func gen_arti_name():

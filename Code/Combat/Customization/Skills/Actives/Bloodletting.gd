@@ -2,15 +2,27 @@ extends BaseSkill
 
 func _init():
 	s_name = "Bloodletting"
-	s_desc = "Cost: 35 MP\nBuffs ATK and CRM by 1xTEC. Buff is doubled if overcasted"
+	s_desc = "Cost: 0.2xMHP\nBuffs ATK and CRM by 1xTEC. Will not kill."
 
 func show_desc_tip(owner):
-	Tip.set_disp(["Cost: 35 MP\nBuffs ATK and CRM by " + GUtil.wrap_highlight(ceil(owner.get_stat_val("TEC"))) + ". Buff is doubled if overcasted"])
+	Tip.set_disp(["Cost: " + GUtil.wrap_highlight(ceil(owner.get_stat_val("MHP")*0.3)) + " HP\nBuffs ATK and CRM by " + GUtil.wrap_highlight(ceil(owner.get_stat_val("TEC"))) + ". Will not kill."])
 
 func use(user):
 	user.emit_signal("skill_start", self)
 	Curtain.ln("%s uses %s" % [user.name, s_name])
-	user.spend_mp(35)
+	var dmg = DamageInstance.new()
+	dmg.target = user
+	dmg.sender = user
+	dmg.is_able_crit = false
+	dmg.pierce = 1
+	dmg.amount = ceil(user.get_stat_val("MHP")*0.3)
+	dmg.dmg_type = DamageInstance.TYPE.PHYS
+	dmg.is_homing = true
+	if dmg.amount > user.hp:
+		dmg.amount = user.hp - 1
+	
+	if dmg.amount > 0:
+		user.send_dmg(dmg)
 	
 	var nod = Node.new()
 	nod.set_script(preload("res://Code/Combat/Statuses/StatMod.gd"))

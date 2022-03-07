@@ -15,7 +15,7 @@ func use(user):
 	var target = yield(c_manager.get_controls(), "target_selected")
 	if not target is int:
 		Curtain.ln("%s uses %s" % [user.name, s_name])
-		user.spend_mp(60)
+		user.spend_mp(20)
 
 		var inst = DamageInstance.new()
 		inst.dmg_type = DamageInstance.TYPE.PHYS

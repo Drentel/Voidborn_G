@@ -3,7 +3,7 @@ extends BaseStatus
 var stacks: int
 
 func _init():
-	status_name = "BAR"
+	status_name = "BUR"
 
 func _ready():
 	status_owner.connect("received_dmg", self, "on_received_dmg")
@@ -13,16 +13,13 @@ func _ready():
 		queue_free()
 
 func get_desc():
-	return "BAR\nBlocks up to " + str(stacks) + " damage in place of HP. Not influenced by DEF or AUR, and attacks that fully ignore defense come right through"
+	return "BUR\nAbsorbs up to " + str(stacks) + " healing instead of HP"
 
 func handle_dupe(dupe):
 	stacks += dupe.stacks
 
 func on_received_dmg(inst):
-	if inst.dmg_type == DamageInstance.TYPE.HEAL:
-		return
-	
-	if inst.pierce == 1.0:
+	if inst.dmg_type != DamageInstance.TYPE.HEAL:
 		return
 	
 	var original_amount = inst.amount
@@ -34,7 +31,7 @@ func on_received_dmg(inst):
 	else:
 		stacks = 0
 	
-	Curtain.ln("Barrier reduced incoming damage from %s to %s (%s barrier left)" % [original_amount, inst.amount, stacks])
+	Curtain.ln("Burn reduced incoming healing from %s to %s (%s burn left)" % [original_amount, inst.amount, stacks])
 	
 	if stacks < 1:
 		get_parent().remove_child(self)

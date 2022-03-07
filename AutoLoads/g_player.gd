@@ -33,9 +33,11 @@ var skill_pool = [
 	"res://Code/Combat/Customization/Skills/Passives/PoisonBlade.gd",
 	"res://Code/Combat/Customization/Skills/Passives/Regen.gd",
 	"res://Code/Combat/Customization/Skills/Passives/Stubborness.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Firebolt.gd",
 ]
 var skills = [
 	"res://Code/Combat/Customization/Skills/Actives/GoldenSlash.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Firebolt.gd",
 	]
 
 signal money_changed(oldval)
