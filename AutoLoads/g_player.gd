@@ -18,10 +18,8 @@ var skill_pool = [
 	"res://Code/Combat/Customization/Skills/Actives/Chainstrike.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Rally.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Reinforce.gd",
-	"res://Code/Combat/Customization/Skills/Actives/Shadowstrike.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Sharpen.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Shred.gd",
-	"res://Code/Combat/Customization/Skills/Actives/Transfer.gd",
 	"res://Code/Combat/Customization/Skills/Passives/CritChance.gd",
 	"res://Code/Combat/Customization/Skills/Passives/CritDamage.gd",
 	"res://Code/Combat/Customization/Skills/Passives/Devotion.gd",
@@ -36,7 +34,9 @@ var skill_pool = [
 	"res://Code/Combat/Customization/Skills/Passives/Regen.gd",
 	"res://Code/Combat/Customization/Skills/Passives/Stubborness.gd",
 ]
-var skills = []
+var skills = [
+	"res://Code/Combat/Customization/Skills/Actives/GoldenSlash.gd",
+	]
 
 signal money_changed(oldval)
 
@@ -53,7 +53,6 @@ func get_item(item_name):
 
 func _ready():
 	skill_pool.shuffle()
-	generic_items["Aspect"] = 3
 
 func respawn():
 	for i in $"/root/Root/CharaCards".get_children():

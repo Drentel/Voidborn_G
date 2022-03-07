@@ -38,4 +38,4 @@ table = [ [ {
 "type": "weapon",
 "weight": 1
 } ] ]
-json_path = "res://LootTables/garden_boss.tres"
+json_path = "res://LootTables/mundane_sh.json"

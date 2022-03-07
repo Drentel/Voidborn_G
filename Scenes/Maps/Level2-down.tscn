@@ -232,10 +232,10 @@ bool_val = true
 [node name="Join" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen/Set"]
 script = ExtResource( 11 )
 soul_path = "res://CharacterDefinitions/ThiefSoul.tres"
-default_pact = "res://CharacterDefinitions/ThiefInitPact.tres"
 start_level = 15
 weapon_class = 3
 weapon_level = 8
+default_skills = [ "res://Code/Combat/Customization/Skills/Actives/Shadowstrike.gd" ]
 def_name = "Thief"
 
 [node name="ReEnter" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen/Set"]

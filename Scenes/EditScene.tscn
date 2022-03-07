@@ -511,7 +511,6 @@ __meta__ = {
 }
 
 [node name="Gear" type="Control" parent="Panel/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
@@ -596,7 +595,7 @@ margin_left = 206.0
 margin_top = 45.0
 margin_right = 215.0
 margin_bottom = 64.0
-desc = "Artifacts grant stat increases and sometimes abilities when equipped. Hover over them for details.
+desc = "Artifacts grant stat increases when equipped. Hover over them for details.
 Characters gain a new artifact slot every 15 levels, up to a maximum of 6 at level 75"
 
 [node name="Skills" type="Control" parent="Panel/TabContainer"]
@@ -671,6 +670,7 @@ Multiple characters can't equip the same skill, and there is only one copy of ea
 Characters gain a new skill slot every 15 levels, up to a maximum of 6 at level 75. Some souls can also grant additional slots."
 
 [node name="Attunement" type="Control" parent="Panel/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0

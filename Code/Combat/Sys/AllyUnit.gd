@@ -20,7 +20,7 @@ const attunement_binds = {
 	"water": ["TEC", "ABS", "HIT"],
 }
 
-const attunement_power = 5
+const attunement_power = 3
 
 var skin_dir = ""
 var pos_adjust = Vector2(0,0)

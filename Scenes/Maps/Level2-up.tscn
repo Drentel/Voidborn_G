@@ -305,10 +305,10 @@ bool_val = true
 [node name="Recruit" type="Node" parent="MapNodes/PrincessRoom/Check/RecruitDialogue/Set"]
 script = ExtResource( 12 )
 soul_path = "res://CharacterDefinitions/PrincessSoul.tres"
-default_pact = "res://CharacterDefinitions/PrincessInitPact.tres"
 start_level = 15
 weapon_class = 1
 weapon_level = 10
+default_skills = [ "res://Code/Combat/Customization/Skills/Actives/Transfer.gd" ]
 def_name = "Princess"
 
 [node name="PainCheck" type="Node" parent="MapNodes/PrincessRoom"]
