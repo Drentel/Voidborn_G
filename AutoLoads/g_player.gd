@@ -20,6 +20,7 @@ var skill_pool = [
 	"res://Code/Combat/Customization/Skills/Actives/Reinforce.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Sharpen.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Shred.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Firebolt.gd",
 	"res://Code/Combat/Customization/Skills/Passives/CritChance.gd",
 	"res://Code/Combat/Customization/Skills/Passives/CritDamage.gd",
 	"res://Code/Combat/Customization/Skills/Passives/Devotion.gd",
@@ -33,7 +34,6 @@ var skill_pool = [
 	"res://Code/Combat/Customization/Skills/Passives/PoisonBlade.gd",
 	"res://Code/Combat/Customization/Skills/Passives/Regen.gd",
 	"res://Code/Combat/Customization/Skills/Passives/Stubborness.gd",
-	"res://Code/Combat/Customization/Skills/Actives/Firebolt.gd",
 ]
 var skills = [
 	"res://Code/Combat/Customization/Skills/Actives/GoldenSlash.gd",

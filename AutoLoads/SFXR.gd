@@ -69,6 +69,7 @@ var effect_names = {
 	"swordup": preload("res://Scenes/SFX/SwordUp.tscn"),
 	"smoke": preload("res://Scenes/SFX/Smoke.tscn"),
 	"star": preload("res://Scenes/SFX/Star.tscn"),
+	"firesmall": preload("res://Scenes/SFX/FireSmall.tscn")
 }
 
 func frame_sfx(name, rect, modulate=Color.white, flip_h = false, flip_v = false, center=true):

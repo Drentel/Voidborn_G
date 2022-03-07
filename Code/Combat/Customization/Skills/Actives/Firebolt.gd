@@ -22,8 +22,9 @@ func use(user):
 		inst.sender = user
 		inst.target = target
 		inst.amount = user.get_stat_val("CRM")*1.5
-		#SFXR.frame_sfx("sword", inst.target.get_global_rect(), Color.goldenrod)
-		yield(get_tree().create_timer(0.2), "timeout")
+		inst.is_homing = true
+		SFXR.frame_sfx("firesmall", inst.target.get_global_rect())
+		yield(get_tree().create_timer(0.4), "timeout")
 		$"/root/Root".screen_shake(0.1)
 		inst.connect("dmg_applied", self, "dmg_dealt", [inst])
 		user.send_dmg(inst)
