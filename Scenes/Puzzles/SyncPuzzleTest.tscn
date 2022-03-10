@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Themes/old-default.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/Puzzles/SymbolSyncButton.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Puzzles/SyncPuzzle.gd" type="Script" id=4]
+[ext_resource path="res://Themes/puzzle_button_inactive.tres" type="Theme" id=5]
+
+[node name="SyncPuzzleTest" type="Control"]
+margin_right = 448.0
+margin_bottom = 320.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+only_sync = false
+
+[node name="Button3" type="Button" parent="."]
+margin_left = 64.0
+margin_top = 128.0
+margin_right = 128.0
+margin_bottom = 192.0
+theme = ExtResource( 5 )
+text = "P"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+connections = [ NodePath("../Button4") ]
+
+[node name="Button4" type="Button" parent="."]
+margin_left = 192.0
+margin_top = 128.0
+margin_right = 256.0
+margin_bottom = 192.0
+theme = ExtResource( 5 )
+text = "P"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+connections = [ NodePath("../Button3"), NodePath("../Button5") ]
+
+[node name="Button5" type="Button" parent="."]
+margin_left = 320.0
+margin_top = 128.0
+margin_right = 384.0
+margin_bottom = 192.0
+theme = ExtResource( 5 )
+text = "P"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+connections = [ NodePath("../Button4") ]
