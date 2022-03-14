@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Code/Map/MapRoot.gd" type="Script" id=1]
 [ext_resource path="res://Code/Map/MapNode.gd" type="Script" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://Code/Map/Events/FlagSet.gd" type="Script" id=11]
 [ext_resource path="res://Code/Map/Events/AddCharacterEvent.gd" type="Script" id=12]
 [ext_resource path="res://Themes/StarShader.tres" type="Material" id=13]
+[ext_resource path="res://Code/Map/Events/Notify.gd" type="Script" id=14]
+[ext_resource path="res://Code/Map/Events/SyncPuzzle.gd" type="Script" id=15]
 
 [node name="MapRoot" type="Control"]
 margin_right = 40.0
@@ -175,6 +177,20 @@ script = ExtResource( 12 )
 soul_path = "res://CharacterDefinitions/MaidSoul.tres"
 weapon_class = 2
 def_name = "Maid"
+
+[node name="Puzzle test" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 15 )
+
+[node name="NotifySuccess" type="Node" parent="MapNodes/Debug/ButtonEvent/Puzzle test"]
+script = ExtResource( 14 )
+notification = "Yas"
+
+[node name="NotifyFail" type="Node" parent="MapNodes/Debug/ButtonEvent/Puzzle test"]
+script = ExtResource( 14 )
+notification = "Fuck you"
+
+[node name="Test notify" type="Node" parent="MapNodes/Debug/ButtonEvent"]
+script = ExtResource( 14 )
 
 [node name="Gayte" type="Panel" parent="MapNodes"]
 margin_left = 172.0

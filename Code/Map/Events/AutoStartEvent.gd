@@ -13,3 +13,6 @@ func activate():
 	for i in get_children():
 		i.activate()
 
+func activate_num(num):
+	if get_child_count() > num:
+		get_child(num).activate()

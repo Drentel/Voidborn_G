@@ -21,7 +21,7 @@ func activate():
 	GPlayer.skills.append(give_skill)
 	var dialog = AcceptDialog.new()
 	dialog.dialog_autowrap = true
-	dialog.rect_size = Vector2(300, 200)
+	dialog.rect_size = Vector2(0, 0)
 	var lski = load(give_skill).new()
 	dialog.dialog_text += lski.s_name + "\n"
 	dialog.dialog_text += lski.s_desc
