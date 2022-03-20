@@ -57,8 +57,9 @@ __meta__ = {
 }
 
 [node name="Controls" type="ScrollContainer" parent="."]
+margin_left = 72.0
 margin_top = 760.0
-margin_right = 816.0
+margin_right = 712.0
 margin_bottom = 880.0
 theme = ExtResource( 3 )
 __meta__ = {
@@ -66,63 +67,63 @@ __meta__ = {
 }
 
 [node name="Controls" type="GridContainer" parent="Controls"]
-margin_right = 816.0
+margin_right = 640.0
 margin_bottom = 120.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 4
+columns = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="Controls/Controls"]
-margin_right = 201.0
+margin_right = 210.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 text = "test1"
 
 [node name="Button2" type="Button" parent="Controls/Controls"]
-margin_left = 205.0
-margin_right = 406.0
+margin_left = 214.0
+margin_right = 424.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 text = "test2"
 
 [node name="Button3" type="Button" parent="Controls/Controls"]
-margin_left = 410.0
-margin_right = 611.0
+margin_left = 428.0
+margin_right = 638.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 text = "test3"
 
 [node name="Button4" type="Button" parent="Controls/Controls"]
-margin_left = 615.0
-margin_right = 816.0
-margin_bottom = 29.0
+margin_top = 33.0
+margin_right = 210.0
+margin_bottom = 62.0
 size_flags_horizontal = 3
 text = "test4"
 
 [node name="Button5" type="Button" parent="Controls/Controls"]
+margin_left = 214.0
 margin_top = 33.0
-margin_right = 201.0
+margin_right = 424.0
 margin_bottom = 62.0
 size_flags_horizontal = 3
 text = "test4"
 
 [node name="Button6" type="Button" parent="Controls/Controls"]
-margin_left = 205.0
+margin_left = 428.0
 margin_top = 33.0
-margin_right = 406.0
+margin_right = 638.0
 margin_bottom = 62.0
 size_flags_horizontal = 3
 text = "test4"
 
 [node name="Button7" type="Button" parent="Controls/Controls"]
-margin_left = 410.0
-margin_top = 33.0
-margin_right = 611.0
-margin_bottom = 62.0
+margin_top = 66.0
+margin_right = 210.0
+margin_bottom = 95.0
 size_flags_horizontal = 3
 text = "test4"
 

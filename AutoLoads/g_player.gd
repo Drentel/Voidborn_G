@@ -13,6 +13,16 @@ var respawn_loc = "res://Scenes/Maps/Level1.tscn"
 var respawn_node = "Fountain"
 var reserve_characters = []
 
+var echoes = [
+	"res://Code/Combat/Customization/Skills/Actives/Bloodletting.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Chainstrike.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Rally.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Reinforce.gd",
+]
+
+var lechoes = []
+var lused_echoes = []
+
 var skill_pool = [
 	"res://Code/Combat/Customization/Skills/Actives/Bloodletting.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Chainstrike.gd",
@@ -55,6 +65,24 @@ func get_item(item_name):
 
 func _ready():
 	skill_pool.shuffle()
+	refresh_echoes()
+
+func refresh_echoes():
+	for i in lechoes + lused_echoes:
+		i.get_parent().remove_child(i)
+		i.queue_free()
+	lechoes = []
+	lused_echoes = []
+	
+	for i in echoes:
+		var lecho = load(i).new()
+		lechoes.append(lecho)
+		add_child(lecho)
+
+func ally_used_skill(skill):
+	if skill in lechoes:
+		lechoes.erase(skill)
+		lused_echoes.append(skill)
 
 func respawn():
 	for i in $"/root/Root/CharaCards".get_children():

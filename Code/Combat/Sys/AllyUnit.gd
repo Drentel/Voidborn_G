@@ -73,6 +73,7 @@ func _ready():
 		weap = GUtil.make_weapon(3, 0)
 	
 	unpack()
+	connect("skill_end", GPlayer, "ally_used_skill")
 
 func unpack():
 	GUtil.annihilate_children($Unpacks)
