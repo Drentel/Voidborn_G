@@ -13,12 +13,7 @@ var respawn_loc = "res://Scenes/Maps/Level1.tscn"
 var respawn_node = "Fountain"
 var reserve_characters = []
 
-var echoes = [
-	"res://Code/Combat/Customization/Skills/Actives/Bloodletting.gd",
-	"res://Code/Combat/Customization/Skills/Actives/Chainstrike.gd",
-	"res://Code/Combat/Customization/Skills/Actives/Rally.gd",
-	"res://Code/Combat/Customization/Skills/Actives/Reinforce.gd",
-]
+var echoes = []
 
 var lechoes = []
 var lused_echoes = []
@@ -31,6 +26,9 @@ var skill_pool = [
 	"res://Code/Combat/Customization/Skills/Actives/Sharpen.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Shred.gd",
 	"res://Code/Combat/Customization/Skills/Actives/Firebolt.gd",
+	"res://Code/Combat/Customization/Skills/Actives/Reassurance.gd",
+	"res://Code/Combat/Customization/Skills/Actives/StatSteal.gd",
+	
 	"res://Code/Combat/Customization/Skills/Passives/CritChance.gd",
 	"res://Code/Combat/Customization/Skills/Passives/CritDamage.gd",
 	"res://Code/Combat/Customization/Skills/Passives/Devotion.gd",
@@ -44,10 +42,11 @@ var skill_pool = [
 	"res://Code/Combat/Customization/Skills/Passives/PoisonBlade.gd",
 	"res://Code/Combat/Customization/Skills/Passives/Regen.gd",
 	"res://Code/Combat/Customization/Skills/Passives/Stubborness.gd",
+	"res://Code/Combat/Customization/Skills/Passives/Slippery.gd",
+	"res://Code/Combat/Customization/Skills/Passives/Cute.gd",
 ]
 var skills = [
 	"res://Code/Combat/Customization/Skills/Actives/GoldenSlash.gd",
-	"res://Code/Combat/Customization/Skills/Actives/Firebolt.gd",
 	]
 
 signal money_changed(oldval)

@@ -11,7 +11,7 @@
 [ext_resource path="res://Code/Map/Events/MapMoveEvent.gd" type="Script" id=9]
 [ext_resource path="res://Code/Map/Events/FlagCheck.gd" type="Script" id=10]
 [ext_resource path="res://Code/Map/Events/FlagSet.gd" type="Script" id=11]
-[ext_resource path="res://Code/Map/Events/AddCharacterEvent.gd" type="Script" id=12]
+[ext_resource path="res://Code/Combat/Customization/Skills/Echoes/Determination.gd" type="Script" id=12]
 [ext_resource path="res://Code/Map/Events/GiveItem.gd" type="Script" id=13]
 
 [sub_resource type="Shader" id=3]
@@ -302,14 +302,8 @@ script = ExtResource( 11 )
 flag = "princess_recruit"
 bool_val = true
 
-[node name="Recruit" type="Node" parent="MapNodes/PrincessRoom/Check/RecruitDialogue/Set"]
+[node name="Echo" type="Node" parent="MapNodes/PrincessRoom/Check/RecruitDialogue/Set"]
 script = ExtResource( 12 )
-soul_path = "res://CharacterDefinitions/PrincessSoul.tres"
-start_level = 15
-weapon_class = 1
-weapon_level = 10
-default_skills = [ "res://Code/Combat/Customization/Skills/Actives/Transfer.gd" ]
-def_name = "Princess"
 
 [node name="PainCheck" type="Node" parent="MapNodes/PrincessRoom"]
 script = ExtResource( 10 )

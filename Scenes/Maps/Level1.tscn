@@ -509,7 +509,7 @@ bool_val = true
 
 [node name="Loot" type="Node" parent="MapNodes/MazeC9/Check/Dialogue/BOSS/SetFlag"]
 script = ExtResource( 14 )
-loot_table = "res://LootTables/mundane_sh.tres"
+loot_table = "res://LootTables/garden_boss.tres"
 repeat = 2
 
 [node name="MazeExit" type="Panel" parent="MapNodes"]

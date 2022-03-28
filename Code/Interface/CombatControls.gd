@@ -21,10 +21,14 @@ func display_skills(unit):
 	
 	var echo_btn = ClackButton.new()
 	echo_btn.connect("pressed", self, "display_echoes", [unit])
+	echo_btn.connect("mouse_entered", Tip, "disp", [unit])
+	echo_btn.connect("mouse_exited", Tip, "hide")
+	echo_btn.connect("tree_exited", Tip, "hide")
 	echo_btn.text = "Use echo"
 	echo_btn.size_flags_horizontal += echo_btn.SIZE_EXPAND
 	add_child(echo_btn)
-	show()
+	if GPlayer.lechoes.size() == 0:
+		echo_btn.disabled = true
 	
 	for i in unit.get_skills():
 		var btn = ClackButton.new()

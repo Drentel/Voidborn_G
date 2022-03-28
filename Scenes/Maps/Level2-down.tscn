@@ -10,7 +10,7 @@
 [ext_resource path="res://Code/Map/Events/DialogueEvent.gd" type="Script" id=8]
 [ext_resource path="res://Code/Map/Events/MapMoveEvent.gd" type="Script" id=9]
 [ext_resource path="res://Code/Map/Events/ReEnterNodeEvent.gd" type="Script" id=10]
-[ext_resource path="res://Code/Map/Events/AddCharacterEvent.gd" type="Script" id=11]
+[ext_resource path="res://Code/Map/Events/GiveEcho.gd" type="Script" id=11]
 [ext_resource path="res://Pic/Map/3d-stairs.png" type="Texture" id=12]
 
 [sub_resource type="Shader" id=3]
@@ -229,14 +229,9 @@ script = ExtResource( 4 )
 flag = "thief_recruit"
 bool_val = true
 
-[node name="Join" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen/Set"]
+[node name="Echo" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen/Set"]
 script = ExtResource( 11 )
-soul_path = "res://CharacterDefinitions/ThiefSoul.tres"
-start_level = 15
-weapon_class = 3
-weapon_level = 8
-default_skills = [ "res://Code/Combat/Customization/Skills/Actives/Shadowstrike.gd" ]
-def_name = "Thief"
+skill = "res://Code/Combat/Customization/Skills/Echoes/SmokePop.gd"
 
 [node name="ReEnter" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen/Set"]
 script = ExtResource( 10 )
