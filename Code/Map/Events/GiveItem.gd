@@ -1,18 +1,29 @@
 extends MapEvent
 
 export var loot_table = "res://Placeholders/placeholder_loot.tres"
+export var table_single = ""
 export var repeat = 1
 
 
 func activate():
 	var tab = load(loot_table)
+	var actual_repeats = repeat
+	var tab2
+	if table_single != "":
+		tab2 = load(table_single)
+		actual_repeats += 1
 	var tot_makka = 0
 	var tot_weaps = []
 	var tot_artis = []
 	var tot_generics = {}
 	
-	for _i in range(repeat):
-		var res = tab.generate()
+	for i in range(repeat):
+		var res
+		if i == 0 and table_single != "":
+			res = tab2.generate()
+		else:
+			res = tab.generate()
+		
 		for j in res:
 			if j["type"] == "money":
 				var am = randi()%int(j["amount_max"] - j["amount_min"]+1) + j["amount_min"]
@@ -52,5 +63,4 @@ func activate():
 		tot += str(tot_generics[i]) + "x " + i + "\n"
 	
 	$"/root/Root".switch_loot(tot)
-	
 	.activate()

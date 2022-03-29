@@ -9,19 +9,15 @@
 	},
 	{
 		"speaker": "",
-		"line": "The woman vanishes in a blink of an eye, only leaving the mangled bodies behind."
+		"line": "The woman vanishes into the shining protal which promptly closes, only leaving the mangled bodies behind."
 	},
 	{
 		"speaker": "",
-		"line": "Your companions stay on high alert for a moment, but seeing that the danger is really gone they lower their weapons."
+		"line": "The maid stays on high alert for a moment, but seeing that the danger is really gone she lowers her weapons."
 	},
 	{
-		"speaker": "Thief",
-		"line": "\"She called us echoes I think?\""
-	},
-	{
-		"speaker": "Princess",
-		"line": "\"Well there is something strange about our bodies. Maybe that's the correct term.\""
+		"speaker": "Maid",
+		"line": "\"'Echoes'?\""
 	},
 	{
 		"speaker": "",
@@ -41,7 +37,7 @@
 	},
 	{
 		"speaker": "Maid",
-		"line": "\"Well, she's gone, so I suppose the only way forward is through this... portal?\""
+		"line": "\"...\""
 	},
 	{
 		"speaker": "Maid",
@@ -49,7 +45,7 @@
 	},
 	{
 		"speaker": "Maid",
-		"line": "\"I thought that the mansion lord was in here. Well he probably was here before she came.\""
+		"line": "\"I thought that the mansion lord was in here. Well, he probably was here before she came.\""
 	},
 	{
 		"speaker": "Maid",

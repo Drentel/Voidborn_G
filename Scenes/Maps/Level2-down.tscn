@@ -233,7 +233,11 @@ bool_val = true
 script = ExtResource( 11 )
 skill = "res://Code/Combat/Customization/Skills/Echoes/SmokePop.gd"
 
-[node name="ReEnter" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen/Set"]
+[node name="Node" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen/Set/Echo"]
+script = ExtResource( 8 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/cell_open2.json"
+
+[node name="ReEnter" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey/FirstOpen/Set/Echo"]
 script = ExtResource( 10 )
 
 [node name="AlreadyOpen" type="Node" parent="MapNodes/Cells2/Btn/Cell door/YesKey"]

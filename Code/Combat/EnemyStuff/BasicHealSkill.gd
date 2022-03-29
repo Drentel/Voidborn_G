@@ -7,11 +7,14 @@ export var scale_stat = "ATK"
 export var scale_mult = 1.0
 export var repeats = 1
 export var target_allies = false
+export var mana_cost = 0
 
 func use(user):
 	user.emit_signal("skill_start", self)
 	SFXR.generic_text(get_parent().get_global_rect(), GUtil.arr_rand(short_msgs))
 	Curtain.ln(user.name + GUtil.arr_rand(messages))
+	if mana_cost > 0:
+		user.spend_mp(mana_cost)
 	
 	for _i in repeats:
 		var inst = DamageInstance.new()

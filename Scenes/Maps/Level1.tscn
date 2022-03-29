@@ -306,7 +306,7 @@ __meta__ = {
 }
 up = NodePath("../MazeC4")
 right = NodePath("../MazeC2")
-desc = "You see a couple of signs planted haphazardly in the ground under the trees."
+desc = "I see a couple of signs planted haphazardly under the trees."
 
 [node name="RandEncounter" parent="MapNodes/MazeC3" instance=ExtResource( 12 )]
 
@@ -642,6 +642,7 @@ bool_val = true
 [node name="Loot" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Small shed/YesKey/Boop1/flagset"]
 script = ExtResource( 14 )
 loot_table = "res://LootTables/shed_loot.tres"
+table_single = "res://LootTables/aspect_2.tres"
 repeat = 16
 
 [node name="Boop2" type="Node" parent="MapNodes/OffBeatPath2/MapButtonEvent/Small shed/YesKey"]

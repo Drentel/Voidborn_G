@@ -1,10 +1,9 @@
-extends Node
-# Will take the frist skill from GPlayer if left empty
-# Or a specific skill otherwise
+extends MapEvent
 export var skill = ""
 
 func activate():
 	GPlayer.echoes.append(skill)
+	GPlayer.refresh_echoes()
 	var dialog = AcceptDialog.new()
 	dialog.dialog_autowrap = true
 	dialog.rect_size = Vector2(0, 0)
@@ -21,3 +20,4 @@ func activate():
 func annihilate_dialog(dialog):
 	dialog.get_parent().remove_child(dialog)
 	dialog.queue_free()
+	.activate()

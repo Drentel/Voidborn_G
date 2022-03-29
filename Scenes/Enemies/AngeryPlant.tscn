@@ -149,7 +149,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-lvl = 10
+lvl = 5
 growth = {
 "ABS": 0.2,
 "ATK": 1.5,
@@ -160,7 +160,7 @@ growth = {
 "CTR": 1.2,
 "DEF": 0.8,
 "HIT": 0.8,
-"MHP": 10.0,
+"MHP": 6.0,
 "MMP": 0.0,
 "SPD": 0.8,
 "TEC": 0.1

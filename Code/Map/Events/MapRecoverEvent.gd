@@ -8,3 +8,4 @@ func activate():
 		
 		GPlayer.respawn_loc = $"/root/Root".get_map_root().root_path
 		GPlayer.respawn_node = root_node.name
+		GPlayer.refresh_echoes()

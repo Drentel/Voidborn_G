@@ -1,0 +1,11 @@
+[
+	[
+		{
+			"weight": 1,
+			"type": "generic",
+			"name": "Aspect",
+			"amount_min": 2,
+			"amount_max": 2,
+		},
+	],
+]

@@ -150,14 +150,14 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-lvl = 20
+lvl = 10
 growth = {
 "ABS": 1.0,
-"ATK": 2.0,
-"AUR": 0.5,
+"ATK": 3.0,
+"AUR": 0.4,
 "AVD": 0.1,
 "CRM": 0.1,
-"CTD": 2.0,
+"CTD": 1.5,
 "CTR": 1.0,
 "DEF": 2.0,
 "HIT": 0.4,
@@ -180,7 +180,9 @@ modulate = Color( 0, 0.517647, 0.0941176, 1 )
 [node name="SelfHeal" type="Node" parent="."]
 script = ExtResource( 14 )
 messages = [ " regrows snapped branches!" ]
-scale_mult = 0.5
+scale_stat = "MHP"
+scale_mult = 0.05
+mana_cost = 25
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 236, 288 )

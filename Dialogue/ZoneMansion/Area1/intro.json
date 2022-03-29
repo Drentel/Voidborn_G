@@ -1,7 +1,7 @@
 [
 	{
 		"speaker": "",
-		"line": "The twists and turns knock me out for a second. After waking up I find yourself laying on soft grass."
+		"line": "The twists and turns knock me out for a second. I find myself laying on soft grass after waking up."
 	},
 	{
 		"speaker": "",
@@ -13,14 +13,10 @@
 	},
 	{
 		"speaker": "",
-		"line": "It seems like it's night, but I can neither see the moon nor any stars. Moreover, I can't actually see anything past the gates of the estate - it's enveloped in complete darkness."
+		"line": "It seems like it's night, but I can neither see the moon nor any stars."
 	},
 	{
-		"speaker": "I",
-		"line": "(Reckon that exploring the estate will be a better idea than going out into the darkness, at least for now.)"
-	},
-	{
-		"speaker": "I",
-		"line": "(Still, this place definetly feels wrong. Much better than the cave though.)"
+		"speaker": "",
+		"line": "I get up and see a fountain in a clearing ahead."
 	},
 ]
