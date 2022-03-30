@@ -163,6 +163,7 @@ GPlayer="*res://AutoLoads/g_player.gd"
 Curtain="*res://AutoLoads/Curtain.tscn"
 Tip="*res://AutoLoads/Tip.tscn"
 SFXR="*res://AutoLoads/SFXR.gd"
+GSound="*res://AutoLoads/g_sound.gd"
 
 [debug]
 
