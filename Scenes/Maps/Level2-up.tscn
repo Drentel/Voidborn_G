@@ -293,16 +293,39 @@ EV painting_3
 script = ExtResource( 10 )
 flag = "princess_recruit"
 
-[node name="RecruitDialogue" type="Node" parent="MapNodes/PrincessRoom/Check"]
+[node name="YesThief" type="Node" parent="MapNodes/PrincessRoom/Check"]
+script = ExtResource( 10 )
+flag = "thief_recruit"
+activate_if = true
+
+[node name="RecruitDialogue" type="Node" parent="MapNodes/PrincessRoom/Check/YesThief"]
 script = ExtResource( 6 )
 dialogue_path = "res://Dialogue/ZoneMansion/Area2/princess.json"
 
-[node name="Set" type="Node" parent="MapNodes/PrincessRoom/Check/RecruitDialogue"]
+[node name="Set" type="Node" parent="MapNodes/PrincessRoom/Check/YesThief/RecruitDialogue"]
 script = ExtResource( 11 )
 flag = "princess_recruit"
 bool_val = true
 
-[node name="Echo" type="Node" parent="MapNodes/PrincessRoom/Check/RecruitDialogue/Set"]
+[node name="Echo" type="Node" parent="MapNodes/PrincessRoom/Check/YesThief/RecruitDialogue/Set"]
+script = ExtResource( 12 )
+skill = "res://Code/Combat/Customization/Skills/Echoes/Determination.gd"
+
+[node name="NoThief" type="Node" parent="MapNodes/PrincessRoom/Check"]
+script = ExtResource( 10 )
+flag = "thief_recruit"
+activate_if = true
+
+[node name="RecruitDialogue" type="Node" parent="MapNodes/PrincessRoom/Check/NoThief"]
+script = ExtResource( 6 )
+dialogue_path = "res://Dialogue/ZoneMansion/Area2/princess_nothief.json"
+
+[node name="Set" type="Node" parent="MapNodes/PrincessRoom/Check/NoThief/RecruitDialogue"]
+script = ExtResource( 11 )
+flag = "princess_recruit"
+bool_val = true
+
+[node name="Echo" type="Node" parent="MapNodes/PrincessRoom/Check/NoThief/RecruitDialogue/Set"]
 script = ExtResource( 12 )
 skill = "res://Code/Combat/Customization/Skills/Echoes/Determination.gd"
 

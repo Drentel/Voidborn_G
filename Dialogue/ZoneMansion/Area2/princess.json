@@ -1,34 +1,26 @@
 [
 	{
 		"speaker": "",
-		"line": "Coming into the room, I see a princess-y blob laying on the bed, seemingly bored."
-	},
-	{
-		"speaker": "",
-		"line": "Without moving, the princess starts to talk."
-	},
-	{
-		"speaker": "Princess",
-		"line": "\"I've felt that you would come. Something happened, haven't it?\""
+		"line": "Coming into the room, I see a glowing sphere laying on the bed, looking just like the one that the thief turned into."
 	},
 	{
 		"speaker": "Maid",
-		"line": "\"Yeah, we have a new arrival.\""
+		"line": "\"Late, aren't we.\""
 	},
 	{
-		"speaker": "",
-		"line": "The maid points at me."
+		"speaker": "I",
+		"line": "\"Didn't even get to hear her last words.\""
 	},
 	{
 		"speaker": "Maid",
-		"line": "\"Get up, we're leaving this place. At least I hope we are.\""
+		"line": "\"...\""
 	},
 	{
-		"speaker": "Princess",
-		"line": "\"You have some nerve for a maid, bossing a princess around.\""
+		"speaker": "Maid",
+		"line": "\"Sure hope I don't meet the same fate.\""
 	},
 	{
-		"speaker": "Princess",
-		"line": "\"But i'm letting this time slide. Something interesting is finally happening.\""
+		"speaker": "",
+		"line": "I touch the sphere, and it's absorbed into my body just like the thief's."
 	},
 ]
